@@ -12,7 +12,7 @@ self.addEventListener('fetch', event => {
   const url = new URL(request.url);
   if (url.origin === self.location.origin) {
     if (request.mode === 'navigate') {
-      event.respondWith(caches.match('/index.html').then(cached => cached || fetch(request)));
+      event.respondWith(fetch(request).then(response => {\n        if (response && response.ok) caches.open(CACHE_VERSION).then(cache => cache.put('/index.html', response.clone()));\n        return response;\n      }).catch(() => caches.match('/index.html')));
       return;
     }
     event.respondWith(caches.match(request).then(cached => cached || fetch(request).then(response => {
