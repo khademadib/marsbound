@@ -1,0 +1,19 @@
+{
+  "name": "MarsBound — Junior Astronaut: Stranded on Mars",
+  "short_name": "MarsBound",
+  "description": "A Mars survival learning game for junior astronauts.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#081525",
+  "theme_color": "#081525",
+  "orientation": "landscape",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
