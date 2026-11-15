@@ -1,4 +1,4 @@
-const CACHE_VERSION = 'marsbound-shell-v2';
+const CACHE_VERSION = 'marsbound-shell-v3';
 const SHELL = ['/', '/index.html', '/favicon.svg', '/manifest.webmanifest'];
 
 self.addEventListener('install', event => {
