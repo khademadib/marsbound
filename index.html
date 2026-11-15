@@ -125,7 +125,7 @@ kbd{background:#081525;color:var(--wa);padding:2px 4px;margin-left:4px;font:inhe
 
 <section id="menu" class="scr on"><canvas id="cv0" width="240" height="135"></canvas><div class="mt"><div><h1>MARSBOUND</h1><div class="sub">SURVIVE 10 SOLS ON MARS</div></div><div><button onclick="startCut()"><kbd>1</kbd> PLAY</button><button class="alt" onclick="show('how')"><kbd>2</kbd> HOW TO PLAY</button><div id="best" class="note"></div><div class="px" style="font-size:clamp(6px,.8vw,10px);color:#b8cfe0;margin-top:1vh">Independent student project · Not an official NASA product or endorsement</div></div></div></section>
 
-<section id="how" class="scr"><div class="stage" id="hst"><canvas id="tcv" width="240" height="135"></canvas><canvas id="txo2" class="txo"></canvas><div id="tcap"><h2 id="tct"></h2><p id="tcp"></p></div><div id="tbar"><i style="display:block;height:100%;width:0;background:var(--cy)"></i></div><div id="tctl"><button class="alt" onclick="tSeek(Math.max(0,(Math.floor(TT/TD)-1)*TD))">&#9664; <kbd>&larr;</kbd></button><button id="tpb" onclick="tToggle()">PAUSE</button><button class="alt" onclick="tSeek(Math.min((TS-1)*TD,(Math.floor(TT/TD)+1)*TD))"><kbd>&rarr;</kbd> &#9654;</button><span id="tdots"></span><button onclick="show('menu')">BACK <kbd>ESC</kbd></button></div></div></section>
+<section id="how" class="scr"><div class="stage" id="hst"><canvas id="tcv" width="240" height="135" aria-hidden="true"></canvas><canvas id="txo2" class="txo"></canvas><div id="tcap"><h2 id="tct"></h2><p id="tcp"></p></div><div id="tbar"><i style="display:block;height:100%;width:0;background:var(--cy)"></i></div><div id="tctl"><button class="alt" onclick="tSeek(Math.max(0,(Math.floor(TT/TD)-1)*TD))">&#9664; <kbd>&larr;</kbd></button><button id="tpb" onclick="tToggle()">PAUSE</button><button class="alt" onclick="tSeek(Math.min((TS-1)*TD,(Math.floor(TT/TD)+1)*TD))"><kbd>&rarr;</kbd> &#9654;</button><span id="tdots"></span><button onclick="show('menu')">BACK <kbd>ESC</kbd></button></div></div></section>
 
 <section id="brief" class="scr"><div class="box"><h2>PICK YOUR POWER</h2><p class="px" style="text-align:center;font-size:clamp(10px,1.4vw,18px)">👆 TAP A PICTURE!</p>
 <div class="cards">
@@ -134,10 +134,10 @@ kbd{background:#081525;color:var(--wa);padding:2px 4px;margin-left:4px;font:inhe
 <div class="box pc"><h3>⚡ HYBRID</h3><canvas width="96" height="64" data-p="hyb" data-n="0"></canvas><div class="chips"><button class="chip" data-n="0">☀️<span>DAY</span></button><button class="chip alt" data-n="1">🌙<span>NIGHT</span></button><button class="chip alt" data-n="2">🌪️<span>STORM</span></button></div><div class="stt on">💡 POWER ON!</div><div class="px sbt">YOU START WITH</div><div class="sbars" data-p="hyb"></div><button onclick="start('hyb')"><kbd>3</kbd> PICK</button></div></div>
 <button class="alt" onclick="show('menu')">BACK <kbd>ESC</kbd></button></div></section>
 
-<section id="game" class="scr"><div id="wrap" class="stage"><canvas id="cv" width="240" height="135"></canvas><canvas id="txo" class="txo"></canvas><div id="hint"></div><div id="pop"></div>
+<section id="game" class="scr"><div id="wrap" class="stage"><canvas id="cv" width="240" height="135" aria-label="Interactive Mars game world. Use the arrow keys or WASD to move and Space to interact."></canvas><canvas id="txo" class="txo"></canvas><div id="hint"></div><div id="pop"></div>
 <div id="ui"><div class="hud" id="hud"></div><div id="info"></div><div id="where"></div><div id="tl"></div><div id="ord"></div><div id="side"><div id="inv" class="note"></div></div></div>
 <div id="skipb"><button class="alt" id="skip" onclick="endCut()" style="display:none">SKIP <kbd>S</kbd></button><button class="alt" id="mgx" onclick="M=null;this.style.display='none'" style="display:none">LEAVE <kbd>ESC</kbd></button></div>
-<div id="ui2"><div id="tg"></div><div class="pad"><div><span></span><button data-k="up">&#9650;</button><span></span><button data-k="left">&#9664;</button><button data-k="down">&#9660;</button><button data-k="right">&#9654;</button></div><button class="act" id="actb" data-k="act">SPACE</button></div>
+<div id="ui2"><div id="tg"></div><div class="pad"><div><span></span><button data-k="up" aria-label="Move up">&#9650;</button><span></span><button data-k="left" aria-label="Move left">&#9664;</button><button data-k="down" aria-label="Move down">&#9660;</button><button data-k="right" aria-label="Move right">&#9654;</button></div><button class="act" id="actb" data-k="act" aria-label="Act or interact">SPACE</button></div>
 <div class="box" id="msg"></div>
 <div id="btns"><button onclick="invOpen()"><span class="bi">🎒</span>PACK<kbd>I</kbd></button><button onclick="openTab('build')"><span class="bi">🏗️</span>BUILD<kbd>B</kbd></button><button onclick="goalsOpen()"><span class="bi">⭐</span>GOALS<kbd>G</kbd></button><button onclick="mapOpen()"><span class="bi">🗺️</span>MAP<kbd>M</kbd></button><button class="alt" onclick="pause(1)"><span class="bi">⏸</span>PAUSE<kbd>P</kbd></button></div>
 <div id="kb">ARROWS MOVE · SPACE USE · SHIFT RUN</div></div>
@@ -468,7 +468,7 @@ const LMS=[
 const GALE={id:'gale',n:'GALE CRATER',w:'A giant crater, 154 km wide. Curiosity has explored it since 2012.',m:'Water once pooled here. The rocks hold clues about whether Mars could host life.'};
 const LMR=[...LMS].sort((a,b)=>a.r-b.r),LMN=id=>LMS.find(l=>l.id===id)||GALE,zoneAt=(x,y)=>LMR.find(l=>Math.hypot(l.x-x,l.y-y)<l.r)||GALE;
 const ITEMS={
- iron:{n:'IRON',e:'🔩',u:'FOR BUILDING',f:'Vera Rubin Ridge contains hematite, an iron oxide mineral. Recovering usable metal from Martian rocks would require processing.'},
+ iron:{n:'IRON',e:'🔩',u:'FOR BUILDING',f:'Curiosity examined Vera Rubin Ridge for hematite, an iron-oxide mineral. Recovering usable metal from Martian rocks would require processing.'},
  sand:{n:'SAND',e:'🏜️',u:'PILE ON ROOF',f:'Martian soil contains silicate minerals. Recovering usable silicon or other materials would require substantial processing; raw soil is not ready-made solar-cell material. Curiosity scooped soil at Rocknest in 2012.'},
  clay:{n:'CLAY',e:'🧱',u:'FOR BUILDING',f:'Curiosity found clay at Yellowknife Bay and Glen Torridon. Clay only forms with water, a clue that Mars was wetter.'},
  ice:{n:'WATER ICE',e:'🧊',u:'MELT FOR GARDEN',f:'NASA’s Phoenix lander dug up water ice just under the surface in 2008. Ice is a future crew’s water.'},
@@ -788,15 +788,15 @@ const NAI={
  food:{i:[],u:'https://www.nasa.gov/exploration-research-and-technology/growing-plants-in-space/',c:'NASA'},
  batt:{i:_pia('PIA22521'),u:'https://science.nasa.gov/photojournal/shades-of-martian-darkness/',c:'NASA/JPL-Caltech/TAMU'}};
 const NAP={
- bra:{i:_pia('PIA16208'),u:_sci+'3-d-view-from-bradbury-landing-site/',c:'NASA/JPL-Caltech'},
+ bra:{i:_pia('PIA16208'),u:'https://science.nasa.gov/photojournal/curiosity-at-bradbury-landing-site-in-3-d/',c:'NASA/JPL-Caltech/University of Arizona'},
  roc:{i:_pia('PIA16570'),u:_sci+'windblown-sand-from-the-rocknest-drift',c:'NASA/JPL-Caltech/MSSS'},
- ykb:{i:_pia('PIA17595'),u:'https://science.nasa.gov/mission/msl-curiosity/science-highlights',c:'NASA/JPL-Caltech/MSSS'},
- ms:{i:_pia('PIA17064'),u:_sci+'from-glenelg-to-mount-sharp/',c:'NASA/JPL-Caltech/UArizona'},
+ ykb:{i:_pia('PIA17595'),u:'https://www.jpl.nasa.gov/images/pia17595-view-of-yellowknife-bay-formation-with-drilling-sites/',c:'NASA/JPL-Caltech/MSSS'},
+ ms:{i:_pia('PIA17064'),u:_sci+'from-glenelg-to-mount-sharp/',c:'NASA/JPL-Caltech/University of Arizona'},
  vrr:{i:NAI.iron.i,u:'https://science.nasa.gov/resource/curiosity-checks-under-the-dust-on-a-martian-rock/',c:'NASA/JPL-Caltech/MSSS'},
  gt:{i:_pia('PIA23139'),u:_sci+'curiosity-surveys-the-clay-bearing-unit/',c:'NASA/JPL-Caltech/MSSS'},
  mb:{i:_pia('PIA20840'),u:_sci+'rovers-panorama-taken-amid-murray-buttes-on-mars/',c:'NASA/JPL-Caltech/MSSS'},
- imp:{i:_pia('PIA17932'),u:'https://www.nasa.gov/image-article/spectacular-new-martian-impact-crater',c:'NASA/JPL-Caltech/UArizona'},
- dd:{i:_pia('PIA04187'),u:_sci+'dust-devils-seen-by-spirit/',c:'NASA/JPL-Caltech/Cornell'},
+ imp:{i:_pia('PIA17932'),u:'https://science.nasa.gov/photojournal/a-spectacular-new-martian-impact-crater/',c:'NASA/JPL-Caltech/University of Arizona'},
+ dd:{i:_pia('PIA04187'),u:'https://science.nasa.gov/photojournal/a-great-place-to-watch-the-weather-vertical/',c:'NASA/JPL-Caltech'},
  sl:{i:_pia('PIA10128'),u:_sci+'dusty-solar-panels-on-spirit/',c:'NASA/JPL-Caltech/Cornell'}};
 /* Descriptive alternatives for NASA/JPL media; visible credits remain below each image. */
 Object.assign(NAI,{
@@ -805,19 +805,19 @@ Object.assign(NAI,{
  clay:{...NAI.clay,a:'Curiosity exploring clay-bearing terrain on Mars'},
  ice:{...NAI.ice,a:'Water ice exposed in a trench by the Phoenix Mars lander'},
  drill:{...NAI.drill,a:'Curiosity drilling locations in the Yellowknife Bay formation'},
- o2:{...NAI.o2,a:'NASA Perseverance rover MOXIE oxygen-generation experiment'},
+ o2:{...NAI.o2,a:'NASA/JPL team installing the MOXIE oxygen experiment in the Perseverance rover chassis'},
  batt:{...NAI.batt,a:'A simulated view of the Martian sky darkened by a global dust storm'}
 });
 Object.assign(NAP,{
  bra:{...NAP.bra,a:'Bradbury Landing area inside Gale Crater on Mars'},
  roc:{...NAP.roc,a:'Windblown sand drift explored by Curiosity at Rocknest'},
  ykb:{...NAP.ykb,a:'Yellowknife Bay formation and Curiosity rover drill sites'},
- ms:{...NAP.ms,a:'Layered terrain at Mount Sharp in Gale Crater'},
+ ms:{...NAP.ms,a:'Map showing Curiosity’s route within Gale Crater from Bradbury Landing and Glenelg toward Mount Sharp'},
  vrr:{...NAP.vrr,a:'A Martian rock surface examined near Vera Rubin Ridge'},
  gt:{...NAP.gt,a:'Clay-bearing terrain surveyed by the Curiosity rover'},
  mb:{...NAP.mb,a:'Layered buttes explored by Curiosity in the Murray Buttes area'},
  imp:{...NAP.imp,a:'An impact crater on the surface of Mars'},
- dd:{...NAP.dd,a:'Dust devils and windblown tracks on the Martian surface'},
+ dd:{...NAP.dd,a:'Spirit rover view of three dust devils over the plains of Gusev Crater'},
  sl:{...NAP.sl,a:'Dust accumulation on solar panels of the Spirit Mars rover'}
 });
 /* if a picture will not load, try the next source; if none load, show the emoji instead */
@@ -1102,4 +1102,7 @@ const _up16=update;update=function(dt){const h0=G&&G.h;_up16(dt);if(!G||!run||G.
  if(G.hFall>0&&(G.hLoss||0)>=.5&&!(G.hTip>0)&&!M&&!ovOpen()){G.hLoss=0;G.hTip=20;sfx('alert');
   say('❤️ You are losing health!',G.storm>0&&!G.in?'Get inside the habitat, then walk to a BED and press SPACE to SLEEP. Sleeping gives health back!':G.in?'Walk to a BED and press SPACE to SLEEP. Sleeping gives health back!':'Go into the habitat (SPACE at the door) and SLEEP in a bed to get health back!','var(--cr)')}};
 const _h16=hud;hud=function(n){_h16(n);if(G&&G.hFall>0&&G.h<98)$('info').innerHTML+=' · <b style="color:var(--cr)">❤ LOW HEALTH: SLEEP IN A BED!</b>'};
+
+/* Respect reduced-motion preferences while keeping mission warnings visible. */
+document.head.insertAdjacentHTML('beforeend','<style>@media (prefers-reduced-motion: reduce){.scr.on,#stw.on,#quest .qr.bad,#btns button.mfl{animation:none!important;transition:none!important}.pc canvas{transition:none!important}}</style>');
 </script></body></html>
