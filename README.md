@@ -66,7 +66,7 @@ The current project is a single-page HTML/CSS/JavaScript game and has no build s
 | `README.md` | Project overview and play instructions |
 | `SOURCES.md` | Scientific and NASA/JPL image references |
 | `THIRD_PARTY_NOTICES.md` | Font and NASA/JPL media notices |
-| `LICENSING.md` | License recommendation and contributor checks |
+| `LICENSE` | Apache License 2.0 for approved original project contributions |\n| `LICENSING.md` | License scope and third-party rights summary |
 | `REVIEW_NOTES.md` | Review results and final QA checklist |
 
 ## Technology, network use, and saved data
@@ -92,4 +92,4 @@ MarsBound is a team project. Confirm the final role list with the team before su
 
 ## License
 
-See [LICENSING.md](LICENSING.md). Apache License 2.0 is the current recommendation for the team's original project work, subject to contributor approval and the 2026 NASA Space Apps Participant Terms. The repository-wide `LICENSE` file should only be added after the contributors confirm they have authority to license their contributions. Third-party fonts and NASA/JPL media have their own notices and are not automatically relicensed with the game's original code.
+The team's original project contributions are released under [Apache License 2.0](LICENSE), as approved by the contributors. This license does not relicense third-party fonts or NASA/JPL media; see [LICENSING.md](LICENSING.md), [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md), and [SOURCES.md](SOURCES.md).
