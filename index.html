@@ -1,8 +1,14 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Explore Gale Crater, make mission decisions, and keep a Mars outpost running for 10 sols in this student-created survival game.">
+<meta name="theme-color" content="#081525">
+<meta property="og:type" content="website">
+<meta property="og:title" content="MarsBound: Stranded on Mars">
+<meta property="og:description" content="Explore Gale Crater and keep a Mars outpost running for 10 sols in this student-created educational game.">
+<title>MarsBound: Stranded on Mars</title>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<title>Junior Astronaut: Stranded on Mars</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#081525;--pn:#12283D;--cy:#45D5E8;--tx:#F4F7FA;--ok:#55D68B;--wa:#FFB547;--cr:#F05B64;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -55,17 +61,21 @@ html,body{height:100%;overflow:hidden;background:#000}
 kbd{background:#081525;color:var(--wa);padding:2px 4px;margin-left:4px;font:inherit;border:1px solid var(--wa)}
 #ui,#ui2{position:absolute;inset:0;pointer-events:none;z-index:3}#ui button,#ui2 button,#skipb button{pointer-events:auto}
 #hud{position:absolute;left:1cqw;top:1cqh;width:64cqw;grid-template-columns:repeat(5,1fr);gap:.5cqw;margin:0}
-.res{background:rgba(8,21,37,.85);padding:.3cqw .5cqw}.res b{font-size:max(7px,.8cqw)}.bar{height:max(5px,.8cqh)}
+.res{background:rgba(8,21,37,.9);padding:.35cqw .5cqw}.res b{font-size:max(8px,.9cqw)}.bar{height:max(8px,1.5cqh)}.res.lo{border-color:var(--cr)}.res.fl{background:#8a1a26;border-color:#ff6b73;box-shadow:0 0 .8cqw #f05b64}.res.fl .bar{border-color:#ff6b73}
 #info,#where{position:absolute;left:1cqw;font:max(8px,.85cqw) "Press Start 2P",monospace;background:rgba(8,21,37,.85);padding:.4cqw .7cqw;margin:0;border:0}
 #info{top:9cqh;color:#fff}#where{top:15cqh;color:var(--wa)}
 #ord{position:absolute;left:1cqw;top:21cqh;width:42cqw;margin:0;min-height:0}.card{font-size:max(9px,.95cqw)}
 #side{position:absolute;right:1cqw;top:29cqh;width:21cqw}
 #goals .gc{font-size:max(8px,.85cqw);margin:.3cqh 0;background:rgba(13,32,51,.9)}#inv{font-size:max(9px,1cqw);background:rgba(8,21,37,.85);margin:.5cqh 0;padding:.4cqw}
 #hint{left:50%;bottom:22cqh;transform:translateX(-50%);font-size:max(9px,1.1cqw);z-index:4}
-#msg{position:absolute;left:1cqw;bottom:4.5cqh;width:74cqw;background:rgba(8,21,37,.9);border:2px solid var(--cy);padding:.8cqw;font-size:max(9px,1cqw);margin:0;min-height:0;box-shadow:none}
+#msg{position:absolute;left:1cqw;bottom:4.5cqh;width:66cqw;background:rgba(8,21,37,.9);border:2px solid var(--cy);padding:.8cqw;font-size:max(9px,1cqw);margin:0;min-height:0;box-shadow:none}
 #msg h3{font-size:max(8px,.95cqw)}#tg{display:none}
-#btns{position:absolute;right:1cqw;bottom:4.5cqh;width:21cqw;display:flex;flex-direction:column}#btns button{font-size:max(8px,.85cqw);margin:.3cqh 0}
-#kb{position:absolute;left:1cqw;right:1cqw;bottom:.8cqh;font:max(7px,.72cqw) "Press Start 2P",monospace;color:#cfe3f0;background:rgba(8,21,37,.85);padding:.3cqw .6cqw;white-space:nowrap;overflow:hidden}
+#btns{position:absolute;right:1cqw;bottom:.8cqh;display:flex;flex-direction:row;gap:.6cqw}
+#btns button{position:relative;width:5.6cqw;height:8cqh;margin:0;padding:.4cqh 0 0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.5cqh;font-size:max(7px,.62cqw);line-height:1;color:#fff;background:rgba(8,21,37,.88);border:.25cqw solid var(--cy);box-shadow:inset -.25cqw -.25cqw #0b3a52,inset .25cqw .25cqw #2b6a8a}
+#btns button.alt{border-color:#46698a}#btns button:hover{background:#12354d;border-color:var(--wa)}
+#btns .bi{font-size:max(14px,2cqw);line-height:1}
+#btns kbd{position:absolute;right:-.4cqw;top:-1.2cqh;margin:0;padding:.2cqh .35cqw;font-size:max(7px,.65cqw);background:var(--wa);color:#081525;border:.2cqw solid #081525}
+#kb{position:absolute;left:1cqw;right:36cqw;bottom:.8cqh;font:max(7px,.72cqw) "Press Start 2P",monospace;color:#cfe3f0;background:rgba(8,21,37,.85);padding:.3cqw .6cqw;white-space:nowrap;overflow:hidden}
 #ui2 .pad{position:absolute;left:1cqw;right:1cqw;bottom:19cqh;margin:0}
 #skipb{position:absolute;right:1cqw;top:1cqh;z-index:5}#skipb button{font-size:max(8px,.9cqw)}
 #menu{background:#000}#cv0{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border:0;margin:0}
@@ -89,31 +99,48 @@ kbd{background:#081525;color:var(--wa);padding:2px 4px;margin-left:4px;font:inhe
 #pop p{font:max(8px,1.3cqw)/1.6 "Press Start 2P",monospace;margin:1cqh 0}#pop.small p{font-size:max(8px,1.15cqw)}#pop b{color:var(--cy)}
 #pop .pb{height:1.2cqh;background:#2b4660;margin-top:1.5cqh}#pop .pb i{display:block;height:100%;width:100%;background:var(--wa)}
 #pop .pn{position:absolute;right:1.2cqw;top:.8cqh;font:4cqh "Press Start 2P",monospace;color:var(--wa)}
+/* ===== v9: NASA pictures + learn-more buttons ===== */
+.nimg{position:relative;overflow:hidden;background:#12283d;border:3px solid #2b4660;margin:8px 0;height:120px}
+.nimg img{width:100%;height:100%;object-fit:cover;display:block;image-rendering:auto}
+.nimf{position:absolute;inset:0;align-items:center;justify-content:center;font-size:44px;background:#12283d}
+.ncr{position:absolute;right:3px;bottom:3px;font:7px "Press Start 2P",monospace;background:#081525cc;color:#b8cfe0;padding:2px 4px}
+.nlearn{display:inline-block;margin:4px 0 2px;padding:9px 11px;background:#ffb547;color:#081525!important;font:9px/1.4 "Press Start 2P",monospace;text-decoration:none;box-shadow:inset -3px -3px #b36b00,inset 3px 3px #ffd98a;cursor:pointer}
+.nlearn:hover{background:#ffc86b}
+#pop .nimg{height:20cqh;border-width:.3cqw;margin:1cqh 0}
+#pop.small .nimg{height:15cqh}
+#pop .nimf{font-size:9cqh}
+#pop .ncr{font-size:max(6px,.75cqw)}
+#pop .nlearn{margin:1cqh 0 0;padding:1.1cqh 1.4cqw;font-size:max(8px,1.15cqw)}
+#pop.nasa .pe{font-size:8cqh}
+#pop.small.nasa{bottom:11cqh}
+#pop .pcont{font:max(7px,.95cqw)/1.5 "Press Start 2P",monospace;color:#b8cfe0;margin-top:1.2cqh}
 #msg:empty{display:none}
 .pc{margin:0;text-align:center}.pc canvas{cursor:pointer;transition:transform .15s}.pc canvas:hover{transform:scale(1.04)}
 .ic{font-size:clamp(18px,2.2vw,30px);margin:1.2vh 0}.pc h3{font-size:clamp(16px,2.2vw,30px)}.pc button{font-size:clamp(14px,1.8vw,24px)}
 .chips{display:flex;justify-content:center;gap:1vw;margin:1.2vh 0}.pc .chip{margin:0;padding:.8vh 1vw;font-size:clamp(16px,2.2vw,30px);display:flex;flex-direction:column;align-items:center;gap:.4vh;line-height:1.1}.pc .chip span{font-size:clamp(12px,1.5vw,20px)}
 .tag{min-height:clamp(22px,3vw,40px);font-size:clamp(14px,1.8vw,24px);margin:.6vh 0}
+.stt{font:clamp(11px,1.5vw,20px) "Press Start 2P",monospace;margin:.8vh 0;min-height:1.6em}.stt.on{color:var(--ok)}.stt.off{color:var(--cr)}
+.sbt{font-size:clamp(7px,.9vw,12px);color:#b8cfe0;margin:1vh 0 .5vh}.sbars{display:grid;grid-template-columns:repeat(3,1fr);gap:.8vw;margin-bottom:1vh}.sbars b{font:clamp(7px,.9vw,12px) "Press Start 2P",monospace;display:block;margin-bottom:.4vh}.sbars .bar{height:clamp(7px,1.1vh,12px);margin:0}
 </style></head><body>
 
-<section id="menu" class="scr on"><canvas id="cv0" width="240" height="135"></canvas><div class="mt"><div><h1>MARSBOUND</h1><div class="sub">SURVIVE 10 SOLS ON MARS</div></div><div><button onclick="startCut()"><kbd>1</kbd> PLAY</button><button class="alt" onclick="show('how')"><kbd>2</kbd> HOW TO PLAY</button><div id="best" class="note"></div></div></div></section>
+<section id="menu" class="scr on"><canvas id="cv0" width="240" height="135"></canvas><div class="mt"><div><h1>MARSBOUND</h1><div class="sub">SURVIVE 10 SOLS ON MARS</div></div><div><button onclick="startCut()"><kbd>1</kbd> PLAY</button><button class="alt" onclick="show('how')"><kbd>2</kbd> HOW TO PLAY</button><div id="best" class="note"></div><div class="px" style="font-size:clamp(6px,.8vw,10px);color:#b8cfe0;margin-top:1vh">Independent student project · Not an official NASA product or endorsement</div></div></div></section>
 
-<section id="how" class="scr"><div class="stage" id="hst"><canvas id="tcv" width="240" height="135"></canvas><canvas id="txo2" class="txo"></canvas><div id="tcap"><h2 id="tct"></h2><p id="tcp"></p></div><div id="tbar"><i style="display:block;height:100%;width:0;background:var(--cy)"></i></div><div id="tctl"><button class="alt" onclick="tSeek(Math.max(0,(Math.floor(TT/TD)-1)*TD))">&#9664; <kbd>&larr;</kbd></button><button id="tpb" onclick="tToggle()">PAUSE</button><button class="alt" onclick="tSeek(Math.min((TS-1)*TD,(Math.floor(TT/TD)+1)*TD))"><kbd>&rarr;</kbd> &#9654;</button><span id="tdots"></span><button onclick="show('menu')">BACK <kbd>ESC</kbd></button></div></div></section>
+<section id="how" class="scr"><div class="stage" id="hst"><canvas id="tcv" width="240" height="135" aria-hidden="true"></canvas><canvas id="txo2" class="txo"></canvas><div id="tcap"><h2 id="tct"></h2><p id="tcp"></p></div><div id="tbar"><i style="display:block;height:100%;width:0;background:var(--cy)"></i></div><div id="tctl"><button class="alt" onclick="tSeek(Math.max(0,(Math.floor(TT/TD)-1)*TD))">&#9664; <kbd>&larr;</kbd></button><button id="tpb" onclick="tToggle()">PAUSE</button><button class="alt" onclick="tSeek(Math.min((TS-1)*TD,(Math.floor(TT/TD)+1)*TD))"><kbd>&rarr;</kbd> &#9654;</button><span id="tdots"></span><button onclick="show('menu')">BACK <kbd>ESC</kbd></button></div></div></section>
 
 <section id="brief" class="scr"><div class="box"><h2>PICK YOUR POWER</h2><p class="px" style="text-align:center;font-size:clamp(10px,1.4vw,18px)">👆 TAP A PICTURE!</p>
 <div class="cards">
-<div class="box pc"><h3>☀️ SOLAR</h3><canvas width="96" height="64" data-p="sol" data-n="0"></canvas><div class="chips"><button class="chip" data-n="0">☀️<span>✅</span></button><button class="chip alt" data-n="1">🌙<span>❌</span></button><button class="chip alt" data-n="2">🌪️<span>❌</span></button></div><div class="tag">&nbsp;</div><button onclick="start('sol')"><kbd>1</kbd> PICK</button></div>
-<div class="box pc"><h3>☢️ REACTOR</h3><canvas width="96" height="64" data-p="nuc" data-n="0"></canvas><div class="chips"><button class="chip" data-n="0">☀️<span>✅</span></button><button class="chip alt" data-n="1">🌙<span>✅</span></button><button class="chip alt" data-n="2">🌪️<span>✅</span></button></div><div class="tag">🥫⬇</div><button onclick="start('nuc')"><kbd>2</kbd> PICK</button></div>
-<div class="box pc"><h3>⚡ HYBRID</h3><canvas width="96" height="64" data-p="hyb" data-n="0"></canvas><div class="chips"><button class="chip" data-n="0">☀️<span>✅</span></button><button class="chip alt" data-n="1">🌙<span>✅</span></button><button class="chip alt" data-n="2">🌪️<span>✅</span></button></div><div class="tag">👍</div><button onclick="start('hyb')"><kbd>3</kbd> PICK</button></div></div>
+<div class="box pc"><h3>☀️ SOLAR</h3><canvas width="96" height="64" data-p="sol" data-n="0"></canvas><div class="chips"><button class="chip" data-n="0">☀️<span>DAY</span></button><button class="chip alt" data-n="1">🌙<span>NIGHT</span></button><button class="chip alt" data-n="2">🌪️<span>STORM</span></button></div><div class="stt on">💡 POWER ON!</div><div class="px sbt">YOU START WITH</div><div class="sbars" data-p="sol"></div><button onclick="start('sol')"><kbd>1</kbd> PICK</button></div>
+<div class="box pc"><h3>☢️ REACTOR</h3><canvas width="96" height="64" data-p="nuc" data-n="0"></canvas><div class="chips"><button class="chip" data-n="0">☀️<span>DAY</span></button><button class="chip alt" data-n="1">🌙<span>NIGHT</span></button><button class="chip alt" data-n="2">🌪️<span>STORM</span></button></div><div class="stt on">💡 POWER ON!</div><div class="px sbt">YOU START WITH</div><div class="sbars" data-p="nuc"></div><button onclick="start('nuc')"><kbd>2</kbd> PICK</button></div>
+<div class="box pc"><h3>⚡ HYBRID</h3><canvas width="96" height="64" data-p="hyb" data-n="0"></canvas><div class="chips"><button class="chip" data-n="0">☀️<span>DAY</span></button><button class="chip alt" data-n="1">🌙<span>NIGHT</span></button><button class="chip alt" data-n="2">🌪️<span>STORM</span></button></div><div class="stt on">💡 POWER ON!</div><div class="px sbt">YOU START WITH</div><div class="sbars" data-p="hyb"></div><button onclick="start('hyb')"><kbd>3</kbd> PICK</button></div></div>
 <button class="alt" onclick="show('menu')">BACK <kbd>ESC</kbd></button></div></section>
 
-<section id="game" class="scr"><div id="wrap" class="stage"><canvas id="cv" width="240" height="135"></canvas><canvas id="txo" class="txo"></canvas><div id="hint"></div><div id="pop"></div>
+<section id="game" class="scr"><div id="wrap" class="stage"><canvas id="cv" width="240" height="135" aria-label="Interactive Mars game world. Use the arrow keys or WASD to move and Space to interact."></canvas><canvas id="txo" class="txo"></canvas><div id="hint"></div><div id="pop"></div>
 <div id="ui"><div class="hud" id="hud"></div><div id="info"></div><div id="where"></div><div id="tl"></div><div id="ord"></div><div id="side"><div id="inv" class="note"></div></div></div>
 <div id="skipb"><button class="alt" id="skip" onclick="endCut()" style="display:none">SKIP <kbd>S</kbd></button><button class="alt" id="mgx" onclick="M=null;this.style.display='none'" style="display:none">LEAVE <kbd>ESC</kbd></button></div>
-<div id="ui2"><div id="tg"></div><div class="pad"><div><span></span><button data-k="up">&#9650;</button><span></span><button data-k="left">&#9664;</button><button data-k="down">&#9660;</button><button data-k="right">&#9654;</button></div><button class="act" id="actb" data-k="act">ACT</button></div>
+<div id="ui2"><div id="tg"></div><div class="pad"><div><span></span><button data-k="up" aria-label="Move up">&#9650;</button><span></span><button data-k="left" aria-label="Move left">&#9664;</button><button data-k="down" aria-label="Move down">&#9660;</button><button data-k="right" aria-label="Move right">&#9654;</button></div><button class="act" id="actb" data-k="act" aria-label="Act or interact">SPACE</button></div>
 <div class="box" id="msg"></div>
-<div id="btns"><button onclick="invOpen()">🎒 PACK <kbd>I</kbd></button><button onclick="openTab('build')">🏗️ BUILD <kbd>B</kbd></button><button onclick="goalsOpen()">⭐ GOALS <kbd>G</kbd></button><button onclick="mapOpen()">🗺️ MAP <kbd>M</kbd></button><button class="alt" onclick="pause(1)">⏸ PAUSE <kbd>P</kbd></button></div>
-<div id="kb">ARROWS MOVE · SPACE ACT · SHIFT RUN</div></div>
+<div id="btns"><button onclick="invOpen()"><span class="bi">🎒</span>PACK<kbd>I</kbd></button><button onclick="openTab('build')"><span class="bi">🏗️</span>BUILD<kbd>B</kbd></button><button onclick="goalsOpen()"><span class="bi">⭐</span>GOALS<kbd>G</kbd></button><button onclick="mapOpen()"><span class="bi">🗺️</span>MAP<kbd>M</kbd></button><button class="alt" onclick="pause(1)"><span class="bi">⏸</span>PAUSE<kbd>P</kbd></button></div>
+<div id="kb">ARROWS MOVE · SPACE USE · SHIFT RUN</div></div>
 </div></section>
 <section id="end" class="scr"><div class="box" id="endbox"></div></section>
 <div class="ov" id="gov"><div class="box" id="gbox" style="text-align:center"><h2>⭐ GOALS</h2><div id="goals"></div><button onclick="goalsClose()">CLOSE <kbd>G</kbd></button></div></div>
@@ -177,7 +204,7 @@ const BP=[
  {t:'Tired astronaut',d:'You are sleepy after a long sol.',a:['Take a nap','+25 health, orders pause for a while',g=>{g.h+=25;g.next+=10},0,'Sleep matters. Tired astronauts make mistakes.'],b:['Work late','+80 score, -15 health',g=>{g.sc+=80;g.h-=15},1,'Extra work earns points but costs rest.']},
  {t:'Time Guard visits',d:'A Time Guard says your timeline looks wobbly.',a:['Cooperate','+25 stability, orders get 20% more time',g=>{g.st+=25;g.tm*=1.2},0,'Listening to experts keeps missions safe.'],b:['Resist','+100 score, -20 stability',g=>{g.sc+=100;g.st-=20},1,'Bold moves can pay off but risk problems.']},
  {t:'Dust forecast',d:'Earth warns of more dust blowing in.',a:['Tilt panels now','Panels cleaned, -5 power',g=>{g.soil=0;g.p-=5},0,'Tilting panels can help dust slide off.'],b:['Ignore it','+30 score',g=>{g.sc+=30},1,'Ignoring forecasts can cost power later.']},
- {t:'Iron and silicon!',d:'Your scanner finds iron and silicon in the soil.',a:['Dig and study','+80 score, -10 food',g=>{g.sc+=80;g.f-=10},1,'Iron builds structures. Silicon makes solar cells. Making them on Mars saves launches.'],b:['Note it for later','+10 stability',g=>{g.st+=10},0,'Mapping first helps you plan the best dig sites.']}];
+ {t:'Iron and silicon!',d:'Your scanner finds iron and silicon in the soil.',a:['Dig and study','+80 score, -10 food',g=>{g.sc+=80;g.f-=10},1,'Iron-bearing minerals and silicate materials could be processed for useful products, but both would require equipment, energy, and multiple processing steps.'],b:['Note it for later','+10 stability',g=>{g.st+=10},0,'Mapping first helps you plan the best dig sites.']}];
 let G=null,keys={},run=false,paused=false,flash=0,bg,M=null,cs=null,last=0,anim=false;
 function show(i){if(i==='how')tStart();else if(typeof tStop==='function')tStop();if(i==='menu'||i==='brief')musicPlay(i==='menu'?'menu':'intro');document.querySelectorAll('.scr').forEach(e=>e.classList.remove('on'));$(i).classList.add('on');if(i==='menu')bestShow()}
 function bestShow(){let b=0;try{b=+localStorage.getItem('jamt5-best')||0}catch(e){}$('best').textContent=b?'HIGH SCORE: '+b:'FINISH A MISSION FOR A HIGH SCORE!'}
@@ -209,7 +236,7 @@ function drawSt(k,t){
  if(k==='batt'){B(x,y+2,20,15,'#2b3a52');for(let i=0;i<3;i++){B(x+2+i*6,y+4,5,11,'#1b2536');const hh=Math.round(10*G.p/100);c.fillStyle=G.p>50?'#55D68B':G.p>25?'#FFB547':'#F05B64';c.fillRect(x+2+i*6,y+15-hh,5,hh)}B(x+4,y,3,2,'#c9d3dc');B(x+13,y,3,2,'#c9d3dc')}
  if(k==='hab'){const cx=x+35;for(let i=G.shield;i>0;i--)D(cx,y+h,24+i*2,'#a85a38');D(cx,y+h,24,'#e3dcd2');B(x,y+15,13,16,'#c2bbb0');B(x+57,y+15,13,16,'#c2bbb0');B(cx-4,y+h-11,8,11,'#2b3a52');B(cx-13,y+13,4,3,'#7fe3f0');B(cx+9,y+13,4,3,'#7fe3f0');B(x+3,y+18,7,4,'#7fe3f0');B(x+60,y+18,7,4,'#7fe3f0');if(G.brk.hab){c.fillStyle='rgba(255,255,255,.7)';c.fillRect(cx+(sw?3:5),y+8,2,1);c.fillRect(cx+(sw?6:2),y+6,2,1)}if(G.tg.heat){c.fillStyle='#FFB547';c.fillRect(x+2,y+24,9,1)}}
  if(s.src){B(x,y+4,w,13,'#7a5a3a');c.fillStyle='#5a3f26';for(let i=4;i<w;i+=6)c.fillRect(x+i,y+4,1,13);item(s.src,x+w/2,y+9)}
- if(G.ord.some(o=>o.s[o.step][1]===k)||G.brk[k]){c.strokeStyle=G.brk[k]&&!m?'#F05B64':'#FFB547';if(m||G.brk[k]){c.lineWidth=1;c.strokeRect(x-1.5,y-1.5,w+3,h+3)}}
+ if(G.ord.some(o=>o.s[o.step][1]===k)||G.brk[k]){c.strokeStyle='#F05B64';if(m||G.brk[k]){c.lineWidth=1;c.strokeRect(x-1.5,y-1.5,w+3,h+3)}}
  tx(s.n,x+w/2,y+h+3,G.brk[k]?'#F05B64':'#F4F7FA','c')}
 function astro(x,y,dir,wk,st='#ff8a3c'){const a=Math.round(x),b=Math.round(y),f=wk?Math.floor(performance.now()/120)%2:0;c.fillStyle='rgba(0,0,0,.3)';c.fillRect(a-4,b,8,2);
  B(a-3,b-3-f,2,3,'#9aa7b6');B(a+1,b-3-(1-f),2,3,'#9aa7b6');B(a-dir*4-1,b-10,2,7,'#8d99a8');B(a-3,b-10,6,7,'#f4f7fa');c.fillStyle=st;c.fillRect(a-3,b-6,6,1);
@@ -233,9 +260,9 @@ function csDraw(t){const i=cs.i,tt=cs.t;c.drawImage(bg,0,0);const launch=i>=3,ry
 /* minigames */
 function mgStart(ty,label,cb){sfx('start');const r=Math.random;M={ty,label:label||GT[ty],cb,t:0,msg:'',fz:0};$('mgx').style.display='';
  if(ty==='pour'){M.v=35;M.on=0;M.pr=0;M.hs=[];M.bs=[];M.sa=0;M.ph=Math.random()*6;M.tg=50;M.sp=0}
- if(ty==='shoot'){M.a=0;M.sx=60;M.sd=1;M.hit=0;M.p=[];M.cd=0;M.left=45}
+ if(ty==='shoot'){M.a=0;M.sx=60;M.sd=DIFF==='easy'?.6:1;M.hit=0;M.p=[];M.cd=0;M.left=60}
  if(ty==='scrub'){M.pr=0;M.last=''}
- if(ty==='timing'){M.n=0;M.x=0;M.d=1;M.sp=50;M.z=15+r()*110}
+ if(ty==='timing'){M.n=0;M.x=0;M.d=1;M.sp=DIFF==='easy'?34:50;M.z=15+r()*110}
  if(ty==='find'){M.lx=50+r()*140;M.ly=36+r()*40;M.cx=120;M.cy=62}
  if(ty==='heat'){M.h=10;M.pr=0}
  if(ty==='simon'){M.seq=[0,0].map(()=>Math.floor(r()*4));M.in=[];M.ph='show';M.ti=0}
@@ -245,20 +272,20 @@ const DK={up:0,right:1,down:2,left:3};
 function mgKey(k){if(!M||M.fz>0)return;const m=M;
  if(m.ty==='pour'&&k==='act'&&!m.rt){m.on=1}
  if(m.ty==='shoot'&&k==='act'&&m.cd<=0){m.cd=.45;const a=m.a*Math.PI/180;m.p.push({x:120+Math.sin(a)*10,y:104-Math.cos(a)*10,vx:Math.sin(a)*95,vy:-Math.cos(a)*95,l:1.5})}
- if(m.ty==='scrub'&&(k==='left'||k==='right')&&m.last!==k){m.last=k;m.pr+=18;if(m.pr>=100)mgWin()}
- if(m.ty==='timing'&&k==='act'){if(m.x>=m.z-3&&m.x<=m.z+30){m.n++;m.sp*=1.2;m.z=15+Math.random()*110;if(m.n>=1)mgWin()}else{sfx('oops');m.n=0;m.sp=50;m.fz=.6;m.msg='MISS! START OVER'}}
- if(m.ty==='find'&&k==='act'){if(Math.hypot(m.cx-m.lx,m.cy-m.ly)<28)mgWin();else{sfx('oops');m.fz=.8;m.msg='NOT HERE!'}}
+ if(m.ty==='scrub'&&(k==='left'||k==='right')&&m.last!==k){m.last=k;m.pr+=(DIFF==='easy'?26:18);if(m.pr>=100)mgWin()}
+ if(m.ty==='timing'&&k==='act'){if(m.x>=m.z-3-(DIFF==='easy'?10:0)&&m.x<=m.z+30+(DIFF==='easy'?10:0)){m.n++;m.sp*=1.2;m.z=15+Math.random()*110;if(m.n>=1)mgWin()}else{sfx('oops');m.n=0;m.sp=DIFF==='easy'?34:50;m.fz=.6;m.msg='MISS! START OVER'}}
+ if(m.ty==='find'&&k==='act'){if(Math.hypot(m.cx-m.lx,m.cy-m.ly)<(DIFF==='easy'?40:28))mgWin();else{sfx('oops');m.fz=.8;m.msg='NOT HERE!'}}
  if(m.ty==='simon'&&m.ph==='in'&&DK[k]!==undefined){m.in.push(DK[k]);const j=m.in.length-1;if(m.in[j]!==m.seq[j]){sfx('oops');m.ph='show';m.ti=0;m.in=[];m.fz=.7;m.msg='WRONG! WATCH AGAIN'}else if(m.in.length>=2)mgWin()}
- if(m.ty==='mash'&&k==='act'){m.v+=18;if(m.v>=100)mgWin()}}
+ if(m.ty==='mash'&&k==='act'){m.v+=(DIFF==='easy'?26:18);if(m.v>=100)mgWin()}}
 function mgUp(k){if(!M)return;if(M.ty==='pour'&&k==='act')M.on=0}
 function mgUpd(dt){const m=M;m.t+=dt;m.fz=Math.max(0,m.fz-dt);if(m.fz>0)return;if(m.msg&&m.fz<=0&&m.ty!=='pour')m.msg='';
- if(m.ty==='pour'){m.v=cl(m.v+(m.on?42:-30)*dt);m.tg=cl(50+22*Math.sin(m.t*.4+m.ph),22,78);const d=Math.abs(m.v-m.tg),inb=d<=16;m.sp=inb?1+(1-d/16):0;m.pr=inb?m.pr+(12+14*(1-d/16))*dt:Math.max(0,m.pr-5*dt);m.sa+=dt;if(m.sa>.07){m.sa=0;m.hs.push(m.v);m.bs.push(m.tg);if(m.hs.length>96){m.hs.shift();m.bs.shift()}}if(m.pr>=100)return mgWin()}
+ if(m.ty==='pour'){m.v=cl(m.v+(m.on?42:-30)*dt);m.tg=cl(50+22*Math.sin(m.t*.4+m.ph),22,78);const d=Math.abs(m.v-m.tg),inb=d<=16;m.sp=inb?1+(1-d/16):0;m.pr=inb?m.pr+(12+14*(1-d/16))*dt*(DIFF==='easy'?1.5:1):Math.max(0,m.pr-5*dt*(DIFF==='easy'?.4:1));m.sa+=dt;if(m.sa>.07){m.sa=0;m.hs.push(m.v);m.bs.push(m.tg);if(m.hs.length>96){m.hs.shift();m.bs.shift()}}if(m.pr>=100)return mgWin()}
  if(m.ty==='shoot'){const a=(keys.right?1:0)-(keys.left?1:0);m.a=cl(m.a+a*75*dt,-62,62);m.cd-=dt;m.sx+=m.sd*34*dt;if(m.sx>205||m.sx<35)m.sd*=-1;
   for(const p of m.p){p.x+=p.vx*dt;p.y+=p.vy*dt;p.l-=dt;if(Math.hypot(p.x-m.sx,p.y-32)<12){p.l=-1;m.hit++;m.msg='CAUGHT!';m.fz=.3}}m.p=m.p.filter(p=>p.l>0&&p.y>0);
-  if(m.hit>=1)return mgWin();m.left-=dt;if(m.left<=0){sfx('oops');m.hit=0;m.left=45;m.fz=1.2;m.msg='TRY AGAIN'}}
+  if(m.hit>=1)return mgWin();m.left-=dt;if(m.left<=0){sfx('oops');m.hit=0;m.left=60;m.fz=1.2;m.msg='TRY AGAIN'}}
  if(m.ty==='timing'){m.x+=m.d*m.sp*dt;if(m.x>128){m.x=128;m.d=-1}if(m.x<0){m.x=0;m.d=1}}
  if(m.ty==='find'){m.cx=cl(m.cx+((keys.right?1:0)-(keys.left?1:0))*55*dt,32,208);m.cy=cl(m.cy+((keys.down?1:0)-(keys.up?1:0))*55*dt,28,92)}
- if(m.ty==='heat'){m.h=cl(m.h+(keys.act?42:-26)*dt);if(m.h>=22&&m.h<=84)m.pr+=dt*40;else m.pr=Math.max(0,m.pr-dt*20);if(m.h>=100){sfx('oops');m.h=55;m.pr=0;m.fz=.8;m.msg='TOO HOT!'}if(m.pr>=100)return mgWin()}
+ if(m.ty==='heat'){m.h=cl(m.h+(keys.act?42:-26)*dt);if(m.h>=(DIFF==='easy'?14:22)&&m.h<=(DIFF==='easy'?92:84))m.pr+=dt*(DIFF==='easy'?55:40);else m.pr=Math.max(0,m.pr-dt*(DIFF==='easy'?8:20));if(m.h>=100){sfx('oops');m.h=55;m.pr=0;m.fz=.8;m.msg='TOO HOT!'}if(m.pr>=100)return mgWin()}
  if(m.ty==='simon'&&m.ph==='show'){m.ti+=dt;if(m.ti>2*.7+.4){m.ph='in'}}
  if(m.ty==='mash')m.v=Math.max(0,m.v-8*dt)}
 function mgDraw(t){const m=M;c.fillStyle='rgba(8,21,37,.9)';c.fillRect(0,0,W,H);B(10,6,220,122,'#12283d');tx(m.label,120,11,'#45d5e8','c');
@@ -268,21 +295,21 @@ function mgDraw(t){const m=M;c.fillStyle='rgba(8,21,37,.9)';c.fillRect(0,0,W,H);
   c.fillStyle='#ffd34d';c.fillRect(gx+gw-3,Y(m.tg+16),3,Y(m.tg-16)-Y(m.tg+16));tx('WATER',gx+2,gy+2,'#8fd6ff');tx('BAR',gx+gw-14,Y(m.tg+16)-7,'#55d68b');
   const h=Math.round(m.pr*.5);B(184,86,24,14,'#b45a35');B(195,86-h,3,h,m.sp?'#3ec46d':'#6b7a4a');if(m.pr>25)B(188,86-Math.round(h*.6),7,3,'#55d68b');if(m.pr>55)B(198,86-Math.round(h*.8),7,3,'#55d68b');if(m.pr>88)B(192,80-h,9,6,'#ffd34d');
   B(172,104,48,6,'#1b2536');c.fillStyle='#55d68b';c.fillRect(173,105,Math.round(46*m.pr/100),4);tx(m.sp>1.7?'BULLSEYE! FAST!':m.sp?'GROWING':'OFF THE BAR',196,28,m.sp>1.7?'#ffd34d':m.sp?'#55d68b':'#f05b64','c');
-  if(m.on){c.fillStyle='#8fd6ff';for(let i=0;i<5;i++)c.fillRect(190+(i%2)*4,60+((t/40+i*7)%24),1,3)}hint('HOLD ACT TO WATER. KEEP THE LINE IN THE GREEN BAR!')}
+  if(m.on){c.fillStyle='#8fd6ff';for(let i=0;i<5;i++)c.fillRect(190+(i%2)*4,60+((t/40+i*7)%24),1,3)}hint('HOLD SPACE TO WATER. KEEP THE LINE IN THE GREEN BAR!')}
  if(m.ty==='shoot'){c.fillStyle='#0a1020';c.fillRect(14,14,212,100);for(let i=0;i<30;i++){c.fillStyle='#fff';c.fillRect(16+(i*37)%208,16+(i*23)%70,1,1)}c.fillStyle='#8a3d20';c.fillRect(14,110,212,4);B(112,106,16,5,'#c9d3dc');
   for(let i=0;i<8;i++){const a=m.a*Math.PI/180;c.fillStyle=i<7?'#dfe3e8':'#45d5e8';c.fillRect(Math.round(120+Math.sin(a)*(4+i*1.3)),Math.round(105-Math.cos(a)*(4+i*1.3)),2,2)}
   const sx=m.sx;B(sx-3,30,6,4,'#c9d3dc');B(sx-11,31,7,2,'#2f5fb3');B(sx+4,31,7,2,'#2f5fb3');c.fillStyle='#ff8a3c';c.fillRect(sx,27,1,3);
   for(const p of m.p){c.fillStyle='#45d5e8';c.fillRect(Math.round(p.x)-1,Math.round(p.y)-1,3,3);c.fillStyle='rgba(69,213,232,.5)';c.fillRect(Math.round(p.x)-3,Math.round(p.y),7,1)}
-  tx('UHF PULSES CAUGHT '+m.hit+'/1   TIME '+Math.ceil(m.left),120,17,'#ffb547','c');hint('LEFT/RIGHT AIM. ACT FIRES. LEAD THE ORBITER!')}
+  tx('UHF PULSES CAUGHT '+m.hit+'/1   TIME '+Math.ceil(m.left),120,17,'#ffb547','c');hint('LEFT/RIGHT AIM. SPACE FIRES. LEAD THE ORBITER!')}
  if(m.ty==='scrub'){for(let i=0;i<4;i++)for(let j=0;j<8;j++)B(36+j*21,34+i*14,19,12,'#2f5fb3');for(let k=0;k<70;k++){if(k/70>=m.pr/100){c.fillStyle='#d9a26a';c.fillRect(38+(k*29)%160,36+(k*17)%52,5,3);c.fillStyle='#b8804e';c.fillRect(38+(k*29)%160,38+(k*17)%52,5,1)}}
   const bx=m.last==='left'?60:m.last==='right'?160:110;B(bx,26,16,5,'#8b5a2b');B(bx,31,16,3,'#F05B64');B(60,98,120,7,'#1b2536');c.fillStyle='#55d68b';c.fillRect(61,99,Math.round(118*m.pr/100),5);hint('MASH LEFT AND RIGHT TO SCRUB')}
- if(m.ty==='timing'){B(45,52,150,16,'#1b2536');B(45+m.z,52,28,16,'#55d68b');B(45+m.x,48,3,24,'#fff');for(let i=0;i<3;i++)B(100+i*16,82,10,8,i<m.n?'#55d68b':'#2b4660');hint('PRESS ACT WHEN THE LINE IS IN THE GREEN.')}
+ if(m.ty==='timing'){B(45,52,150,16,'#1b2536');B(45+m.z,52,28,16,'#55d68b');B(45+m.x,48,3,24,'#fff');for(let i=0;i<3;i++)B(100+i*16,82,10,8,i<m.n?'#55d68b':'#2b4660');hint('PRESS SPACE WHEN THE LINE IS IN THE GREEN.')}
  if(m.ty==='find'){B(30,26,180,72,'#c2bbb0');for(let i=0;i<9;i++){c.fillStyle='#8d867b';c.fillRect(36+i*20,30,2,2);c.fillRect(36+i*20,92,2,2)}const d=Math.hypot(m.cx-m.lx,m.cy-m.ly),hs=cl(1-d/90,0,1);
   c.fillStyle=hs>.6?'#f05b64':hs>.3?'#ffb547':'#45d5e8';const x=Math.round(m.cx),y=Math.round(m.cy);c.fillRect(x-6,y,5,1);c.fillRect(x+2,y,5,1);c.fillRect(x,y-6,1,5);c.fillRect(x,y+2,1,5);
-  tx('HISS',34,104,'#b8cfe0');B(56,104,100,6,'#1b2536');c.fillStyle=hs>.6?'#f05b64':'#ffb547';c.fillRect(57,105,Math.round(98*hs),4);if(hs>.5&&Math.floor(t/120)%2){c.fillStyle='#fff';c.fillRect(Math.round(m.lx),Math.round(m.ly)-1,1,1)}hint('ARROWS MOVE. LOUDER HISS = CLOSER. PRESS ACT!')}
- if(m.ty==='heat'){B(96,26,48,66,'#1b2536');const hh=Math.round(62*m.h/100);c.fillStyle=m.h>62?'#f05b64':m.h>=34?'#55d68b':'#8fd6ff';c.fillRect(98,90-hh,44,hh);c.fillStyle='#fff';c.fillRect(94,90-Math.round(62*.62),52,1);c.fillRect(94,90-Math.round(62*.4),52,1);tx('BAND',150,58,'#55d68b');B(60,98,120,7,'#1b2536');c.fillStyle='#55d68b';c.fillRect(61,99,Math.round(118*m.pr/100),5);hint('HOLD ACT TO HEAT. KEEP IT IN THE BAND!')}
+  tx('HISS',34,104,'#b8cfe0');B(56,104,100,6,'#1b2536');c.fillStyle=hs>.6?'#f05b64':'#ffb547';c.fillRect(57,105,Math.round(98*hs),4);if(hs>.5&&Math.floor(t/120)%2){c.fillStyle='#fff';c.fillRect(Math.round(m.lx),Math.round(m.ly)-1,1,1)}hint('ARROWS MOVE. LOUDER HISS = CLOSER. PRESS SPACE!')}
+ if(m.ty==='heat'){B(96,26,48,66,'#1b2536');const hh=Math.round(62*m.h/100);c.fillStyle=m.h>62?'#f05b64':m.h>=34?'#55d68b':'#8fd6ff';c.fillRect(98,90-hh,44,hh);c.fillStyle='#fff';c.fillRect(94,90-Math.round(62*.62),52,1);c.fillRect(94,90-Math.round(62*.4),52,1);tx('BAND',150,58,'#55d68b');B(60,98,120,7,'#1b2536');c.fillStyle='#55d68b';c.fillRect(61,99,Math.round(118*m.pr/100),5);hint('HOLD SPACE TO HEAT. KEEP IT IN THE BAND!')}
  if(m.ty==='simon'){const P=[[104,28],[134,52],[104,76],[74,52]],act=m.ph==='show'?Math.floor(m.ti/.7):-1,on=act>=0&&act<4&&(m.ti%.7)<.5?m.seq[act]:-1;P.forEach((p,i)=>{B(p[0],p[1],24,20,i===on?'#ffb547':'#2b4660');tx(['UP','RIGHT','DOWN','LEFT'][i],p[0]+12,p[1]+8,'#fff','c')});for(let i=0;i<3;i++)B(100+i*10,104,6,5,i<m.in.length?'#55d68b':'#2b4660');hint(m.ph==='show'?'WATCH THE CODE...':'NOW COPY IT WITH THE ARROWS')}
- if(m.ty==='mash'){B(70,50,100,28,'#1b2536');c.fillStyle='#c98a66';c.fillRect(72,52,Math.round(96*m.v/100),24);c.fillStyle='#9c5a3c';for(let i=0;i<8;i++)c.fillRect(72+(i*17)%90,56+(i*7)%18,4,2);B(108,86,3,16,'#8b5a2b');B(104,100,11,4,'#c9d3dc');hint('MASH ACT TO SHOVEL SOIL FAST!')}}
+ if(m.ty==='mash'){B(70,50,100,28,'#1b2536');c.fillStyle='#c98a66';c.fillRect(72,52,Math.round(96*m.v/100),24);c.fillStyle='#9c5a3c';for(let i=0;i<8;i++)c.fillRect(72+(i*17)%90,56+(i*7)%18,4,2);B(108,86,3,16,'#8b5a2b');B(104,100,11,4,'#c9d3dc');hint('MASH SPACE TO SHOVEL SOIL FAST!')}}
 function destName(k){ return ({solar:'SOLAR PANELS',moxie:'OXYGEN MAKER',ext:'WATER MAKER',comm:'RADIO',garden:'GARDEN',hab:'HABITAT',reactor:'REACTOR',batt:'BATTERY'})[k]||String(ST[k]?.n||k); }
 function path(s,i){ const step=s[i]; return step?'GO TO: '+destName(step[1]):''; }
 function start(p){sfx('start');musicPlay('game');if(!bg)mkBg();
@@ -347,7 +374,7 @@ function update(dt){
  if(!M){let dx=(keys.right?1:0)-(keys.left?1:0),dy=(keys.down?1:0)-(keys.up?1:0);if(dx&&dy){dx*=.7;dy*=.7}if(dx)G.dir=dx>0?1:-1;const sp=46*G.spd*dt*(keys.shift?1.6:1);G.mv=!!(dx||dy);
   let nx=cl(G.x+dx*sp,4,WW-4);if(!solid(nx,G.y))G.x=nx;let ny=cl(G.y+dy*sp,40,WH-5);if(!solid(G.x,ny))G.y=ny}
  explore(dt);G.ck+=dt*.7;const ph=G.ck/40,night=ph>=.5,sun=Math.max(0,Math.sin(2*Math.PI*ph));
- if(G.warn>0){G.warn-=dt;if(G.warn<=0){G.storm=55;sfx('wind');say('DUST STORM!','Sunlight is blocked for a while. Cleaning panels will NOT fix dust in the sky.','var(--cr)')}}
+ if(G.warn>0){if(!M&&!G.in&&!ovOpen())G.warn-=dt;if(G.warn<=0){G.storm=55;sfx('wind');say('DUST STORM!','Sunlight is blocked for a while. Cleaning panels will NOT fix dust in the sky.','var(--cr)')}}
  if(G.storm>0)G.storm-=dt;G.tau+=((G.storm>0?.85:0)-G.tau)*Math.min(1,dt*.5);G.soil=cl(G.soil+(.004+(G.storm>0?.008:0))*dt,0,1);
  const P=PL[G.plan],gen=(P.s+6*G.bd.solar)*sun*(1-.7*G.soil)*(1-.92*G.tau)+P.nu*(G.brk.reactor?.5:1),blk=G.p<=0&&gen<6,e=k=>G.tg[k]&&!blk;
  const load=4+(e('heat')?2:0)+(e('moxie')?5+3*G.bd.moxie:0)+(e('garden')?3+2*G.bd.garden:0)+(e('comm')?.5:0);
@@ -362,20 +389,20 @@ function update(dt){
  if(!M)for(const od of G.ord.slice()){od.left-=dt;if(od.left<=0)failOrder(od)}
  flash=Math.max(0,flash-dt);
  if(G.st<=0)return endGame('pruned');if(G.o<=0||G.h<=0)return endGame('fail');hud(night)}
-function hud(night){const col=v=>v>50?'var(--ok)':v>25?'var(--wa)':'var(--cr)',cell=(n,k)=>`<div class=\"res\"><b><span>${n}</span><span style=\"color:${col(G[k])}\">${Math.round(G[k])}</span></b><div class=\"bar\"><i style=\"width:${G[k]}%;background:${col(G[k])}\"></i></div></div>`;
+function hud(night){const col=v=>v>50?'var(--ok)':v>25?'var(--wa)':'var(--cr)',cell=(n,k)=>{const v=G[k],lo=v<=40,fl=lo&&Math.floor(performance.now()/(100+800*v/40))%2===0;return`<div class="res${lo?' lo':''}${fl?' fl':''}"><b><span>${n}</span><span style="color:${fl?'#fff':col(v)}">${Math.round(v)}</span></b><div class="bar"><i style="width:${v}%;background:${col(v)}"></i></div></div>`};
  $('hud').innerHTML=cell('AIR','o')+cell('POWER','p')+cell('FOOD','f')+cell('HEAT','t')+cell('HEALTH','h');
  $('info').innerHTML=`SOL ${Math.min(10,G.sol)}/10 · ${night?'NIGHT':'DAY'} · SCORE ${G.sc}${G.warn>0?' · <b style="color:var(--cr)">STORM COMING!</b>':''}${G.orb?' · <b style="color:var(--cy)">RADIO ON NOW!</b>':''}`;
  $('ord').innerHTML=G.ord.map(o=>`<div class=\"card ${o.left<6?'low':''}\"><b>${OT[o.k].txt}</b><br><span style=\"color:var(--cy)\">${path(o.s,o.step)}</span><div class=\"bar\"><i style=\"width:${100*o.left/o.max}%;background:${o.left<6?'var(--cr)':'var(--wa)'}\"></i></div></div>`).join('')||'<div class=\"note\">No job now. Explore!</div>';
- tlDraw();invBar();goalBar();const n=M?null:nearAny(),nn=M?null:nearNode(),hh=$('hint');hh.style.display=(n||nn)?'block':'none';if(n)hh.textContent='[ACT] '+ST[n].n;else if(nn)hh.textContent='[ACT] '+nn.d.n}
+ tlDraw();invBar();goalBar();const n=M?null:nearAny(),nn=M?null:nearNode(),hh=$('hint');hh.style.display=(n||nn)?'block':'none';if(n)hh.textContent='[SPACE] '+ST[n].n;else if(nn)hh.textContent='[SPACE] '+nn.d.n}
 function render(t){c.save();c.translate(-Math.round(CAM.x),-Math.round(CAM.y));c.drawImage(bg,0,0);const ph=G.ck/40,night=Math.max(0,-Math.sin(2*Math.PI*ph));
  for(const k in ST)if(hasSt(k))drawSt(k,t);
  const order=G.ord[0];
  if(order){
   const target=ST[order.s[order.step][1]];
   const x=target.x+target.w/2,y=target.y+target.h/2;
-  c.strokeStyle='#FFB547';c.lineWidth=2;
+  c.strokeStyle='#F05B64';c.lineWidth=2;
   c.beginPath();c.arc(x,y,12+Math.sin(t/180)*2,0,Math.PI*2);c.stroke();
-  tx('GO HERE',x,Math.max(2,target.y-7),'#FFB547','c');
+  tx('GO HERE',x,Math.max(2,target.y-7),'#F05B64','c');
  }
  drawNodes(t);astro(G.x,G.y,G.dir,G.mv&&!M);if(G.held)item(G.held,G.x,G.y-21);c.restore();drawMini();drawArrow();
  c.fillStyle='rgba(255,225,190,.28)';for(let i=0;i<22;i++)c.fillRect(Math.floor((i*47+t/40*(1+i%3))%W),(i*31)%H,2,1);
@@ -393,7 +420,7 @@ function endGame(r){run=false;M=null;invClose();mapClose();musicPlay(r==='win'?'
  <p class="edu"><b>Explorer report:</b> NASA facts ${Object.keys(G.facts).length}/${Object.keys(ITEMS).length} · Places ${Object.keys(G.seen).length}/${LMS.length} · Goals ${G.gd} · Built ${G.bd.solar+G.bd.moxie+G.bd.garden}</p>
  <p class="edu"><b>Your power plan (${PL[G.plan].n}):</b> ${tips[G.plan]}</p>
  <p class="edu"><b>MARS TO EARTH:</b> Dust-proof panels and better batteries made for Mars help Earth too!</p>
- <p class="note">A simplified game. Numbers are not NASA specs.</p>
+ <p class="note">A simplified educational game. Resource values and outcomes are not NASA mission specifications. This is an independent student project, not an official NASA product or endorsement.</p>
  <button onclick="show('brief')">REPLAY MISSION</button><button class="alt" onclick="show('menu')">MAIN MENU</button>`;show('end')}
 
 bestShow();
@@ -441,8 +468,8 @@ const LMS=[
 const GALE={id:'gale',n:'GALE CRATER',w:'A giant crater, 154 km wide. Curiosity has explored it since 2012.',m:'Water once pooled here. The rocks hold clues about whether Mars could host life.'};
 const LMR=[...LMS].sort((a,b)=>a.r-b.r),LMN=id=>LMS.find(l=>l.id===id)||GALE,zoneAt=(x,y)=>LMR.find(l=>Math.hypot(l.x-x,l.y-y)<l.r)||GALE;
 const ITEMS={
- iron:{n:'IRON',e:'🔩',u:'FOR BUILDING',f:'Vera Rubin Ridge glows with hematite, an iron mineral. On Mars, iron could become tools and parts.'},
- sand:{n:'SAND',e:'🏜️',u:'PILE ON ROOF',f:'Mars sand is full of silicon, the stuff in solar cells. Curiosity scooped sand at Rocknest in 2012.'},
+ iron:{n:'IRON',e:'🔩',u:'FOR BUILDING',f:'Curiosity examined Vera Rubin Ridge for hematite, an iron-oxide mineral. Recovering usable metal from Martian rocks would require processing.'},
+ sand:{n:'SAND',e:'🏜️',u:'PILE ON ROOF',f:'Martian soil contains silicate minerals. Recovering usable silicon or other materials would require substantial processing; raw soil is not ready-made solar-cell material. Curiosity scooped soil at Rocknest in 2012.'},
  clay:{n:'CLAY',e:'🧱',u:'FOR BUILDING',f:'Curiosity found clay at Yellowknife Bay and Glen Torridon. Clay only forms with water, a clue that Mars was wetter.'},
  ice:{n:'WATER ICE',e:'🧊',u:'MELT FOR GARDEN',f:'NASA’s Phoenix lander dug up water ice just under the surface in 2008. Ice is a future crew’s water.'},
  drill:{n:'DRILL ROCK',e:'🧪',u:'SEND TO EARTH',f:'Curiosity drilled rock at Yellowknife Bay and found signs of an ancient lake. Later samples held organic molecules: carbon-based, but not proof of life.'},
@@ -453,7 +480,7 @@ const USE={ice:()=>{G.f=cl(G.f+12);return'Water for the garden: +12 food.'},sand
  drill:()=>{G.sc+=70;G.st=cl(G.st+5);return'Sample sent to Earth: +70 score, +5 stability.'},o2:()=>{G.o=cl(G.o+20);return'+20 air.'},food:()=>{G.f=cl(G.f+20);return'+20 food.'},batt:()=>{G.p=cl(G.p+20);return'+20 power.'}};
 const BLD={solar:{n:'SOLAR PANEL',e:'☀️',c:{iron:3,sand:2},max:3,d:'MORE POWER'},moxie:{n:'MOXIE',e:'💨',c:{iron:4,sand:2},max:2,d:'MORE AIR'},garden:{n:'GARDEN',e:'🥬',c:{clay:3,ice:2,iron:1},max:2,d:'MORE FOOD'}};
 const SLOT={solar:[[20,104],[75,104],[330,112]],moxie:[[200,110],[262,110]],garden:[[322,166],[322,206]],bank:[[250,120],[272,120]]};
-const SOLF=['A Mars day (a sol) lasts 24 hours 39 minutes, a little longer than an Earth day.','Gravity on Mars is about 38% of Earth’s, so you would feel much lighter.','Mars air is about 95% carbon dioxide, and it is less than 1% as thick as Earth’s.','Radio signals take roughly 5 to 20 minutes to travel between Mars and Earth.','Mars has two tiny moons, Phobos and Deimos.','Olympus Mons, a Mars volcano, is more than twice as tall as Mount Everest.','Mars days can reach about 20°C, but nights drop far below freezing.','A year on Mars lasts about 687 Earth days.','Perseverance uses a plutonium-powered generator, so dust cannot block its power.','Mars is a little over half as wide as Earth.'];
+const SOLF=['A Mars day (a sol) lasts 24 hours 39 minutes, a little longer than an Earth day.','Gravity on Mars is about 38% of Earth’s, so you would feel much lighter.','Mars’s surface air pressure is less than 1% of Earth’s average sea-level pressure, and its atmosphere is about 95% carbon dioxide.','One-way radio signals between Earth and Mars can take several minutes to more than 20 minutes, depending on where the planets are in their orbits.','Mars has two tiny moons, Phobos and Deimos.','Olympus Mons, a Mars volcano, is more than twice as tall as Mount Everest.','At some equatorial locations, Mars temperatures can approach 20°C around midday; nights can fall far below freezing.','A year on Mars lasts about 687 Earth days.','Perseverance uses a plutonium-powered generator, so dust cannot block its power.','Mars is a little over half as wide as Earth.'];
 const NODES=[['o2',100,330],['food',240,320],['batt',395,235],['o2',420,300],['sand',300,375],['sand',355,415],['sand',315,445],['sand',385,380],
  ['clay',535,110],['clay',600,150],['clay',570,175],['drill',568,128],['ice',450,95],['ice',720,230],['ice',520,320],['ice',640,300],
  ['iron',830,225],['iron',905,270],['iron',875,310],['iron',935,215],['iron',850,500],['iron',915,420],['iron',935,500],
@@ -516,8 +543,8 @@ function drawMini(){const x=W-52,y=3,w=48,h=27,sx=w/WW,sy=h/WH;c.fillStyle='rgba
  c.fillStyle='#FFB547';for(const n of G.nodes)if(!n.got)c.fillRect(Math.round(x+n.x*sx),Math.round(y+n.y*sy),1,1);
  const o=G.ord[0];if(o&&Math.floor(performance.now()/300)%2){const s=ST[o.s[o.step][1]];c.fillStyle='#F05B64';c.fillRect(Math.round(x+s.x*sx),Math.round(y+s.y*sy),2,2)}
  c.strokeStyle='rgba(255,255,255,.55)';c.lineWidth=1;c.strokeRect(x+CAM.x*sx+.5,y+CAM.y*sy+.5,W*sx,H*sy);c.fillStyle='#fff';c.fillRect(Math.round(x+G.x*sx)-1,Math.round(y+G.y*sy)-1,2,2);tx('MAP: M',x+w/2,y+h+2,'#b8cfe0','c')}
-function drawArrow(){const o=G.ord[0];if(!o||M)return;const s=ST[o.s[o.step][1]],x=s.x+s.w/2-CAM.x,y=s.y+s.h/2-CAM.y;if(x>10&&x<W-10&&y>10&&y<H-10)return;const a=Math.atan2(y-H/2,x-W/2),k=Math.min((W/2-10)/Math.max(.001,Math.abs(Math.cos(a))),(H/2-10)/Math.max(.001,Math.abs(Math.sin(a)))),px=W/2+Math.cos(a)*k,py=H/2+Math.sin(a)*k;
- c.fillStyle=K;c.beginPath();c.moveTo(px+Math.cos(a)*9,py+Math.sin(a)*9);c.lineTo(px+Math.cos(a+2.4)*7,py+Math.sin(a+2.4)*7);c.lineTo(px+Math.cos(a-2.4)*7,py+Math.sin(a-2.4)*7);c.fill();c.fillStyle='#FFB547';c.beginPath();c.moveTo(px+Math.cos(a)*7,py+Math.sin(a)*7);c.lineTo(px+Math.cos(a+2.4)*5,py+Math.sin(a+2.4)*5);c.lineTo(px+Math.cos(a-2.4)*5,py+Math.sin(a-2.4)*5);c.fill()}
+function drawArrow(){const o=G.ord[0];if(!o||M)return;const s=ST[o.s[o.step][1]],x=s.x+s.w/2-CAM.x,y=s.y+s.h/2-CAM.y;if(x>10&&x<W-10&&y>10&&y<H-10)return;const a=Math.atan2(y-H/2,x-W/2),k=Math.min((W/2-15)/Math.max(.001,Math.abs(Math.cos(a))),(H/2-15)/Math.max(.001,Math.abs(Math.sin(a)))),px=W/2+Math.cos(a)*k,py=H/2+Math.sin(a)*k;
+ c.fillStyle=K;c.beginPath();c.moveTo(px+Math.cos(a)*13,py+Math.sin(a)*13);c.lineTo(px+Math.cos(a+2.4)*10,py+Math.sin(a+2.4)*10);c.lineTo(px+Math.cos(a-2.4)*10,py+Math.sin(a-2.4)*10);c.fill();c.fillStyle='#F05B64';c.beginPath();c.moveTo(px+Math.cos(a)*10,py+Math.sin(a)*10);c.lineTo(px+Math.cos(a+2.4)*7,py+Math.sin(a+2.4)*7);c.lineTo(px+Math.cos(a-2.4)*7,py+Math.sin(a-2.4)*7);c.fill()}
 /* collecting, backpack, build */
 const invN=()=>Object.values(G.inv).reduce((a,b)=>a+b,0);
 function nearNode(){if(!G||!G.nodes)return null;for(const n of G.nodes)if(!n.got&&Math.hypot(G.x-n.x,G.y-n.y)<18)return{n,d:ITEMS[n.k]};return null}
@@ -532,7 +559,7 @@ function invDraw(){const T=G.tab||'pack',ks=Object.keys(ITEMS);let b='';
  const tabs=[['pack','🎒 PACK'],['build','🏗️ BUILD'],['col','📖 COLLECTION']].map(t=>`<button class="${T===t[0]?'':'alt'}" onclick="G.tab='${t[0]}';invDraw()">${t[1]}</button>`).join('');
  if(T==='pack')b=`<p class="note">🎒 ${invN()}/${CAP}</p><div class="cards">${ks.map(k=>{const i=ITEMS[k],n=G.inv[k]||0;return`<div class="box ${n?'':'dim'}" style="margin:0;text-align:center"><div style="font-size:28px">${i.e}</div><h3>${i.n} ×${n}</h3><button ${n&&USE[k]?'':'disabled'} onclick="useItem('${k}')">${i.u}</button></div>`}).join('')}</div>`;
  if(T==='build')b=`<p class="note">${atBase()?'Build here at base!':'⚠️ Go back to base to build.'}</p><div class="cards">${Object.keys(BLD).map(k=>{const q=BLD[k],ok=Object.keys(q.c).every(m=>(G.inv[m]||0)>=q.c[m])&&G.bd[k]<q.max;return`<div class="box" style="margin:0;text-align:center"><div style="font-size:30px">${q.e}</div><h3>${q.n}</h3><p class="note">${q.d}<br>BUILT ${G.bd[k]}/${q.max}</p><p>${Object.keys(q.c).map(m=>`<span style="color:${(G.inv[m]||0)>=q.c[m]?'var(--ok)':'var(--cr)'}">${ITEMS[m].e}${G.inv[m]||0}/${q.c[m]}</span>`).join(' ')}</p><button ${ok?'':'disabled'} onclick="build('${k}')">BUILD</button></div>`}).join('')}</div>`;
- if(T==='col')b=`<p class="note">NASA FACTS ${Object.keys(COL.facts).length}/${ks.length} · PLACES ${Object.keys(COL.seen).length}/${LMS.length}</p><div class="cards">${ks.map(k=>`<div class="box ${COL.facts[k]?'':'dim'}" style="margin:0"><h3>${ITEMS[k].e} ${ITEMS[k].n} · found ${G.tot[k]||0}</h3><p class="note">${COL.facts[k]?ITEMS[k].f:'❔ Find one to unlock!'}</p></div>`).join('')}${LMS.map(l=>`<div class="box ${COL.seen[l.id]?'':'dim'}" style="margin:0"><h3>${COL.seen[l.id]?'✅':'❔'} ${l.n}</h3><p class="note">${COL.seen[l.id]?l.w+' '+l.m:'Visit to unlock!'}</p></div>`).join('')}</div>`;
+ if(T==='col')b=`<p class="note">NASA FACTS ${Object.keys(COL.facts).length}/${ks.length} · PLACES ${Object.keys(COL.seen).length}/${LMS.length}</p><div class="cards">${ks.map(k=>`<div class="box ${COL.facts[k]?'':'dim'}" style="margin:0"><h3>${ITEMS[k].e} ${ITEMS[k].n} · found ${G.tot[k]||0}</h3><p class="note">${COL.facts[k]?ITEMS[k].f:'❔ Find one to unlock!'}</p>${COL.facts[k]&&NAI[k]?nasaCard(NAI[k],ITEMS[k].e):''}</div>`).join('')}${LMS.map(l=>`<div class="box ${COL.seen[l.id]?'':'dim'}" style="margin:0"><h3>${COL.seen[l.id]?'✅':'❔'} ${l.n}</h3><p class="note">${COL.seen[l.id]?l.w+' '+l.m:'Visit to unlock!'}</p>${COL.seen[l.id]&&NAP[l.id]?nasaCard(NAP[l.id],'📍'):''}</div>`).join('')}</div>`;
  $('ibox').innerHTML=`<h2>BACKPACK</h2><div>${tabs}</div>${b}<button class="alt" onclick="invClose()">CLOSE</button>`}
 function useItem(k){if(!G.inv[k])return;G.inv[k]--;const r=USE[k]();sfx('pickup');invDraw();say(ITEMS[k].e+' Used '+ITEMS[k].n,r,'var(--cy)')}
 function build(k){const b=BLD[k];if(G.bd[k]>=b.max)return;if(!atBase()){sfx('oops');return}for(const m in b.c)if((G.inv[m]||0)<b.c[m])return;for(const m in b.c)G.inv[m]-=b.c[m];G.bd[k]++;G.sc+=40;sfx('fanfare');goalEvt('build');invDraw();say('🏗️ BUILT: '+b.n+'!',b.d+'. +40 score. '+(b.x||''),'var(--ok)')}
@@ -542,7 +569,7 @@ function mapOpen(){if(!run||M||cs)return;if($('mov').classList.contains('on'))re
 function mapClose(){clearInterval(mapTimer);$('mov').classList.remove('on');if(!ovOpen())paused=false}
 function mapHtml(){$('mbox').innerHTML=`<h2>GALE CRATER MAP</h2><canvas id="mcv" width="480" height="270" style="width:100%;height:auto;border:3px solid var(--cy);image-rendering:pixelated;cursor:pointer"></canvas><div id="mif" class="note edu"></div><div>${LMS.map((l,i)=>`<button class="alt" onclick="mapSel('${l.id}')">${i+1}. ${l.n}</button>`).join('')}</div><button onclick="mapClose()">CLOSE</button>`;
  $('mcv').onclick=e=>{const b=$('mcv').getBoundingClientRect(),x=(e.clientX-b.left)/b.width*WW,y=(e.clientY-b.top)/b.height*WH;let best=null,bd=60;for(const l of LMS){const d=Math.hypot(l.x-x,l.y-y);if(d<bd){bd=d;best=l.id}}if(best)mapSel(best)};mapSel(mapSelId)}
-function mapSel(id){mapSelId=id;const l=LMN(id),cur=LMN(G.zone||'bra');$('mif').innerHTML=`🧍 <b>YOU ARE IN: ${cur.n}</b><br><br>📍 <b>${l.n}</b> ${G.seen[id]?'✅':''}<br>${l.w}<br><b>WHY IT MATTERS:</b> ${l.m}`;mapDraw()}
+function mapSel(id){mapSelId=id;const l=LMN(id),cur=LMN(G.zone||'bra');$('mif').innerHTML=`🧍 <b>YOU ARE IN: ${cur.n}</b><br><br>📍 <b>${l.n}</b> ${G.seen[id]?'✅':''}<br>${l.w}<br><b>WHY IT MATTERS:</b> ${l.m}${NAP[id]?nasaCard(NAP[id],'📍'):''}`;mapDraw()}
 function mapDraw(){const cv2=$('mcv');if(!cv2||!G)return;const x=cv2.getContext('2d'),s=480/WW,bl=Math.floor(Date.now()/300)%2;x.imageSmoothingEnabled=false;x.drawImage(bg,0,0,WW,WH,0,0,480,270);x.fillStyle='rgba(8,21,37,.2)';x.fillRect(0,0,480,270);
  x.fillStyle='#FFB547';for(const n of G.nodes)if(!n.got)x.fillRect(Math.round(n.x*s)-1,Math.round(n.y*s)-1,3,3);
  x.textAlign='center';x.textBaseline='middle';LMS.forEach((l,i)=>{const px=l.x*s,py=l.y*s,sel=l.id===mapSelId;x.beginPath();x.arc(px,py,sel?12:9,0,7);x.fillStyle=G.seen[l.id]?'#55D68B':'#45D5E8';x.fill();x.lineWidth=2;x.strokeStyle=sel&&bl?'#fff':'#081525';x.stroke();x.fillStyle='#081525';x.font='9px "Press Start 2P",monospace';x.fillText(i+1,px,py+1)});
@@ -551,12 +578,12 @@ addEventListener('keydown',e=>{if(!run||cs)return;if(e.code==='KeyI')invOpen();i
 /* animated how-to-play "video" */
 const mainCtx=c;let TT=0,tRun=false,tPause=false,tLast=0,tRaf=0;const TS=7,TD=5;
 function tArrow(x,y,d,on){B(x,y,14,14,on?'#ffb547':'#2b4660');c.fillStyle='#fff';for(let i=0;i<5;i++){const w=2*i+1;if(d==='u')c.fillRect(x+7-i,y+3+i,w,1);if(d==='d')c.fillRect(x+7-i,y+11-i,w,1);if(d==='l')c.fillRect(x+3+i,y+7-i,1,w);if(d==='r')c.fillRect(x+11-i,y+7-i,1,w)}}
-function tAct(x,y,on){B(x,y,26,26,on?'#ffb547':'#45D5E8');tx('ACT',x+13,y+10,'#fff','c')}
+function tAct(x,y,on){B(x,y,26,26,on?'#ffb547':'#45D5E8');tx('SPACE',x+13,y+10,'#fff','c')}
 function tCap(s,col){tx(s,120,8,col||'#ffb547','c',2)}
 function tTick(x,y){c.fillStyle='#55d68b';c.fillRect(x,y+3,2,2);c.fillRect(x+2,y+5,2,2);c.fillRect(x+4,y+3,2,2);c.fillRect(x+6,y+1,2,2);c.fillRect(x+8,y-1,2,2)}
 function tDraw(){if(!bg)mkBg();const s=Math.floor(TT/TD)%TS,u=TT%TD,p=u/TD,sm=a=>Math.min(1,Math.max(0,a));c.imageSmoothingEnabled=false;c.drawImage(bg,40,30,240,135,0,0,240,135);
  if(s===0){tCap('MOVE');const x=30+p*170;astro(x,100,1,true);[['u',40],['l',24],['d',40],['r',56]].forEach(([d,bx],i)=>tArrow(bx+150-24,[96,112,112,112][i]-8,d,d==='r'&&Math.floor(u*3)%2===0));tx('OR WASD',186,72,'#b8cfe0','c')}
- if(s===1){tCap('GO TO THE GLOW');const sx=165,wx=20+sm(u/2.6)*125;for(let i=0;i<4;i++){B(sx+i*11-6,66,9,10,'#2f5fb3');B(sx+i*11-2,76,2,5,'#6b7480')}const rr=14+Math.sin(u*6)*2;c.strokeStyle='#FFB547';c.lineWidth=2;c.strokeRect(sx-12,58,58,30);tx('GO HERE',sx+17,50,'#FFB547','c');astro(wx,106,1,u<2.7);if(u>3){const on=Math.floor(u*4)%2===0;tAct(14,100,on);if(on){c.fillStyle='#fff3b0';c.fillRect(wx+8,88,2,2);c.fillRect(wx+12,84,2,2);c.fillRect(wx+4,82,2,2)}}else tAct(14,100,false)}
+ if(s===1){tCap('GO TO THE GLOW');const sx=165,wx=20+sm(u/2.6)*125;for(let i=0;i<4;i++){B(sx+i*11-6,66,9,10,'#2f5fb3');B(sx+i*11-2,76,2,5,'#6b7480')}const rr=14+Math.sin(u*6)*2;c.strokeStyle='#F05B64';c.lineWidth=2;c.strokeRect(sx-12,58,58,30);tx('GO HERE',sx+17,50,'#F05B64','c');astro(wx,106,1,u<2.7);if(u>3){const on=Math.floor(u*4)%2===0;tAct(14,100,on);if(on){c.fillStyle='#fff3b0';c.fillRect(wx+8,88,2,2);c.fillRect(wx+12,84,2,2);c.fillRect(wx+4,82,2,2)}}else tAct(14,100,false)}
  if(s===2){c.fillStyle='rgba(8,21,37,.9)';c.fillRect(0,0,W,H);B(10,6,220,122,'#12283d');tx('STAY IN THE GREEN',120,11,'#45d5e8','c');const gx=18,gy=22,gw=144,gh=72;B(gx,gy,gw,gh,'#0b1626');const Y=v=>gy+gh-2-Math.round(v/100*(gh-4)),bf=t=>50+28*Math.sin(t*.55)+8*Math.sin(t*1.3),vf=t=>bf(t)+9*Math.sin(t*3.1)*sm(1-(t-1)/2)+(t<1?-14*(1-t):0);let pv=null;
   for(let i=0;i<96;i++){const t=u-(95-i)*.07;if(t<0)continue;const x=gx+1+i*1.45,b=bf(t),v=vf(t),y0=Y(b+16);c.fillStyle='rgba(85,214,139,.5)';c.fillRect(x,y0,2,Y(b-16)-y0);const y1=Y(v),ya=pv===null?y1:Math.min(pv,y1);c.fillStyle='#fff';c.fillRect(x,ya,2,(pv===null?0:Math.abs(pv-y1))+2);pv=y1}
   const g2=sm(u/4.5),h=Math.round(g2*50);B(184,86,24,14,'#b45a35');B(195,86-h,3,h,'#3ec46d');if(g2>.3)B(188,86-Math.round(h*.6),7,3,'#55d68b');if(g2>.6)B(198,86-Math.round(h*.8),7,3,'#55d68b');if(g2>.92)B(192,80-h,9,6,'#ffd34d');B(172,104,48,6,'#1b2536');c.fillStyle='#55d68b';c.fillRect(173,105,Math.round(46*g2),4);tx('FAST!',196,30,'#ffd34d','c');
@@ -599,10 +626,10 @@ const _mk=mkBg;mkBg=function(){_mk();const g=bg.getContext('2d'),e=(cx,cy,rx,ry,
  e(490,172,34,15,'#8a4528');e(490,174,30,12,'#6f301c');e(491,176,24,9,'#9c4627');e(486,171,8,3,'#b8764a');g.fillStyle='#e0a07a';g.fillRect(472,159,18,1);
  g.fillStyle='#7a3a22';for(let i=0;i<64;i++)g.fillRect(Math.round(228+i*.8+Math.sin(i/4)*6),Math.round(178+Math.cos(i/5)*8+i*.1),1,1);
  for(let j=0;j<3;j++){const x=52+j*14;g.fillStyle='#081525';g.fillRect(x-1,217,13,10);g.fillStyle='#2f5fb3';g.fillRect(x,218,11,8);g.fillStyle='#8fc1ff';g.fillRect(x+5,218,1,8)}};
-SOLF[1]='Mars gets only about 43% of the sunlight Earth gets, because it is farther from the Sun.';SOLF[4]='Dust on solar panels is a Mars problem AND an Earth problem. Both use cleaning tricks!';SOLF[8]='Solar tech made for space, like tough light panels, now helps power homes and schools on Earth.';
+SOLF[1]='Mars receives about 43% of the sunlight Earth receives at the top of the atmosphere, because it is farther from the Sun.';SOLF[4]='Dust can reduce the sunlight reaching solar panels. Wind sometimes clears dust from rover panels, but this is not a dependable cleaning system.';SOLF[8]='Dust-resistant designs and energy storage are useful challenges on Earth too. The power systems in this game are simplified examples.';
 ITEMS.iron.u='FIX THE BASE';ITEMS.clay.u='SEAL THE WALLS';
 USE.iron=()=>{G.h=cl(G.h+10);G.t=cl(G.t+10);return'Fixed walls and tools: +10 health, +10 heat.'};USE.clay=()=>{G.t=cl(G.t+20);return'Clay patched the walls: +20 heat.'};
-BLD.solar.x='Mars sunlight is weak, so Mars panels must be extra tough and smart. That same tech makes Earth solar cheaper and cleaner!';BLD.moxie.x='MOXIE makes air from Mars air, like a robot tree!';BLD.garden.x='Plants make food AND fresh air.';
+BLD.solar.x='Mars sunlight is weak, so Mars panels need dust-tolerant designs and energy storage. These are important engineering challenges, and this game simplifies the trade-offs.';BLD.moxie.x='MOXIE makes air from Mars air, like a robot tree!';BLD.garden.x='Plants make food AND fresh air.';
 BLD.bank={n:'BATTERY BANK',e:'🔋',c:{iron:2,clay:1},max:2,d:'POWER NEVER GETS TOO LOW',x:'Batteries save Sun power for the night. Earth homes with solar use them too!'};
 /* kid-friendly tweaks */
 KM.Enter='act';
@@ -639,9 +666,9 @@ const _cd=csDraw;csDraw=function(t){_cd(t);const i=cs.i,st=Math.min(1,(i+cs.t/9)
  if(i===0&&cs.t<2.2){const a=cs.t<1.4?1:1-(cs.t-1.4)/.8;c.fillStyle=`rgba(0,0,0,${a})`;c.fillRect(0,0,240,135);if(a>.2){tx('SOL 0',120,48,'#ffb547','c',3);tx('GALE CRATER, MARS',120,72,'#ffffff','c',1)}}};
 const _sc=startCut;startCut=function(){_sc();if(cs)cs.ch=-60};
 /* how to play */
-const TCAP=[['1. MOVE','ARROW KEYS or WASD to walk. Hold SHIFT to run!'],['2. GO TO THE GLOW','Follow the yellow arrow. Stand at the glow and press SPACE.'],['3. FIX-IT GAMES','Hold SPACE. Keep the line in the green!'],['4. FIND STUFF','Walk to sparkles and press SPACE to grab. Open your pack with I.'],['5. BUILD','Press B to build at your base.'],['6. DAILY GOALS','Finish goals, visit places, survive 10 sols!'],['7. SHORTCUTS','SPACE grab/act · SHIFT run · I backpack · B build · C facts book · M map · N music · P pause · F full screen · ESC menu']];
+const TCAP=[['1. MOVE','ARROW KEYS or WASD to walk. Hold SHIFT to run!'],['2. GO TO THE GLOW','Follow the red arrow. Stand at the glow and press SPACE.'],['3. FIX-IT GAMES','Hold SPACE. Keep the line in the green!'],['4. FIND STUFF','Walk to sparkles and press SPACE to grab. Open your pack with I.'],['5. BUILD','Press B to build at your base.'],['6. DAILY GOALS','Finish goals, visit places, survive 10 sols!'],['7. SHORTCUTS','SPACE grab/act · SHIFT run · I backpack · B build · C facts book · M map · N music · P pause · F full screen · ESC menu']];
 const _td=tDraw;tDraw=function(){const s=Math.floor(TT/TD)%TS;if(s<6)return _td();c.drawImage(bg,40,30,240,135,0,0,240,135);c.fillStyle='rgba(8,21,37,.82)';c.fillRect(0,0,240,135);tx('KEYS',120,5,'#ffb547','c',2);
- [['MOVE','ARROWS/WASD'],['GRAB / ACT','SPACE'],['RUN','SHIFT'],['BACKPACK','I'],['BUILD','B'],['FACTS BOOK','C'],['MAP','M'],['MUSIC','N'],['PAUSE','P'],['FULL SCREEN','F'],['MENU','ESC']].forEach((r,i)=>{const x=6+(i%2)*118,y=22+Math.floor(i/2)*17;B(x,y,110,13,'#12283d');tx(r[0],x+3,y+4,'#b8cfe0');tx(r[1],x+107-r[1].length*4,y+4,'#ffb547')})};
+ [['MOVE','ARROWS/WASD'],['GRAB / USE','SPACE'],['RUN','SHIFT'],['BACKPACK','I'],['BUILD','B'],['FACTS BOOK','C'],['MAP','M'],['MUSIC','N'],['PAUSE','P'],['FULL SCREEN','F'],['MENU','ESC']].forEach((r,i)=>{const x=6+(i%2)*118,y=22+Math.floor(i/2)*17;B(x,y,110,13,'#12283d');tx(r[0],x+3,y+4,'#b8cfe0');tx(r[1],x+107-r[1].length*4,y+4,'#ffb547')})};
 /* title screen */
 const c0=$('cv0').getContext('2d');
 (function ml(t){if($('menu').classList.contains('on')){const x=c0,f=(a,b,w,h,col)=>{x.fillStyle=col;x.fillRect(Math.round(a),Math.round(b),w,h)},HZ=84,p=Math.sin(t/900),cx=120;
@@ -665,7 +692,7 @@ rsz();
 let POP=0,_pt=0,_pcd=0,MMD=0;
 function popShow(h,big){const p=$('pop');p.className=big?'big':'small';p.innerHTML=h+'<div class="pb"><i></i></div><div class="pn">3</div>';p.onclick=()=>{if(POP&&Date.now()-POP>600)popClose()};p.style.display='block';POP=Date.now();paused=true;sfx('switch');clearInterval(_pt);_pt=setInterval(()=>{const t=(Date.now()-POP)/3000;if(t>=1)return popClose();p.querySelector('.pb i').style.width=(100-t*100)+'%';p.querySelector('.pn').textContent=Math.ceil(3-t*3)},60)}
 function popClose(){clearInterval(_pt);$('pop').style.display='none';POP=0;_pcd=Date.now();if(!ovOpen())paused=false}
-const ITI={iron:['Red-orange rocks on ridges, like Vera Rubin Ridge.','Iron makes tools and building parts!'],sand:['Dunes and dusty flats, like Rocknest.','Sand has silicon, the stuff inside solar panels!'],clay:['Old dried-up lake beds, like Yellowknife Bay.','Clay only forms with water. Mars was once wet!'],ice:['Hidden just under the dust, mostly near the poles.','Ice is future water to drink and grow plants.'],drill:['Layered rock you drill into, like at Yellowknife Bay.','Rock holds clues about ancient lakes and life.'],o2:['Mars air is mostly CO₂, so we make oxygen with MOXIE.','Oxygen is what you breathe!'],food:['Packed on Earth and flown to Mars.','Food gives you energy to explore.'],batt:['Brought from Earth with the base.','Batteries save Sun power for the night.']};
+const ITI={iron:['Red-orange rocks on ridges, like Vera Rubin Ridge.','Iron makes tools and building parts!'],sand:['Dunes and dusty flats, like Rocknest.','Martian soil contains silicate minerals; recovering useful materials from it would require substantial processing.'],clay:['Old dried-up lake beds, like Yellowknife Bay.','Clay only forms with water. Mars was once wet!'],ice:['Hidden just under the dust, mostly near the poles.','Ice is future water to drink and grow plants.'],drill:['Layered rock you drill into, like at Yellowknife Bay.','Rock holds clues about ancient lakes and life.'],o2:['Mars air is mostly CO₂, so we make oxygen with MOXIE.','Oxygen is what you breathe!'],food:['Packed on Earth and flown to Mars.','Food gives you energy to explore.'],batt:['Brought from Earth with the base.','Batteries save Sun power for the night.']};
 function popItem(k){const d=ITEMS[k],t=ITI[k]||['On the Mars surface.','Useful for your base.'];popShow(`<div class="pe">${d.e}</div><h2>${d.n}</h2><p><b>WHERE?</b><br>${t[0]}</p><p><b>WHY?</b><br>${t[1]}</p>`,1)}
 function popPlace(z){popShow(`<h2>📍 ${z.n}</h2><p>${z.w}</p><p><b>WHY?</b> ${z.m}</p>`,0)}
 const SD={solar:['☀️','Makes power from sunlight.'],reactor:['☢️','Makes power day and night.'],moxie:['🫧','Turns Mars air into oxygen.'],ext:['💧','Makes water from ice.'],comm:['📡','Radio to Earth and the orbiter.'],garden:['🌱','Grows food and fresh air.'],batt:['🔋','Saves power for the night.'],hab:['🏠','Your home. Warm and safe.'],tools:['🔧','Wrench for fixing things.'],brush:['🧹','Brush for dusty panels.'],filt:['🧰','Spare filters.'],seeds:['🌰','Seeds for the garden.'],ice:['🧊','Ice to melt into water.'],rego:['🪨','Mars soil for the garden.']};
@@ -691,7 +718,391 @@ function pcArt(cv,p,n,t){const g=cv.getContext('2d'),f=(x,y,w,h,col)=>{g.fillSty
  if(p==='sol'){panel(6);panel(32);bolt(17,22,n===0);bolt(43,22,n===0)}else if(p==='nuc'){reactor(36);bolt(14,26,1);bolt(60,30,1)}else{panel(4);reactor(44);bolt(28,24,n===0);bolt(66,30,1)}
  house();
  if(storm){f(0,0,96,64,'rgba(150,80,40,.18)');for(let i=0;i<26;i++){const x=((i*37+t/9*(1+i%3))%120)-12,y=(i*17)%58+2;f(x,y,5+(i%3)*3,1,'rgba(245,210,160,.7)')}}}
-document.querySelectorAll('.pc').forEach(card=>{const cv=card.querySelector('canvas'),set=n=>{cv.dataset.n=n;card.querySelectorAll('.chip').forEach(b=>b.classList.toggle('alt',+b.dataset.n!==n));sfx('switch')};
+document.querySelectorAll('.sbars').forEach(el=>{const P=PL[el.dataset.p],c2=v=>v>=80?'var(--ok)':v>=70?'var(--cy)':'var(--wa)';
+ el.innerHTML=[['AIR',P.o],['POWER',P.p],['FOOD',P.f]].map(([n,v])=>`<div><b>${n}</b><div class="bar"><i style="width:${v}%;background:${c2(v)}"></i></div></div>`).join('')});
+document.querySelectorAll('.pc').forEach(card=>{const cv=card.querySelector('canvas'),st=card.querySelector('.stt'),p=cv.dataset.p,
+ set=(n,q)=>{cv.dataset.n=n;card.querySelectorAll('.chip').forEach(b=>b.classList.toggle('alt',+b.dataset.n!==n));const on=p!=='sol'||n===0;st.className='stt '+(on?'on':'off');st.textContent=on?'💡 POWER ON!':'🌑 NO POWER!';if(!q)sfx('switch')};
  cv.onclick=()=>set((+cv.dataset.n+1)%3);card.querySelectorAll('.chip').forEach(b=>b.onclick=()=>set(+b.dataset.n))});
 (function pl(t){if($('brief').classList.contains('on'))document.querySelectorAll('.pc canvas').forEach(cv=>pcArt(cv,cv.dataset.p,+cv.dataset.n,t));requestAnimationFrame(pl)})(0);
+
+/* ===== v8: heroic ending scene after you win ===== */
+const HM=['7 - - 7 12 - - - 16 - 14 12 14 - - -','11 - - 11 14 - - - 19 - 17 16 17 - - -','12 - - 12 16 - - - 19 - 17 16 17 - 16 -','9 - - 9 12 - - - 17 - 16 14 12 - - -','12 - 14 - 17 - 21 - 19 - 17 - 14 - 12 -','16 - - 16 19 - - - 24 - - - 23 - 24 -','19 - 17 - 14 - 11 - 14 - 17 - 19 - 23 -','24 - - - - - - - 19 - 16 - 12 - - -'].map(x=>x.split(' '));
+const HC=[[0,[0,4,7]],[-5,[-5,-1,2]],[-3,[-3,0,4]],[-7,[-7,-3,0]],[-7,[-7,-3,0]],[0,[0,4,7]],[-5,[-5,-1,2]],[0,[0,4,7]]];
+const hf=q=>261.63*Math.pow(2,q/12);
+function heroSched(){const a=audioCtx,sp=.15,mb=bus().m;
+ while(mus.next<a.currentTime+.3){const s=mus.step,i=s%16,bar=(s>>4)%8,t=mus.next,mel=HM[bar],rt=HC[bar][0],ch=HC[bar][1],n=mel[i];
+  if(i===0){ch.forEach(x=>tone(hf(x-12),t,sp*15,'triangle',.05,0,mb));ch.forEach(x=>tone(hf(x),t,sp*3,'sawtooth',.03,0,mb))}
+  if(i===8)ch.forEach(x=>tone(hf(x),t,sp*3,'sawtooth',.025,0,mb));
+  if(i%2===0)tone(hf(rt-24),t,sp*1.7,'triangle',.12,0,mb);
+  if(n!=='-'){let len=1;while(i+len<16&&mel[i+len]==='-')len++;const h=hf(+n),d=sp*len*.95;tone(h,t,d,'sawtooth',.03,0,mb);tone(h*1.006,t,d,'square',.02,0,mb);tone(h/2,t,d,'triangle',.04,0,mb)}
+  if(i%4===0)tone(140,t,.2,'sine',.2,45,mb);
+  if(i===4||i===12)nz(t,.14,.09,2600,'bandpass',.003,mb);
+  if(i%2===1)nz(t,.03,.02,7000,'highpass',.002,mb);
+  if(i===0&&bar===0)nz(t,1.4,.06,6000,'highpass',.01,mb);
+  mus.next+=sp;mus.step++}}
+const _sd=sched;sched=function(){if(mus.mode==='hero')heroSched();else _sd()};
+
+let EC=null;
+function ecDone(){if(!EC)return;EC=null;$('skip').style.display='none';show('end')}
+function ecDraw(t){const T=EC.t,gy=102,f=(x,y,w,h,col)=>{c.fillStyle=col;c.fillRect(Math.round(x),Math.round(y),w,h)};
+ c.imageSmoothingEnabled=false;c.drawImage(bg,40,30,240,135,0,0,240,135);
+ c.fillStyle='rgba(255,190,100,'+Math.min(.3,T*.06)+')';c.fillRect(0,0,240,135);
+ for(let k=0;k<14;k++){const an=-Math.PI+(k+.5)*Math.PI/14+Math.sin(T*.4)*.05;c.fillStyle=k%2?'rgba(255,224,138,.25)':'rgba(255,179,71,.2)';for(let d=20;d<150;d+=3)c.fillRect(Math.round(120+Math.cos(an)*d),Math.round(84+Math.sin(an)*d),2,2)}
+ /* flag */
+ B(45,78,2,26,'#c9d3dc');for(let j=0;j<10;j++)f(47+j,80+Math.round(Math.sin(t/200+j*.6)*1),1,9,'#F05B64');f(49,83,2,2,'#fff');
+ /* landing ship */
+ const rx=172,rb=gy-2-Math.pow(Math.max(0,5-T),2)*5;
+ B(rx-7,rb-50,14,50,'#e8edf2');B(rx-5,rb-58,10,8,'#F05B64');B(rx-3,rb-38,6,6,'#45D5E8');B(rx-12,rb-14,5,14,'#F05B64');B(rx+7,rb-14,5,14,'#F05B64');B(rx-3,rb-12,6,12,'#c9d3dc');
+ if(T<5){const fs=4+Math.floor(t/60)%3*2;f(rx-3,rb,6,fs+6,'#ffd34d');f(rx-2,rb+3,4,fs+8,'#ff8a3c');f(rx-1,rb,2,fs,'#fff')}
+ if(T>4.5&&T<8){c.fillStyle='rgba(230,200,170,'+(Math.max(0,1-(T-4.5)/3.5)*.6)+')';for(let k=0;k<14;k++)c.fillRect(Math.round(rx+(k-7)*((T-4.5)*6+2)),gy-3-(k%3)*2,6,3)}
+ /* you + the new crew */
+ const hop=T>7?Math.abs(Math.sin((T-7)*5))*6:0,px=70;
+ astro(px,gy-hop,1,false);if(T>7){B(px-5,gy-hop-18,2,6,'#dfe6ec');B(px+3,gy-hop-18,2,6,'#dfe6ec')}
+ [['#45D5E8',112],['#55D68B',124],['#FFB547',136]].forEach(([col,tx2],j)=>{if(T<5.5)return;const x=Math.max(tx2,rx-6-(T-5.5)*14),h=T>8?Math.abs(Math.sin((T-8)*6+j))*4:0;astro(x,gy-h,-1,x>tx2,col)});
+ /* fireworks */
+ [[60,40,'#ffd34d'],[130,32,'#ff6b73'],[200,46,'#7cffb0'],[95,56,'#8fd6ff']].forEach(([cx,cy,col],b)=>{const st=7+b*1.5;if(T<st)return;const age=(T-st)%4.5;if(age>2.2)return;c.fillStyle=col;c.globalAlpha=1-age/2.2;for(let p=0;p<16;p++){const an=p*Math.PI/8,d=age*18;c.fillRect(Math.round(cx+Math.cos(an)*d),Math.round(cy+Math.sin(an)*d+age*age*6),2,2)}c.globalAlpha=1});
+ if(T>9){const cc=['#ffd34d','#ff6b73','#7cffb0','#8fd6ff'];for(let i=0;i<30;i++){c.fillStyle=cc[i%4];c.fillRect((i*53)%240,((T-9)*25+i*17)%135,2,2)}}
+ f(0,0,240,5,'#000');f(0,130,240,5,'#000');
+ if(T>1.5)tx('MISSION SUCCESS!',120,10,Math.floor(T*2)%2?'#ffd34d':'#ffffff','c',3);
+ if(T>3)tx('YOU SURVIVED 10 SOLS!',120,31,'#ffe08a','c',2);
+ if(T>6.5)tx('THE NEXT CREW HAS ARRIVED!',120,48,'#ffffff','c');
+ if(T>4&&Math.floor(T*2)%2)tx('PRESS SPACE',120,122,'#55d68b','c')}
+const _eg=endGame;endGame=function(r){_eg(r);if(r!=='win')return;
+ $('end').classList.remove('on');show('game');$('ui').style.display=$('ui2').style.display='none';$('hint').style.display='none';$('mgx').style.display='none';$('skip').style.display='';
+ EC={t:0,l:performance.now()};musicPlay('hero');if(audioCtx&&mus.timer){mus.step=0;mus.next=audioCtx.currentTime+.15}go()};
+const _lp=loop;loop=function(t){_lp(t);if(EC){EC.t+=Math.min(.05,Math.max(0,(t-EC.l)/1000));EC.l=t;ecDraw(t);if(EC.t>40)ecDone()}};
+const _ecut=endCut;endCut=function(){if(EC)return ecDone();_ecut()};
+addEventListener('keydown',e=>{if(!EC||e.repeat)return;if(EC.t>1.5&&(e.code==='Space'||e.code==='Enter'||e.code==='KeyS'||e.code==='Escape')){e.preventDefault();ecDone()}},true);
+cv.addEventListener('pointerdown',()=>{if(EC&&EC.t>1.5)ecDone()});
+/* ===== v9: NASA pictures + "click here to learn more" ===== */
+const _pia=id=>[`https://images-assets.nasa.gov/image/${id}/${id}~medium.jpg`,`https://photojournal.jpl.nasa.gov/jpeg/${id}.jpg`];
+const _sci='https://science.nasa.gov/photojournal/';
+/* i = picture sources tried in order, u = NASA article, c = photo credit */
+const NAI={
+ iron:{i:['https://assets.science.nasa.gov/dynamicimage/assets/science/psd/mars/resources/detail_files/2/21369_pia22067-16.jpg?w=640&h=400&fit=clip',..._pia('PIA22067')],u:'https://science.nasa.gov/resource/curiosity-checks-under-the-dust-on-a-martian-rock/',c:'NASA/JPL-Caltech/MSSS'},
+ sand:{i:_pia('PIA16469'),u:_sci+'scoop-marks-in-the-sand-at-rocknest',c:'NASA/JPL-Caltech/MSSS'},
+ clay:{i:_pia('PIA23047'),u:_sci+'curiosity-on-the-clay-unit',c:'NASA/JPL-Caltech/MSSS'},
+ ice:{i:_pia('PIA10910'),u:'https://science.nasa.gov/photojournal/ice-on-mars-now-you-see-it/',c:'NASA/JPL-Caltech/University of Arizona/Texas A&M University'},
+ drill:{i:_pia('PIA17595'),u:'https://www.jpl.nasa.gov/images/pia17595-view-of-yellowknife-bay-formation-with-drilling-sites/',c:'NASA/JPL-Caltech/MSSS'},
+ o2:{i:['https://www.nasa.gov/wp-content/uploads/2023/05/pia23154-16.jpg',..._pia('PIA23154')],u:'https://www.nasa.gov/missions/mars-2020-perseverance/perseverance-rover/nasas-oxygen-generating-experiment-moxie-completes-mars-mission/',c:'NASA/JPL-Caltech'},
+ food:{i:[],u:'https://www.nasa.gov/exploration-research-and-technology/growing-plants-in-space/',c:'NASA'},
+ batt:{i:_pia('PIA22521'),u:'https://science.nasa.gov/photojournal/shades-of-martian-darkness/',c:'NASA/JPL-Caltech/TAMU'}};
+const NAP={
+ bra:{i:_pia('PIA16208'),u:'https://science.nasa.gov/photojournal/curiosity-at-bradbury-landing-site-in-3-d/',c:'NASA/JPL-Caltech/University of Arizona'},
+ roc:{i:_pia('PIA16570'),u:_sci+'windblown-sand-from-the-rocknest-drift',c:'NASA/JPL-Caltech/MSSS'},
+ ykb:{i:_pia('PIA17595'),u:'https://www.jpl.nasa.gov/images/pia17595-view-of-yellowknife-bay-formation-with-drilling-sites/',c:'NASA/JPL-Caltech/MSSS'},
+ ms:{i:_pia('PIA17064'),u:_sci+'from-glenelg-to-mount-sharp/',c:'NASA/JPL-Caltech/University of Arizona'},
+ vrr:{i:NAI.iron.i,u:'https://science.nasa.gov/resource/curiosity-checks-under-the-dust-on-a-martian-rock/',c:'NASA/JPL-Caltech/MSSS'},
+ gt:{i:_pia('PIA23139'),u:_sci+'curiosity-surveys-the-clay-bearing-unit/',c:'NASA/JPL-Caltech/MSSS'},
+ mb:{i:_pia('PIA20840'),u:_sci+'rovers-panorama-taken-amid-murray-buttes-on-mars/',c:'NASA/JPL-Caltech/MSSS'},
+ imp:{i:_pia('PIA17932'),u:'https://science.nasa.gov/photojournal/a-spectacular-new-martian-impact-crater/',c:'NASA/JPL-Caltech/University of Arizona'},
+ dd:{i:_pia('PIA04187'),u:'https://science.nasa.gov/photojournal/a-great-place-to-watch-the-weather-vertical/',c:'NASA/JPL-Caltech'},
+ sl:{i:_pia('PIA10128'),u:_sci+'dusty-solar-panels-on-spirit/',c:'NASA/JPL-Caltech/Cornell'}};
+/* Descriptive alternatives for NASA/JPL media; visible credits remain below each image. */
+Object.assign(NAI,{
+ iron:{...NAI.iron,a:'Curiosity examining a dusty Martian rock near Vera Rubin Ridge'},
+ sand:{...NAI.sand,a:'Curiosity scoop marks in windblown sand at Rocknest on Mars'},
+ clay:{...NAI.clay,a:'Curiosity exploring clay-bearing terrain on Mars'},
+ ice:{...NAI.ice,a:'Water ice exposed in a trench by the Phoenix Mars lander'},
+ drill:{...NAI.drill,a:'Curiosity drilling locations in the Yellowknife Bay formation'},
+ o2:{...NAI.o2,a:'NASA/JPL team installing the MOXIE oxygen experiment in the Perseverance rover chassis'},
+ batt:{...NAI.batt,a:'A simulated view of the Martian sky darkened by a global dust storm'}
+});
+Object.assign(NAP,{
+ bra:{...NAP.bra,a:'Bradbury Landing area inside Gale Crater on Mars'},
+ roc:{...NAP.roc,a:'Windblown sand drift explored by Curiosity at Rocknest'},
+ ykb:{...NAP.ykb,a:'Yellowknife Bay formation and Curiosity rover drill sites'},
+ ms:{...NAP.ms,a:'Map showing Curiosity’s route within Gale Crater from Bradbury Landing and Glenelg toward Mount Sharp'},
+ vrr:{...NAP.vrr,a:'A Martian rock surface examined near Vera Rubin Ridge'},
+ gt:{...NAP.gt,a:'Clay-bearing terrain surveyed by the Curiosity rover'},
+ mb:{...NAP.mb,a:'Layered buttes explored by Curiosity in the Murray Buttes area'},
+ imp:{...NAP.imp,a:'An impact crater on the surface of Mars'},
+ dd:{...NAP.dd,a:'Spirit rover view of three dust devils over the plains of Gusev Crater'},
+ sl:{...NAP.sl,a:'Dust accumulation on solar panels of the Spirit Mars rover'}
+});
+/* if a picture will not load, try the next source; if none load, show the emoji instead */
+function nasaErr(im){const c=(im.dataset.c||'').split('|');let n=(+im.dataset.n||0)+1;
+ if(n<c.length){im.dataset.n=n;im.src=c[n]}else{im.onerror=null;im.style.display='none';const f=im.nextElementSibling;if(f)f.style.display='flex'}}
+function nasaPic(d,em){const c=d.i||[];
+ return `<div class="nimg">${c.length?`<img src="${c[0]}" data-c="${c.join('|')}" data-n="0" alt="${d.a||'NASA/JPL Mars mission image supporting this topic'}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="nasaErr(this)">`:''}<div class="nimf" style="display:${c.length?'none':'flex'}">${em}</div><span class="ncr">${d.c}</span></div>`}
+function nasaLink(d){return `<a class="nlearn" href="${d.u}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();const a=this;setTimeout(()=>a.blur(),0)">CLICK HERE TO LEARN MORE ▸</a>`}
+function nasaCard(d,em){return `<div class="ncard">${nasaPic(d,em)}${nasaLink(d)}</div>`}
+/* popups that have a NASA link wait for you (so you have time to click); SPACE or a click on the popup continues */
+function popShowN(h,big){popShow(h,big);const p=$('pop');clearInterval(_pt);p.classList.add('nasa');
+ const pb=p.querySelector('.pb'),pn=p.querySelector('.pn');if(pb)pb.outerHTML='<div class="pcont">PRESS SPACE OR CLICK HERE TO CONTINUE</div>';if(pn)pn.remove()}
+popItem=function(k){const d=ITEMS[k],t=ITI[k]||['On the Mars surface.','Useful for your base.'],n=NAI[k];
+ popShowN(`<div class="pe">${d.e}</div><h2>${d.n}</h2>${n?nasaPic(n,d.e):''}<p><b>WHERE?</b><br>${t[0]}</p><p><b>WHY?</b><br>${t[1]}</p>${n?nasaLink(n):''}`,1)};
+popPlace=function(z){const n=NAP[z.id];
+ popShowN(`<h2>📍 ${z.n}</h2>${n?nasaPic(n,'📍'):''}<p>${z.w}</p><p><b>WHY?</b> ${z.m}</p>${n?nasaLink(n):''}`,0)};
+/* ===== v10: sandstorm shelter + sand/clay pictures ===== */
+document.head.insertAdjacentHTML('beforeend','<style>#stw{position:fixed;inset:0;z-index:8;pointer-events:none;display:none;box-shadow:inset 0 0 14vmin 5vmin rgba(255,30,40,.95);animation:stwb .6s infinite}#stw.on{display:block}@keyframes stwb{0%,49%{background:rgba(240,40,50,.42)}50%,100%{background:rgba(240,40,50,.06)}}#stw div{position:absolute;top:30vh;left:50%;transform:translateX(-50%);font:clamp(10px,1.8vw,24px) "Press Start 2P",monospace;color:#fff;background:#b3121e;border:.4vw solid #fff;padding:1.2vh 1.6vw;text-align:center;line-height:1.7}</style>');
+document.body.insertAdjacentHTML('beforeend','<div id="stw"><div>⚠ DUST STORM! ⚠<br>GET INSIDE THE HABITAT!<br><span id="stwd">-1</span> HEALTH EVERY SECOND</div></div>');
+
+/* pictures: try several NASA image links, then a built-in picture so the box is never empty */
+const _nm=id=>['large','medium','small'].map(s=>`https://images-assets.nasa.gov/image/${id}/${id}~${s}.jpg`).concat(`https://photojournal.jpl.nasa.gov/jpeg/${id}.jpg`);
+const _art=k=>'data:image/svg+xml,'+encodeURIComponent(k==='sand'
+ ?'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 160"><rect width="320" height="160" fill="#f0b27a"/><path d="M0 100Q60 70 120 95T240 90T320 85V160H0Z" fill="#d9a066"/><path d="M0 125Q80 95 160 120T320 110V160H0Z" fill="#e8c88a"/><path d="M0 145Q100 120 200 140T320 135V160H0Z" fill="#f2d9a2"/><path d="M20 130q20-8 40 0M90 138q20-8 40 0M180 128q20-8 40 0M250 140q20-8 40 0" stroke="#c58a50" stroke-width="2" fill="none"/></svg>'
+ :'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 160"><rect width="320" height="160" fill="#e6b88a"/><rect y="70" width="320" height="90" fill="#8f9a82"/><rect y="95" width="320" height="22" fill="#a5b096"/><rect y="117" width="320" height="20" fill="#78806a"/><rect y="137" width="320" height="23" fill="#9aa58c"/><path d="M40 70l10 25-8 22 12 20M150 70l-8 30 10 20M250 70l12 28-6 24" stroke="#4f5646" stroke-width="3" fill="none"/></svg>');
+NAI.sand.i=[..._nm('PIA16469'),..._nm('PIA16174'),_art('sand')];
+NAI.clay.i=[..._nm('PIA23047'),..._nm('PIA23139'),_art('clay')];
+NAP.roc.i=[..._nm('PIA16570'),_art('sand')];NAP.gt.i=[..._nm('PIA23139'),_art('clay')];
+nasaErr=function(im){const c=(im.dataset.c||'').split('|');let n=(+im.dataset.n||0)+1;
+ if(n<c.length){im.dataset.n=n;im.src=c[n];if(c[n].startsWith('data:')){const cr=im.parentNode.querySelector('.ncr');if(cr)cr.textContent='ILLUSTRATION · SEE NASA LINK'}}
+ else{im.onerror=null;im.style.display='none';const f=im.nextElementSibling;if(f)f.style.display='flex'}};
+
+/* habitat interior */
+const IRM={bedA:[34,68],bedB:[90,68],pc:[152,74],plant:[199,74],door:[120,120]};
+function enterHab(){const s=ST.hab;G.in=1;G.ix=120;G.iy=98;G.iDir=1;G.x=s.x+35;G.y=s.y+s.h+4;sfx('switch');$('where').textContent='🏠 INSIDE THE HABITAT';
+ say('Inside the habitat','Safe from the dust! Sleep in a bed, use the computer, or leave by the hatch.','var(--ok)')}
+function exitHab(){G.in=0;sfx('switch');whereBar(zoneAt(G.x,G.y));say('Back outside',G.storm>0?'DANGER! The storm is still blowing. You lose health out here.':'Stay safe out there!',G.storm>0?'var(--cr)':'var(--cy)')}
+function iNear(){for(const k in IRM)if(Math.hypot(G.ix-IRM[k][0],G.iy-IRM[k][1])<18)return k;return null}
+function inAct(){const k=iNear();if(!k)return;
+ if(k==='door')return exitHab();
+ if(k==='bedA'||k==='bedB'){if(G.rc>0){say('Not sleepy yet','Rest again in '+Math.ceil(G.rc)+' seconds.','var(--wa)');return}G.rc=8;G.h=cl(G.h+12);sfx('pickup');say('😴 Zzz... +12 health','Sleep matters. Rested astronauts make fewer mistakes.','var(--ok)');return}
+ if(k==='pc'){sfx('radio');say('💻 Mission computer',SOLF[Math.floor(Math.random()*SOLF.length)],'var(--cy)');return}
+ sfx('tap');say('🌱 Habitat plant','Food '+Math.round(G.f)+'/100. Plants make food AND fresh air.','var(--ok)')}
+function drawIn(t){const f=(x,y,w,h,col)=>{c.fillStyle=col;c.fillRect(x,y,w,h)},night=Math.max(0,-Math.sin(2*Math.PI*G.ck/40)),st=G.storm>0,fl=Math.floor(t/300)%2;
+ f(0,0,240,135,'#1b2536');f(0,0,240,64,'#cfc8bc');for(let x=0;x<240;x+=24)f(x,0,1,64,'#aaa398');f(0,0,240,5,'#8d867b');f(0,62,240,3,'#8d867b');
+ f(0,65,240,70,'#4b5566');for(let y=70;y<135;y+=14)f(0,y,240,1,'#3d4756');for(let x=0;x<240;x+=30)f(x,65,1,70,'#3d4756');
+ B(100,6,40,3,'#fff6c0');
+ [128,172].forEach(wx=>{B(wx,12,36,22,st?'#b8672f':night>.5?'#1b1030':'#f0b27a');if(st)for(let i=0;i<9;i++)f(wx+((i*37+t/4*(1+i%3))%30),14+(i*7)%19,6,1,'rgba(255,225,190,.8)')});
+ [10,66].forEach(x=>{B(x,38,48,24,'#2b3a52');B(x+2,40,44,14,'#45D5E8');B(x+4,42,12,8,'#f4f7fa');B(x+18,42,26,12,'#2f5fb3')});
+ B(132,60,44,6,'#7a5a3a');B(134,66,3,8,'#5a3f26');B(172,66,3,8,'#5a3f26');B(144,44,22,15,'#12283d');f(146,46,18,11,'#0a3a4a');for(let i=0;i<3;i++)f(147,48+i*3,8+((Math.floor(t/300)+i*3)%8),1,'#45D5E8');B(152,59,6,2,'#6b7480');
+ B(193,54,14,10,'#8b5a2b');B(195,46,3,8,'#55D68B');B(199,43,3,11,'#55D68B');B(203,47,3,7,'#55D68B');
+ B(214,30,18,36,'#9fb0c0');f(222,32,1,32,'#6b7480');B(218,46,2,5,'#2b3a52');
+ B(104,122,32,10,'#c9d3dc');f(108,125,24,4,'#2b3a52');tx('EXIT',120,125,'#ffb547','c');
+ astro(G.ix,G.iy,G.iDir,G.imv);
+ f(40,3,160,10,'rgba(8,21,37,.85)');tx(st?'DUST STORM OUTSIDE '+Math.ceil(G.storm)+'S · YOU ARE SAFE':G.warn>0?'STORM COMING! STAY CLOSE':'SAFE AND WARM INSIDE',120,6,st?(fl?'#FFB547':'#fff'):'#55D68B','c')}
+
+/* wrappers */
+const _a10=act;act=function(){if(!run||paused||!G||G.wait||G.over||M||Date.now()-_pcd<300)return;if(G.in)return inAct();if(near()==='hab'&&!G.ord.some(o=>o.s[o.step][1]==='hab'))return enterHab();_a10()};
+const _r10=render;render=function(t){if(G&&G.in){drawIn(t);return}_r10(t)};
+const _up10=update;update=function(dt){
+ if(!G||!run)return _up10(dt);
+ const h0=G.h,inn=!!G.in,sv={};
+ if(inn)for(const k of['left','right','up','down']){sv[k]=keys[k];keys[k]=0}
+ _up10(dt);
+ if(inn)for(const k in sv)keys[k]=sv[k];
+ if(!run||G.over)return;
+ G.rc=Math.max(0,(G.rc||0)-dt);
+ if(G.storm>0&&!G.sw){G.sw=1;G.storm=DFC().sl;$('stwd').textContent='-'+DFC().sd;say('DUST STORM!','GET INSIDE THE HABITAT! Outside you lose '+DFC().sd+' health every second.','var(--cr)')}if(G.storm<=0)G.sw=0;
+ if(inn){let dx=(keys.right?1:0)-(keys.left?1:0),dy=(keys.down?1:0)-(keys.up?1:0);if(dx&&dy){dx*=.7;dy*=.7}if(dx)G.iDir=dx>0?1:-1;G.imv=!!(dx||dy);
+  if(!M){const sp=46*G.spd*dt*(keys.shift?1.6:1);G.ix=cl(G.ix+dx*sp,10,230);G.iy=cl(G.iy+dy*sp,72,120)}
+  if(G.imv&&(G.isd=(G.isd||0)-dt)<=0){sfx('step');G.isd=.3}}
+ else if(G.storm>0){if(G.h>h0)G.h=h0;G.h=cl(G.h-dt*DFC().sd);if(G.h<=0)endGame('fail')}};
+const _h10=hud;hud=function(n){_h10(n);const hh=$('hint');
+ if(G.in){const k=iNear();hh.style.display=k?'block':'none';if(k)hh.textContent='[SPACE] '+({bedA:'SLEEP',bedB:'SLEEP',pc:'COMPUTER',plant:'PLANT',door:'GO OUTSIDE'})[k]}
+ else if(!M&&nearAny()==='hab'){hh.style.display='block';hh.textContent=G.ord.some(o=>o.s[o.step][1]==='hab')?'[SPACE] FIX · [H] GO INSIDE':'[SPACE] GO INSIDE'}};
+let _bp=0;const _l10=loop;loop=function(t){_l10(t);const on=!!(G&&run&&!G.over&&!paused&&!cs&&!EC&&G.storm>0&&!G.in&&$('game').classList.contains('on'));$('stw').classList.toggle('on',on);if(on&&t-_bp>2000){_bp=t;sfx('alert')}};
+addEventListener('keydown',e=>{if(e.code!=='KeyH'||e.repeat||!G||!run||paused||M||cs||G.over||ovOpen())return;
+ if(G.in){if(iNear()==='door')exitHab();else say('Use the hatch','Walk to the EXIT hatch at the bottom.','var(--wa)')}else if(near()==='hab')enterHab()});
+/* ===== v11: easy/hard mode, day-night clock, WHY lessons, decisions, old-base malfunctions ===== */
+let DIFF='easy',MODE_OK=0,X={kind:'note'};
+const DM={easy:{n:'EASY',tm:4,dr:.3,warn:20,sl:6,sd:.25,from:5,tip:1,bonus:25,day:60,cap:2,gap:20},hard:{n:'HARD',tm:2.4,dr:.5,warn:12,sl:8,sd:.5,from:4,tip:1,bonus:10,day:45,cap:3,gap:14}},DFC=()=>DM[DIFF];
+document.head.insertAdjacentHTML('beforeend','<style>#mode{padding:3vh 4vw;background:var(--bg)}.mdc ul{list-style:none;padding:0;margin:1vh 0;text-align:left}.mdc li{font-size:clamp(12px,1.45vw,18px);margin:1vh 0;line-height:1.4}.mdc h2{text-align:center;font-size:clamp(14px,2vw,26px)}.mdc button{display:block;margin:1.5vh auto 0;font-size:clamp(12px,1.6vw,20px)}#clk{position:absolute;left:66cqw;top:1cqh;width:11.5cqw;background:rgba(8,21,37,.8);border:.25cqw solid var(--cy);padding:.3cqw .4cqw;font:max(7px,.7cqw)/1.55 "Press Start 2P",monospace;color:#fff;pointer-events:none}#clk .big{font-size:max(9px,1.15cqw)}#clk .tb{display:flex;height:max(7px,1.2cqh);border:2px solid #2b4660;margin:.5cqh 0;position:relative}#clk .tb i{display:block;height:100%}#clk .tb u{position:absolute;top:-3px;bottom:-3px;width:3px;background:#fff}#clk.hu{border-color:var(--cr);animation:bl .5s infinite steps(2)}.lsn{text-align:left}.lsn p{font-size:clamp(13px,1.5vw,18px);margin:.5vh 0 1.6vh}.lsn b{font:clamp(9px,1.1vw,14px) "Press Start 2P",monospace}#xbox p{font-size:clamp(13px,1.5vw,18px)}</style>');
+document.body.insertAdjacentHTML('beforeend',`<section id="mode" class="scr"><div class="box" style="max-width:1100px;margin:2vh auto"><h2 style="text-align:center;font-size:clamp(14px,2.2vw,28px)">CHOOSE YOUR MODE</h2><p class="px" style="text-align:center;font-size:clamp(8px,1.1vw,14px)">SAME 10 SOLS · SAME GOAL · DIFFERENT CHALLENGE</p><div class="cards">
+<div class="box mdc"><h2 style="color:var(--ok)">🌱 EASY<br>TRAINEE</h2><ul><li>🏠 Base starts <b>clean and working</b></li><li>⏱️ <b>Tons of time</b> for each job</li><li>🛠️ Only <b>1-2 jobs</b> and <b>2 missions</b> a day</li><li>🌪️ Storms: <b>20 sec warning</b>, last about 6 sec</li><li>❤️ Storm damage outside: <b>-0.25 health/sec</b></li><li>☀️ Each day is <b>60 seconds</b></li></ul><button onclick="pickMode('easy')"><kbd>1</kbd> PICK EASY</button></div>
+<div class="box mdc"><h2 style="color:var(--cr)">🚀 HARD<br>COMMANDER</h2><ul><li>🔧 Old base starts with <b>1 broken part</b> to fix</li><li>⏱️ <b>Shorter job timers</b> than Easy mode</li><li>🌪️ Storms: <b>12 sec warning</b>, last about 8 sec</li><li>❤️ Storm damage outside: <b>-0.5 health/sec</b></li><li>☀️ Each day is <b>45 seconds</b></li></ul><button onclick="pickMode('hard')"><kbd>2</kbd> PICK HARD</button></div></div>
+<p class="note" style="text-align:center">💡 BOTH MODES: tips explain WHY things happen and what to try.</p><button class="alt" onclick="show('menu')">BACK <kbd>ESC</kbd></button></div></section><div class="ov" id="xov"><div class="box" id="xbox" style="text-align:center"></div></div>`);
+$('ui').insertAdjacentHTML('beforeend','<div id="clk"></div>');
+const _s11=show;show=function(i){_s11(i==='brief'&&!MODE_OK?'mode':i)};
+function pickMode(m){DIFF=m;sfx('select');MODE_OK=1;show('brief');MODE_OK=0}
+addEventListener('keydown',e=>{const sc=document.querySelector('.scr.on');if(!sc||sc.id!=='mode'||e.repeat)return;if(e.code==='Digit1')pickMode('easy');if(e.code==='Digit2')pickMode('hard');if(e.code==='Escape')show('menu')});
+
+/* popup framework: SEE -> WHY -> DECIDE */
+const _ov11=ovOpen;ovOpen=function(){return _ov11()||$('xov').classList.contains('on')};
+function xShow(h,kind='note'){X={kind};$('xbox').innerHTML=h;$('xov').classList.add('on');paused=true}
+function xClose(){$('xov').classList.remove('on');_pcd=Date.now();if(!ovOpen())paused=false}
+addEventListener('keydown',e=>{if(!$('xov').classList.contains('on')||e.repeat)return;const k=e.code;if(k==='Space')e.preventDefault();
+ if(X.kind==='dec'){if(k==='Digit1')decide(0);if(k==='Digit2')decide(1)}else if(k==='Space'||k==='Enter'||k==='Escape')xClose()},true);
+const LES={
+ storm:['DUST STORM','Your power is dropping and the sky turned dark.','Dust in the sky can greatly reduce sunlight reaching the surface. The game models this as a temporary drop in solar output; real storm effects vary. Cleaning the panels will NOT help, because the dust is in the sky.','Go inside the habitat (SPACE at the door) and let the batteries and reactor carry you until the storm ends.'],
+ night:['NIGHT TIME','The Sun is gone and solar power stopped.','Mars spins, so half of every sol is dark. Solar panels cannot make power at night, and it gets freezing cold.','Batteries save daytime power for the night. Build a battery bank and do outdoor jobs in the day.'],
+ dust:['DUSTY PANELS','Your solar panels look brown and dusty.','A layer of dust can reduce the sunlight reaching the panels. The amount of power lost varies with the dust and conditions; the game uses a simplified effect.','Do the scrub job with the brush when it appears.'],
+ power:['LOW POWER','Your power bar is almost empty.','Every machine uses power. At zero, MOXIE (air), the garden (food) and the heater all stop, and you start losing health.','Clean the panels, build a solar panel or battery bank, or use a spare battery from your pack.'],
+ air:['LOW AIR','Your air bar is dropping.','Mars air is mostly CO₂, which you cannot breathe. MOXIE turns it into oxygen, but it needs power and a clean filter. Leaks and walking far from base use air faster.','Fix MOXIE jobs, seal leaks, grab oxygen cans and stay near base.'],
+ food:['LOW FOOD','Your food bar is low.','The garden makes food, but plants need power and water. No water or no power means wilted plants.','Melt ice for the garden, plant seeds, or eat a ration pack.'],
+ heat:['COLD BASE','Your heat bar is low.','Mars is far from the Sun and its thin air cannot hold warmth. The heater uses power, and leaks let heat escape.','Keep power on, seal leaks, and patch walls with clay or iron.']};
+function advisor(){if(M||ovOpen()||Date.now()-_pcd<400)return;const t=performance.now(),ls=G.ls||(G.ls={});if(t<(G.ac||0))return;const P=PL[G.plan];let k=null;
+ if(G.storm>0)k='storm';else if(G.ck>=20&&P.s>0&&!ls.night)k='night';else if(G.soil>.6&&P.s>0)k='dust';else if(G.p<30)k='power';else if(G.o<30)k='air';else if(G.f<30)k='food';else if(G.t<30)k='heat';
+ if(!k)return;const L=LES[k];
+ if(ls[k]){if(k==='night'||t-ls[k]<45000||(k==='storm'&&G.in))return;ls[k]=t;G.ac=t+10000;say('💡 '+L[0],L[2],'var(--wa)');return}
+ ls[k]=t||1;G.ac=t+12000;sfx('alert');
+ xShow(`<h2 style="color:var(--wa)">💡 ${L[0]}</h2><div class="lsn"><b style="color:var(--cr)">👀 YOU SEE</b><p>${L[1]}</p><b style="color:var(--cy)">🤔 WHY IT HAPPENS</b><p>${L[2]}</p><b style="color:var(--ok)">✅ YOUR DECISION</b><p>${DFC().tip?'TRY THIS: '+L[3]:'Think: what could you do? In HARD mode, YOU decide!'}</p></div><button onclick="xClose()">GOT IT <kbd>SPACE</kbd></button>`)}
+function decideOpen(){const u=G.bu||(G.bu=[]);let i;do{i=Math.floor(Math.random()*BP.length)}while(u.includes(i)&&u.length<BP.length);u.push(i);const b=G.cur=BP[i],tag=o=>DFC().tip?(o[3]?'<span style="color:var(--wa)">⚠ RISKY</span>':'<span style="color:var(--ok)">🛡 SAFE</span>'):'';
+ xShow(`<h2 style="color:var(--wa)">🧭 DECISION TIME</h2><h3>${b.t}</h3><p>${b.d}</p><p class="note">Every choice gives you something and costs you something. Pick what you need most right now!</p><div class="cards">${[b.a,b.b].map((o,j)=>`<div class="box" style="margin:0"><h3>${j?'B':'A'}: ${o[0]}</h3><p>${o[1]}</p>${tag(o)}<br><button class="${j?'alt':''}" onclick="decide(${j})"><kbd>${j+1}</kbd> CHOOSE</button></div>`).join('')}</div>`,'dec')}
+function decide(j){const b=G.cur,o=j?b.b:b.a;o[2](G);for(const k of['o','p','f','t','h','st'])G[k]=cl(G[k]);G.sc=Math.max(0,G.sc);sfx('select');G.cur=null;
+ xShow(`<h2 style="color:var(--ok)">✅ YOU CHOSE: ${o[0]}</h2><p><b style="color:var(--cy)">WHAT HAPPENED:</b> ${o[1]}</p><p class="edu"><b>WHY IT MATTERS:</b> ${o[4]}</p><button onclick="xClose()">CONTINUE <kbd>SPACE</kbd></button>`)}
+
+/* modes: start-up, storms, old-base malfunctions */
+function hardStart(p){const P=PL[p],L=[['🧪 MOXIE filter clogged','Less oxygen. Mars air is CO₂, and MOXIE needs a clean filter.']];G.clog=1;G.q=['filt'];G.pm={};
+ G.next=3;xShow(`<h2 style="color:var(--cr)">🔧 THE OLD BASE IS BROKEN!</h2><p>The crew left in a hurry. Fix this one thing:</p><div class="lsn">${L.map(l=>`<p><b style="color:var(--wa)">${l[0]}</b><br>${l[1]}</p>`).join('')}</div><p class="note">Fix them when the jobs appear.</p><button onclick="xClose()">LET'S FIX IT! <kbd>SPACE</kbd></button>`)}
+const _st11=start;start=function(p){_st11(p);const d=DFC();G.diff=DIFF;G.dr=d.dr;G.tm=d.tm;for(const k of['o','p','f','t'])G[k]=cl(G[k]+d.bonus);G.q=[];G.ls={};if(DIFF==='hard')hardStart(p)};
+const _sp11=spawn;spawn=function(){if(G.q&&G.q.length&&!G.ord.length&&!G.force)G.force=G.q.shift();_sp11();const o=G.ord[0];if(o&&o.k==='cool'&&G.pm&&G.pm.cool){G.brk.reactor=1;G.pm.cool=0}};
+const _fo11=failOrder;failOrder=function(od){const k=od.k;_fo11(od);if(G.diff!=='hard'||!G.q)return;if(({filt:G.clog,dust:G.soil>.5,cool:G.brk.reactor})[k]&&!G.q.includes(k)){G.q.push(k);G.next=0}};
+const _ns11=nextSol;nextSol=function(){_ns11();if(!G||G.over||!run)return;const d=DFC();
+ if(G.warn>0)G.warn=G.sol<d.from?0:d.warn;else if(d.from<3&&G.sol>=d.from&&!G.storm&&Math.random()<.45)G.warn=d.warn;
+ if(G.sol>=2&&G.sol%2===0&&G.sol<=10){const go=()=>{if(!run||!G||G.over)return;if(M||ovOpen()){setTimeout(go,1000);return}decideOpen()};setTimeout(go,1200)}};
+const BK={comm:'ant',batt:'cold',hab:'leak',reactor:'cool'};
+const _up11=update;update=function(dt){_up11(dt);if(!G||!run||G.over)return;G.ck+=dt*(40/DFC().day-.7);for(const s in BK)if(G.brk[s]&&!G.ord.some(o=>o.k===BK[s])){delete G.brk[s];if(s==='reactor'&&G.diff==='hard'){G.pm=G.pm||{};G.pm.cool=1}}if(!paused)advisor()};
+
+/* day / night clock */
+function clkDraw(){const ck=G.ck,night=ck>=20,R=40/DFC().day,left=Math.ceil(((night?40:20)-ck)/R),sol=Math.ceil((40-ck)/R),gd=G.goals.filter(g=>g.done).length,el=$('clk');el.className=left<=8?'hu':'';
+ el.innerHTML=`<div>${night?'🌙 NIGHT':'☀️ DAY'} <b class="big" style="color:${night?'#9aa8ff':'#FFB547'}">${left}s</b></div><div class="tb"><i style="width:50%;background:#FFB547"></i><i style="width:50%;background:#4a55b0"></i><u style="left:${ck/40*100}%"></u></div><div>SOL ENDS ${sol}s</div><div style="color:var(--ok)">⭐ GOALS ${gd}/${G.goals.length}</div>`}
+const _h11=hud;hud=function(n){_h11(n);clkDraw()};
+
+/* ===== v14/v15: sandstorm haze (the world, stations and base stay visible; only the on-screen buttons are hidden) ===== */
+document.head.insertAdjacentHTML('beforeend','<style>#wrap.stormout #btns{visibility:hidden}</style>');
+const inStorm=()=>!!(G&&run&&!G.over&&G.storm>0&&!G.in&&!cs&&!EC);
+function drawWhiteout(t){const s=ST.hab,dx=s.x+35,dy=s.y+s.h+3,px=G.x-CAM.x,py=G.y-CAM.y,a=Math.atan2(dy-G.y,dx-G.x),d=Math.hypot(dx-G.x,dy-G.y);
+ /* see-through dust haze over the land */
+ c.fillStyle='rgba(168,98,52,.5)';c.fillRect(0,0,W,H);
+ for(let i=0;i<70;i++){c.fillStyle=i%3?'rgba(236,190,140,.55)':'rgba(120,64,34,.5)';c.fillRect(Math.floor((i*61+t/(2+i%4))%(W+40))-20,(i*29)%H,10+i%9,1)}
+ /* labels drawn under the haze are cleared, then the base and stations are drawn again on top so they stay easy to see */
+ if(T1.ok)T1.g.clearRect(0,0,T1.cv.width,T1.cv.height);
+ c.save();c.translate(-Math.round(CAM.x),-Math.round(CAM.y));
+ for(const k in ST)if(hasSt(k))drawSt(k,t);
+ drawPad(t);
+ c.restore();
+ drawMini();
+ if(d<70){c.fillStyle='rgba(124,255,176,'+(.3+.15*Math.sin(t/150))+')';c.fillRect(Math.round(dx-CAM.x)-7,Math.round(dy-CAM.y)-11,14,13)}
+ c.save();c.translate(-Math.round(CAM.x),-Math.round(CAM.y));astro(G.x,G.y,G.dir,G.mv);c.restore();
+ if(d>14){const r=26+Math.sin(t/120)*2,ax=px+Math.cos(a)*r,ay=py-8+Math.sin(a)*r,tri=(k,col)=>{c.fillStyle=col;c.beginPath();c.moveTo(ax+Math.cos(a)*k,ay+Math.sin(a)*k);c.lineTo(ax+Math.cos(a+2.4)*(k-2),ay+Math.sin(a+2.4)*(k-2));c.lineTo(ax+Math.cos(a-2.4)*(k-2),ay+Math.sin(a-2.4)*(k-2));c.fill()};tri(9,K);tri(7,'#55D68B')}
+ tx('GO TO THE HABITAT!',120,12,'#FFE08A','c',1);tx(d>14?'SHELTER IS '+Math.round(d)+' STEPS AWAY':'PRESS SPACE TO GO IN!',120,22,'#55D68B','c')}
+const _r12=render;render=function(t){_r12(t);if(inStorm())drawWhiteout(t)};
+const _up12=update;update=function(dt){if(inStorm()&&M){M=null;$('mgx').style.display='none';say('Too dusty!','The storm stopped your job. Get inside!','var(--cr)')}_up12(dt)};
+const _a12=act;act=function(){if(inStorm()&&!paused&&!M&&!G.wait){if(Date.now()-_pcd<300)return;if(near()==='hab')return enterHab();say('Too dusty to work!','Get inside the habitat! Follow the green arrow.','var(--cr)');return}_a12()};
+const _l12=loop;loop=function(t){_l12(t);$('wrap').classList.toggle('stormout',inStorm())};
+
+/* ===== v15: big flashing missions panel, build nudges, SUPPLY RUNS (red arrows + base drop-off) ===== */
+document.head.insertAdjacentHTML('beforeend',`<style>
+#side{top:28cqh}
+#quest{margin-bottom:.6cqh}
+#quest .qh{font:max(8px,.9cqw) "Press Start 2P",monospace;padding:.5cqw .6cqw;background:#12283d;border:.3cqw solid var(--ok);color:#fff;display:flex;justify-content:space-between}
+#quest.bad .qh{border-color:var(--cr);animation:qfl .9s infinite steps(1)}
+#quest .qr{font:max(7px,.76cqw)/1.5 "Press Start 2P",monospace;padding:.4cqw .6cqw;margin-top:.3cqh;background:rgba(8,21,37,.92);border:.25cqw solid #2b4660;color:#fff}
+#quest .qr.bad{border-color:var(--cr);animation:qfl .9s infinite steps(1)}
+#quest .qr.urg{animation-duration:.45s}
+#quest .qr.ok{border-color:var(--ok);color:var(--ok);animation:none}
+@keyframes qfl{0%,49%{background:#6a1019;border-color:#ff6b73}50%,100%{background:rgba(8,21,37,.92);border-color:#a02a35}}
+#btns button.mfl{animation:qbt .7s infinite steps(1)}
+@keyframes qbt{0%,49%{background:#8a1a26;border-color:#ff6b73}50%,100%{background:rgba(8,21,37,.88);border-color:var(--cy)}}
+#btns .mbdg{position:absolute;left:-.4cqw;top:-1.2cqh;background:var(--cr);color:#fff;font-size:max(7px,.65cqw);padding:.2cqh .35cqw;border:.2cqw solid #081525;display:none}
+#btns button.mfl .mbdg{display:block}
+</style>`);
+$('side').insertAdjacentHTML('afterbegin','<div id="quest"></div>');
+{const gb=$('btns').querySelector('[onclick^="goalsOpen"]');if(gb)gb.insertAdjacentHTML('beforeend','<span class="mbdg"></span>')}
+TCAP[5]=['6. DAILY GOALS','Red flashing goals are not done yet. On a SUPPLY RUN, follow the red arrow, grab the items and drop them at the base!'];
+
+/* --- helpers --- */
+const PAD={x:54,y:110,w:20,h:11};
+const canBuildNow=()=>{for(const k in BLD){const b=BLD[k];if(G.bd[k]<b.max&&Object.keys(b.c).every(m=>(G.inv[m]||0)>=b.c[m]))return k}return null};
+const solLeft=()=>Math.ceil((40-G.ck)/(40/DFC().day));
+let _qb='',_bfx=null;
+
+/* a build goal every sol from sol 2 (while there is still something to build) */
+const _gg15=genGoals;genGoals=function(){_gg15();if(G.sol>=2&&!G.goals.some(g=>g.t==='build')&&Object.keys(BLD).some(k=>G.bd[k]<BLD[k].max))G.goals.push({t:'build',n:1,h:0});_gb=''};
+
+/* missed missions: red flash when a sol ends with goals left undone */
+const _ns15=nextSol;nextSol=function(){const miss=(G&&G.goals)?G.goals.filter(g=>!g.done).length:0;_ns15();
+ if(miss&&G&&run&&!G.over){flash=.6;sfx('oops');say('Sol '+Math.min(10,G.sol)+' · ⚠ '+miss+' MISSION'+(miss>1?'S':'')+' MISSED!',SOLF[(G.sol-1)%SOLF.length],'var(--cr)')}};
+
+/* --- supply runs --- */
+function srPick(){const out=[];
+ for(const l of LMS){if(l.id==='bra')continue;const cnt={};
+  for(const n of G.nodes)if(!n.got&&Math.hypot(n.x-l.x,n.y-l.y)<l.r)cnt[n.k]=(cnt[n.k]||0)+1;
+  for(const k of ['iron','sand','clay','ice','drill'])if(cnt[k]>=2){const d=Math.hypot(l.x-G.x,l.y-G.y);out.push({l,k,n:Math.min(3,cnt[k]),w:1+(G.seen[l.id]?0:2)+d/200})}}
+ if(!out.length)return null;let r=Math.random()*out.reduce((a,o)=>a+o.w,0);return out.find(o=>(r-=o.w)<=0)||out[0]}
+function srStart(){const pk=srPick();if(!pk){G.srT=15;G.srDue=1;return}
+ const l=pk.l,d=Math.hypot(l.x-(PAD.x+10),l.y-(PAD.y+8)),left=Math.round(Math.max(120,d*2/42+60));
+ G.sr={lm:l.id,k:pk.k,n:pk.n,left,max:left,vis:0};sfx('alert');_qb='';
+ say('📦 SUPPLY RUN!','The base needs '+pk.n+' '+ITEMS[pk.k].n+'. Follow the RED ARROW to '+l.n+', grab them, then deposit them at the DROP-OFF by the habitat.','var(--cr)')}
+function srTarget(){const s=G.sr;if(!s)return null;const l=LMN(s.lm);
+ if(!s.vis)return{x:l.x,y:l.y,name:l.n,kind:'lm',lab:'GET '+s.n+' '+ITEMS[s.k].n};
+ if((G.inv[s.k]||0)>=s.n)return{x:PAD.x+PAD.w/2,y:PAD.y+4,name:'BASE DROP-OFF',kind:'pad',lab:'DEPOSIT HERE'};
+ let b=null,bd=1e9;for(const n of G.nodes)if(!n.got&&n.k===s.k&&Math.hypot(n.x-l.x,n.y-l.y)<l.r){const d=Math.hypot(n.x-G.x,n.y-G.y);if(d<bd){bd=d;b=n}}
+ if(!b){for(const n of G.nodes)if(n.k===s.k&&Math.hypot(n.x-l.x,n.y-l.y)<l.r){n.got=0;b=n;break}}return b?{x:b.x,y:b.y,name:ITEMS[s.k].n,kind:'node',lab:'GRAB '+ITEMS[s.k].n}:{x:l.x,y:l.y,name:l.n,kind:'lm',lab:'GET '+s.n+' '+ITEMS[s.k].n}}
+function srTick(dt){
+ if(G.sr){const s=G.sr;s.left-=dt;
+  if(!G.in&&!s.vis&&zoneAt(G.x,G.y).id===s.lm){s.vis=1;_qb='';sfx('switch');say('📍 You made it!','Grab '+s.n+' '+ITEMS[s.k].n+' here (press SPACE on each one), then carry them back to the DROP-OFF at base.','var(--ok)')}
+  if(s.left<=0){G.sr=null;_qb='';sfx('oops');say('Supply run missed','No worries! The crew will ask again in 2 days.','var(--wa)')}
+  return}
+ if(!G.srDue)return;G.srT-=dt;if(G.srT<=0){if(G.in||G.storm>0||G.warn>0||M||ovOpen()){G.srT=3;return}G.srDue=0;srStart()}}
+const srNear=()=>Math.hypot(G.x-(PAD.x+PAD.w/2),G.y-(PAD.y+PAD.h+3))<16;
+function srDeposit(){const s=G.sr;
+ if(!s){sfx('tap');say('📦 DROP-OFF','Supply runs pop up every 2 days. Bring the items here to deposit them!','var(--cy)');return 1}
+ const it=ITEMS[s.k],have=G.inv[s.k]||0;
+ if(!s.vis){sfx('oops');say('Not yet!','Go to '+LMN(s.lm).n+' first. Follow the red arrow.','var(--wa)');return 1}
+ if(have<s.n){sfx('oops');say('Need more '+it.n,'You have '+have+'/'+s.n+'. Grab more near '+LMN(s.lm).n+'.','var(--wa)');return 1}
+ G.inv[s.k]-=s.n;G.sc+=120;G.st=cl(G.st+6);if(invN()<CAP)G.inv.batt=(G.inv.batt||0)+1;G.srN=(G.srN||0)+1;G.sr=null;_qb='';_ib='';
+ sfx('fanfare');say('📦 DELIVERED! +120 score · +1 🔋','The crew got your '+it.n+'. '+it.f,'var(--ok)');return 1}
+
+/* drop-off pad at the base (always there, flashes red when you are carrying a delivery) */
+function drawPad(t){const{x,y,w,h}=PAD,s=G.sr,on=!!(s&&s.vis&&(G.inv[s.k]||0)>=s.n),m=Math.floor(t/300)%2;
+ c.fillStyle='rgba(0,0,0,.28)';c.fillRect(x+2,y+h-1,w,3);B(x,y+5,w,h-5,'#7d8794');B(x+2,y,16,7,on?(m?'#F05B64':'#8a1a26'):'#c9a46a');
+ c.fillStyle='#6b4a2f';c.fillRect(x+9,y,2,7);c.fillRect(x+2,y+3,16,1);
+ tx('DROP-OFF',x+w/2,y+h+3,on?'#F05B64':'#F4F7FA','c')}
+function dnArrow(x,y,col){c.fillStyle=K;c.fillRect(x-4,y-12,8,8);c.beginPath();c.moveTo(x-8,y-5);c.lineTo(x+8,y-5);c.lineTo(x,y+5);c.fill();c.fillStyle=col;c.fillRect(x-3,y-11,6,7);c.beginPath();c.moveTo(x-6,y-4);c.lineTo(x+6,y-4);c.lineTo(x,y+3);c.fill()}
+/* arrows live inside the part of the screen that is not covered by the HUD, minimap and missions panel */
+const AR={x0:12,y0:34,x1:W-68,y1:H-34},arIn=(x,y)=>x>AR.x0&&x<AR.x1&&y>AR.y0&&y<AR.y1;
+function edgePt(sx,sy){const ox=cl(G.x-CAM.x,AR.x0+4,AR.x1-4),oy=cl(G.y-CAM.y-8,AR.y0+4,AR.y1-4),dx=sx-ox,dy=sy-oy;let k=1e9;
+ if(dx>0)k=Math.min(k,(AR.x1-ox)/dx);else if(dx<0)k=Math.min(k,(AR.x0-ox)/dx);
+ if(dy>0)k=Math.min(k,(AR.y1-oy)/dy);else if(dy<0)k=Math.min(k,(AR.y0-oy)/dy);
+ return{px:ox+dx*k,py:oy+dy*k,a:Math.atan2(dy,dx)}}
+drawArrow=function(){const o=G.ord[0];if(!o||M)return;const s=ST[o.s[o.step][1]],x=s.x+s.w/2-CAM.x,y=s.y+s.h/2-CAM.y;if(arIn(x,y))return;const e=edgePt(x,y),a=e.a,px=e.px,py=e.py;
+ c.fillStyle=K;c.beginPath();c.moveTo(px+Math.cos(a)*13,py+Math.sin(a)*13);c.lineTo(px+Math.cos(a+2.4)*10,py+Math.sin(a+2.4)*10);c.lineTo(px+Math.cos(a-2.4)*10,py+Math.sin(a-2.4)*10);c.fill();c.fillStyle='#F05B64';c.beginPath();c.moveTo(px+Math.cos(a)*10,py+Math.sin(a)*10);c.lineTo(px+Math.cos(a+2.4)*7,py+Math.sin(a+2.4)*7);c.lineTo(px+Math.cos(a-2.4)*7,py+Math.sin(a-2.4)*7);c.fill()};
+function srWorld(t){const s=G.sr;if(!s)return;const tg=srTarget();if(!tg)return;const m=Math.floor(t/250)%2;
+ if(tg.kind==='lm'){const l=LMN(s.lm);c.strokeStyle=m?'#F05B64':'#ff9aa0';c.lineWidth=2;c.beginPath();c.arc(l.x,l.y,Math.max(14,l.r*.55)+Math.sin(t/200)*3,0,7);c.stroke()}
+ if(!arIn(tg.x-CAM.x,tg.y-CAM.y))return;
+ const bob=Math.round(Math.sin(t/140)*3),x=Math.round(tg.x),y=Math.round(tg.y)-(tg.kind==='lm'?20:14)+bob;
+ dnArrow(x,y,m?'#F05B64':'#ff9aa0');tx(tg.lab,x,y-20,'#FFE08A','c')}
+function srScreen(t){const s=G.sr;if(!s||M)return;const tg=srTarget();if(!tg)return;const x=tg.x-CAM.x,y=tg.y-CAM.y;if(arIn(x,y))return;
+ const e=edgePt(x,y),a=e.a,px=e.px,py=e.py,pu=Math.sin(t/110)*2,col=Math.floor(t/250)%2?'#F05B64':'#ff9aa0';
+ c.fillStyle=K;c.beginPath();c.moveTo(px+Math.cos(a)*(18+pu),py+Math.sin(a)*(18+pu));c.lineTo(px+Math.cos(a+2.5)*14,py+Math.sin(a+2.5)*14);c.lineTo(px+Math.cos(a-2.5)*14,py+Math.sin(a-2.5)*14);c.fill();
+ c.fillStyle=col;c.beginPath();c.moveTo(px+Math.cos(a)*(14+pu),py+Math.sin(a)*(14+pu));c.lineTo(px+Math.cos(a+2.5)*10,py+Math.sin(a+2.5)*10);c.lineTo(px+Math.cos(a-2.5)*10,py+Math.sin(a-2.5)*10);c.fill();
+ const txt=tg.name+' '+Math.round(Math.hypot(tg.x-G.x,tg.y-G.y))+'M',half=txt.length*2,lx=cl(px,half+4,186-half),ly=cl(py<H/2?py+16:py-20,4,H-12);tx(txt,lx,ly,'#FFE08A','c')}
+const _dn15=drawNodes;drawNodes=function(t){_dn15(t);drawPad(t);srWorld(t)};
+const _r15=render;render=function(t){_r15(t);if(G&&run&&!G.over&&!G.in&&!cs&&!EC&&G.sr&&!inStorm())srScreen(t)};
+const _dm15=drawMini;drawMini=function(){_dm15();if(!G||!G.sr)return;const tg=srTarget();if(!tg||Math.floor(performance.now()/250)%2)return;
+ const x=Math.round(W-52+tg.x*48/WW),y=Math.round(3+tg.y*27/WH);c.fillStyle='#F05B64';c.fillRect(x-2,y-2,4,4);c.fillStyle='#fff';c.fillRect(x-1,y-1,2,2)};
+const _a15=act;act=function(){if(G&&run&&!paused&&!M&&!G.wait&&!G.over&&!G.in&&!cs&&!EC&&!inStorm()&&Date.now()-_pcd>=300&&srNear()&&srDeposit())return;_a15()};
+const _up15=update;update=function(dt){_up15(dt);if(G&&run&&!G.over&&!M)srTick(dt)};
+const _st15=start;start=function(p){_st15(p);if(G){G.sr=null;G.srT=0;G.srDue=0;G.srN=0;G.spN=0}_qb=''};
+
+/* --- missions panel (always on screen) --- */
+function questDraw(){const q=$('quest'),gl=G.goals||[],done=gl.filter(g=>g.done).length,inc=gl.length-done,urg=solLeft()<=12,cb=DIFF==='easy'?null:canBuildNow(),sr=G.sr;
+ const lab=g=>g.t==='get'?ITEMS[g.k].e+' GET '+ITEMS[g.k].n+' '+Math.min(g.h,g.n)+'/'+g.n:g.t==='visit'?'📍 VISIT '+LMN(g.k).n:g.t==='order'?'🛠️ FIX JOBS '+Math.min(g.h,g.n)+'/'+g.n:'🏗️ BUILD SOMETHING';
+ let h=`<div class="qh"><span>⭐ MISSIONS</span><span>${done}/${gl.length}</span></div>`;
+ h+=gl.map(g=>`<div class="qr ${g.done?'ok':'bad'+(urg?' urg':'')}">${g.done?'✅':'⭐'} ${lab(g)}${!g.done&&g.t==='build'?'<br>BUILD AT BASE · PRESS B':''}</div>`).join('');
+ if(cb)h+=`<div class="qr bad urg">🏗️ YOU CAN BUILD ${BLD[cb].n}!<br>${atBase()?'PRESS B NOW!':'GO TO BASE · PRESS B'}</div>`;
+ if(sr){const it=ITEMS[sr.k],have=G.inv[sr.k]||0;h+=`<div class="qr bad${sr.left<20?' urg':''}">📦 SUPPLY RUN<br>${!sr.vis?'GO TO '+LMN(sr.lm).n+' · GET '+sr.n+' '+it.n:have>=sr.n?'DEPOSIT AT BASE DROP-OFF!':'GET '+it.n+' '+have+'/'+sr.n+' · THEN DROP AT BASE'}<br><span id="srt"></span></div>`}
+ const key=h+(inc?'|bad':'|ok');if(key!==_qb){_qb=key;q.className=inc?'bad':'';q.innerHTML=h}
+ if(sr){const e=$('srt');if(e)e.textContent='⏱ '+Math.ceil(sr.left)+'S'}
+ if(!_bfx){const gb=$('btns').querySelector('[onclick^="goalsOpen"]'),bb=$('btns').querySelector('[onclick*="build"]');if(gb&&bb)_bfx={gb,bb,bd:gb.querySelector('.mbdg')}}
+ if(_bfx){_bfx.gb.classList.toggle('mfl',inc>0);_bfx.bb.classList.toggle('mfl',!!cb);if(_bfx.bd)_bfx.bd.textContent=inc}}
+const _h15=hud;hud=function(n){_h15(n);if(!G||!G.goals)return;questDraw();
+ if(!G.in&&!M&&srNear()){const hh=$('hint'),s=G.sr;hh.style.display='block';hh.textContent=s&&s.vis&&(G.inv[s.k]||0)>=s.n?'[SPACE] DEPOSIT '+s.n+' '+ITEMS[s.k].n:s?'DROP-OFF · BRING '+s.n+' '+ITEMS[s.k].n:'[SPACE] SUPPLY DROP-OFF'}};
+
+/* ===== v16: final polish =====
+   - EASY = 2 missions/day, 1-2 jobs/day, 60s days.  HARD = old easy settings, 45s days.
+   - Supply run once every 2 days (odd sols).  Storms never hit during a job or inside the habitat.
+   - Low health? Tips tell the kid to go sleep. */
+const _gg16=genGoals;genGoals=function(){_gg16();
+ const gl=G.goals.filter(g=>g.t!=='build');
+ if(DIFF==='easy'){const get=gl.find(g=>g.t==='get'),ord=gl.find(g=>g.t==='order');if(get)get.n=Math.min(get.n,2);if(ord)ord.n=1;G.goals=[get,ord].filter(Boolean)}
+ else{const ord=gl.find(g=>g.t==='order');if(ord)ord.n=1;G.goals=gl}
+ _gb=''};
+const _sp16=spawn;spawn=function(){if(!G||(G.spN||0)>=DFC().cap)return;const n=G.ord.length;_sp16();if(G.ord.length>n){G.spN=(G.spN||0)+1;G.gapSet=1}};
+const _ns16=nextSol;nextSol=function(){_ns16();if(!G||G.over||!run)return;G.spN=0;G.next=Math.min(G.next,6+Math.random()*4);
+ if(G.sol>=3&&G.sol%2===1&&G.sol<=9){G.srDue=1;G.srT=10+Math.random()*6}};
+const _up16=update;update=function(dt){const h0=G&&G.h;_up16(dt);if(!G||!run||G.over)return;
+ if(G.gapSet){G.gapSet=0;G.next=DFC().gap+Math.random()*4}
+ if(G.hFall>0)G.hFall-=dt;if(G.hTip>0)G.hTip-=dt;
+ if(G.h<h0-1e-6){G.hFall=5;G.hLoss=(G.hLoss||0)+(h0-G.h)}
+ if(G.hFall>0&&(G.hLoss||0)>=.5&&!(G.hTip>0)&&!M&&!ovOpen()){G.hLoss=0;G.hTip=20;sfx('alert');
+  say('❤️ You are losing health!',G.storm>0&&!G.in?'Get inside the habitat, then walk to a BED and press SPACE to SLEEP. Sleeping gives health back!':G.in?'Walk to a BED and press SPACE to SLEEP. Sleeping gives health back!':'Go into the habitat (SPACE at the door) and SLEEP in a bed to get health back!','var(--cr)')}};
+const _h16=hud;hud=function(n){_h16(n);if(G&&G.hFall>0&&G.h<98)$('info').innerHTML+=' · <b style="color:var(--cr)">❤ LOW HEALTH: SLEEP IN A BED!</b>'};
+
+/* Respect reduced-motion preferences while keeping mission warnings visible. */
+document.head.insertAdjacentHTML('beforeend','<style>@media (prefers-reduced-motion: reduce){.scr.on,#stw.on,#quest .qr.bad,#btns button.mfl{animation:none!important;transition:none!important}.pc canvas{transition:none!important}}</style>');
 </script></body></html>

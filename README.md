@@ -1,28 +1,32 @@
 # MarsBound
 
 **Junior Astronaut: Stranded on Mars**  
-An educational, pixel-art browser game about the choices involved in keeping a small Mars outpost running.
+A student-created, pixel-art browser game about the decisions involved in keeping a small Mars outpost running.
 
-**Play:** [marsbound.earth](https://marsbound.earth/)  
-**Fallback deployment:** [marsbound-spaceapps-2026.vercel.app](https://marsbound-spaceapps-2026.vercel.app/)
+**Play:** [Vercel deployment](https://marsbound-spaceapps-2026.vercel.app/)  
+**Alternate domain:** [marsbound.earth](https://marsbound.earth/)
 
-MarsBound was built for the **2026 NASA Space Apps Challenge**, for the Junior Astronaut Mission Trainer challenge.
+MarsBound was built for the **2026 NASA Space Apps Challenge**, for the **Junior Astronaut Mission Trainer** challenge.
 
-> **Educational project notice:** MarsBound is a student-created game concept. It is not a NASA product, official mission simulator, engineering design, or endorsement by NASA. Game values and consequences are simplified for learning and gameplay; they are not NASA mission specifications.
+> **Project notice:** MarsBound is an independent student project. It is not an official NASA product, mission simulator, engineering design, or NASA endorsement. Game values, resources, events, and outcomes are simplified for learning and gameplay; they are not NASA mission specifications.
 
 ## The game
 
-Players try to keep a Mars base operating for 10 sols (Martian days). They choose an energy strategy, explore a simplified Gale Crater environment, gather resources, repair systems, build equipment, and respond to mission events.
+Try to keep a Mars base operating for 10 sols (Martian days). Choose a power strategy, explore a simplified Gale Crater environment, gather and process resources, repair systems, build equipment, respond to changing conditions, and make mission decisions.
 
-The current game includes:
+### Current features
 
+- Easy and Hard difficulty modes, with different starting conditions and time pressure.
 - Three power strategies: solar, nuclear, and hybrid.
-- Base resources and status indicators, including air, power, food, heat, health, and stability.
+- Day/night cycle and base systems for air, power, food, heat, health, and stability.
 - Exploration of places inspired by real Gale Crater locations.
-- Resource collection, repairs, base construction, and mission events.
-- Goals, a map, a facts/collection feature, and a 10-sol survival objective.
-- Keyboard controls and on-screen touch controls.
-- Original pixel-style visuals and synthesized sound/music.
+- Resource collection, repairs, construction, mission orders, and timed supply runs.
+- Dust-storm warnings and a habitat interior where the astronaut can shelter and recover.
+- Bed and computer interactions inside the habitat.
+- Decision events, daily objectives, a mission map, and a collection/facts book.
+- NASA/JPL photo cards with source links and visible image credits; fallback visuals appear if a remote image cannot load.
+- Animated instructions, keyboard controls, and on-screen touch controls.
+- Local high-score and collection progress saved in the browser.
 
 ## How to play
 
@@ -32,7 +36,7 @@ The current game includes:
 | --- | --- |
 | Arrow keys or WASD | Move |
 | Shift | Run |
-| Space | Act, interact, or use an action |
+| Space or E | Act, interact, or continue |
 | I | Open backpack |
 | B | Open build menu |
 | C | Open facts/collection book |
@@ -41,49 +45,51 @@ The current game includes:
 | N | Toggle music |
 | P | Pause |
 | F | Toggle fullscreen |
-| Esc | Back/menu or close the current overlay |
+| Esc | Back, close an overlay, or pause/menu depending on the current screen |
 
-The title screen also offers **1 = Play** and **2 = How to Play**. The game displays on-screen controls on supported touch devices.
+Use the on-screen directional and action controls on supported touch devices. Near the habitat, follow the on-screen prompt to enter; inside, interact with the beds and computer.
 
-### Play locally
+## Run locally
 
 1. Download or clone this repository.
 2. Open `index.html` in a modern browser.
 3. Start the game from the title screen.
 
-There is no build step or package installation for the current single-file version. The game is written in HTML, CSS, and JavaScript. The Press Start 2P display font is loaded from Google Fonts; if that service is blocked or unavailable, the CSS fallback font is used.
+The current project is a single-page HTML/CSS/JavaScript game and has no build step or package installation.
 
 ## Project files
 
 | File | Purpose |
 | --- | --- |
-| `index.html` | The game: markup, styling, rendering, gameplay, and audio code |
+| `index.html` | Game markup, styles, rendering, gameplay, and generated audio |
 | `favicon.svg` | MarsBound browser-tab icon |
 | `README.md` | Project overview and play instructions |
-| `SOURCES.md` | NASA/scientific references used to support in-game facts |
-| `THIRD_PARTY_NOTICES.md` | Third-party font and license information |
-| `LICENSING.md` | Current license decision and contributor checklist |
-| `REVIEW_NOTES.md` | Review notes for the current baseline and final handoff |
+| `SOURCES.md` | Scientific and NASA/JPL image references |
+| `THIRD_PARTY_NOTICES.md` | Font and NASA/JPL media notices |
+| `LICENSE` | Apache License 2.0 for approved original project contributions |\n| `LICENSING.md` | License scope and third-party rights summary |
+| `REVIEW_NOTES.md` | Review results and final QA checklist |
 
-## Technology and data
+## Technology, network use, and saved data
 
-- **HTML, CSS, and vanilla JavaScript** — no framework or package manager required.
-- **HTML Canvas** — game world, pixel art, and visual effects.
-- **Web Audio API** — generated sound effects and music; the current build does not load audio files.
-- **localStorage** — stores local high-score and exploration/collection progress in the player's browser. It is not a shared account or cloud save.
+- **HTML, CSS, and vanilla JavaScript** — no framework, build command, or third-party JavaScript library.
+- **HTML Canvas** — game world, pixel art, visual effects, map, and tutorials.
+- **Web Audio API** — generated sound effects and music; no separate audio files are loaded by the current game.
+- **localStorage** — stores the high score and collection/exploration progress in the player's browser. Saves are local to that browser/device; there is no account or cloud save.
+- **Google Fonts** — loads Press Start 2P from Google Fonts. A CSS fallback font is provided.
+- **NASA/JPL Photojournal and NASA image services** — NASA images are loaded remotely when a relevant information card is opened. The image cards include credits and source links. If an image service is blocked or unavailable, the game uses a fallback visual or emoji.
 
-The current game code does not call an external application API or send gameplay data to a project backend. The only external resource reference found in the reviewed HTML is the Google Fonts stylesheet for Press Start 2P.
+The game code does not use analytics, a game account, or a project backend to upload gameplay progress. A network connection is required to load the hosted game and remote font/photo assets; local saves remain in the browser.
 
-## Science and sources
+## Science and image sources
 
-The game uses real Mars locations, mission examples, and planetary facts as educational context. The survival model, resource levels, construction costs, event timings, and outcomes are simplified gameplay systems—not engineering specifications.
+See [SOURCES.md](SOURCES.md) for the research references behind in-game facts and NASA/JPL image cards. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for image credits, NASA media guidance, and the separate font license.
 
-See [SOURCES.md](SOURCES.md) for the research references and [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md) for third-party material and its separate license.
+The game deliberately simplifies survival values and trade-offs. A game mechanic is not evidence that a real Mars base could use the same system, amount, or procedure.
 
 ## Contributors
 
-This is a team project. The public project documentation uses role-based credits rather than publishing personal details. Contributions include game programming, gameplay/mechanics design, Mars research and fact-checking, testing, documentation, and deployment. The final role list should be checked with the team before submission.
+MarsBound is a team project. Confirm the final role list with the team before submission. Credits should accurately reflect who contributed to programming, gameplay design, Mars research, testing, documentation, and deployment. Do not list someone as an author or rights holder without their agreement.
 
 ## License
 
-See [LICENSING.md](LICENSING.md). The team is aligning the repository license with the 2026 NASA Space Apps Participant Terms and confirming that all contributors have authority to license their original contributions. The separate Press Start 2P font license is described in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+The team's original project contributions are released under [Apache License 2.0](LICENSE), as approved by the contributors. This license does not relicense third-party fonts or NASA/JPL media; see [LICENSING.md](LICENSING.md), [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md), and [SOURCES.md](SOURCES.md).
