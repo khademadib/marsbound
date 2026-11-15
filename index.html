@@ -119,6 +119,94 @@ kbd{background:#081525;color:var(--wa);padding:2px 4px;margin-left:4px;font:inhe
 .tag{min-height:clamp(22px,3vw,40px);font-size:clamp(14px,1.8vw,24px);margin:.6vh 0}
 .stt{font:clamp(11px,1.5vw,20px) "Press Start 2P",monospace;margin:.8vh 0;min-height:1.6em}.stt.on{color:var(--ok)}.stt.off{color:var(--cr)}
 .sbt{font-size:clamp(7px,.9vw,12px);color:#b8cfe0;margin:1vh 0 .5vh}.sbars{display:grid;grid-template-columns:repeat(3,1fr);gap:.8vw;margin-bottom:1vh}.sbars b{font:clamp(7px,.9vw,12px) "Press Start 2P",monospace;display:block;margin-bottom:.4vh}.sbars .bar{height:clamp(7px,1.1vh,12px);margin:0}
+
+/* ===== Mobile touch support ===== */
+@media (pointer:coarse) {
+  button { -webkit-tap-highlight-color:transparent; }
+  kbd { display:none !important; }
+  .stage {
+    width:min(100vw,calc(100dvh * 16 / 9));
+    height:min(100dvh,calc(100vw * 9 / 16));
+  }
+  .pad > div:first-child {
+    grid-template-columns:repeat(3,clamp(44px,7.5cqw,58px));
+    grid-template-rows:repeat(2,clamp(44px,7.5cqw,58px));
+    gap:4px;
+  }
+  .pad .touch-actions {
+    display:flex;
+    align-items:flex-end;
+    gap:6px;
+    grid-template-columns:none;
+    grid-template-rows:none;
+  }
+  .pad button {
+    min-width:44px;
+    min-height:44px;
+    padding:0;
+    touch-action:none;
+    -webkit-user-select:none;
+    user-select:none;
+  }
+  .pad .act {
+    width:clamp(64px,10cqw,82px);
+    height:clamp(64px,10cqw,82px);
+    min-width:64px;
+    min-height:64px;
+    font-size:clamp(11px,1.25cqw,16px) !important;
+  }
+  .pad .run {
+    width:clamp(54px,8cqw,68px);
+    height:clamp(48px,7cqw,60px);
+    min-width:54px;
+    min-height:48px;
+    border:2px solid var(--wa);
+    background:#49391d;
+    color:#fff;
+    font-size:clamp(9px,1cqw,13px);
+  }
+  #ui2 .pad {
+    bottom:22cqh;
+    align-items:flex-end;
+  }
+  #btns {
+    right:1cqw;
+    bottom:1cqh;
+    gap:4px;
+  }
+  #btns button {
+    width:max(40px,6.2cqw);
+    height:max(40px,8cqh);
+    min-width:40px;
+    min-height:40px;
+    padding:2px;
+    gap:3px;
+    font-size:max(7px,.9cqw);
+  }
+  #btns .bi { font-size:max(16px,2.2cqw); }
+  #msg {
+    left:1cqw;
+    bottom:2cqh;
+    width:42cqw;
+    min-height:0;
+    max-height:15cqh;
+    overflow:auto;
+    padding:.6cqw;
+    font-size:max(8px,.9cqw);
+  }
+  #kb { display:none; }
+  #skipb button { min-height:42px; }
+}
+@media (pointer:coarse) and (orientation:portrait) {
+  #menu .mt::after {
+    content:"ROTATE YOUR PHONE SIDEWAYS FOR THE BEST VIEW";
+    display:block;
+    max-width:90%;
+    margin:0 auto;
+    color:#b8cfe0;
+    font:clamp(7px,2.2vw,10px)/1.5 "Press Start 2P",monospace;
+  }
+}
 </style></head><body>
 
 <section id="menu" class="scr on"><canvas id="cv0" width="240" height="135"></canvas><div class="mt"><div><h1>MARSBOUND</h1><div class="sub">SURVIVE 10 SOLS ON MARS</div></div><div><button onclick="startCut()"><kbd>1</kbd> PLAY</button><button class="alt" onclick="show('how')"><kbd>2</kbd> HOW TO PLAY</button><div id="best" class="note"></div></div></div></section>
@@ -135,7 +223,7 @@ kbd{background:#081525;color:var(--wa);padding:2px 4px;margin-left:4px;font:inhe
 <section id="game" class="scr"><div id="wrap" class="stage"><canvas id="cv" width="240" height="135"></canvas><canvas id="txo" class="txo"></canvas><div id="hint"></div><div id="pop"></div>
 <div id="ui"><div class="hud" id="hud"></div><div id="info"></div><div id="where"></div><div id="tl"></div><div id="ord"></div><div id="side"><div id="inv" class="note"></div></div></div>
 <div id="skipb"><button class="alt" id="skip" onclick="endCut()" style="display:none">SKIP <kbd>S</kbd></button><button class="alt" id="mgx" onclick="M=null;this.style.display='none'" style="display:none">LEAVE <kbd>ESC</kbd></button></div>
-<div id="ui2"><div id="tg"></div><div class="pad"><div><span></span><button data-k="up">&#9650;</button><span></span><button data-k="left">&#9664;</button><button data-k="down">&#9660;</button><button data-k="right">&#9654;</button></div><button class="act" id="actb" data-k="act">SPACE</button></div>
+<div id="ui2"><div id="tg"></div><div class="pad"><div class="move-pad"><span></span><button type="button" data-k="up" aria-label="Move up">&#9650;</button><span></span><button type="button" data-k="left" aria-label="Move left">&#9664;</button><button type="button" data-k="down" aria-label="Move down">&#9660;</button><button type="button" data-k="right" aria-label="Move right">&#9654;</button></div><div class="touch-actions"><button type="button" class="act" id="actb" data-k="act" aria-label="Use or interact">USE</button><button type="button" class="run" id="runb" data-k="run" aria-label="Hold to run">RUN</button></div></div>
 <div class="box" id="msg"></div>
 <div id="btns"><button onclick="invOpen()"><span class="bi">🎒</span>PACK<kbd>I</kbd></button><button onclick="openTab('build')"><span class="bi">🏗️</span>BUILD<kbd>B</kbd></button><button onclick="goalsOpen()"><span class="bi">⭐</span>GOALS<kbd>G</kbd></button><button onclick="mapOpen()"><span class="bi">🗺️</span>MAP<kbd>M</kbd></button><button class="alt" onclick="pause(1)"><span class="bi">⏸</span>PAUSE<kbd>P</kbd></button></div>
 <div id="kb">ARROWS MOVE · SPACE USE · SHIFT RUN</div></div>
@@ -357,11 +445,14 @@ function act(){
  popStation(k);
 }
 const KM={ArrowUp:'up',KeyW:'up',ArrowDown:'down',KeyS:'down',ArrowLeft:'left',KeyA:'left',ArrowRight:'right',KeyD:'right',Space:'act',KeyE:'act'};
-function press(k){if(cs){if(k==='act')csNext();return}keys[k]=1;if(M){mgKey(k);return}if(k==='act'&&run&&G)act()}
-function rel(k){keys[k]=0;if(M)mgUp(k)}
+function press(k){if(k==='run'){keys.shift=1;return}if(cs){if(k==='act')csNext();return}keys[k]=1;if(M){mgKey(k);return}if(k==='act'&&run&&G)act()}
+function rel(k){if(k==='run'){keys.shift=0;return}keys[k]=0;if(M)mgUp(k)}
 addEventListener('keydown',e=>{if(KM[e.code]){e.preventDefault();if(!e.repeat)press(KM[e.code])}if(e.code==='KeyP'&&run&&!POP)pause(!paused);if(e.code==='Escape'&&M){M=null;$('mgx').style.display='none'}});
 addEventListener('keyup',e=>{if(KM[e.code])rel(KM[e.code])});
-document.querySelectorAll('.pad [data-k]').forEach(b=>{const k=b.dataset.k;b.addEventListener('pointerdown',e=>{e.preventDefault();press(k)});['pointerup','pointerleave','pointercancel'].forEach(n=>b.addEventListener(n,()=>rel(k)))});
+document.querySelectorAll('.pad [data-k]').forEach(b=>{const k=b.dataset.k;b.addEventListener('pointerdown',e=>{e.preventDefault();try{b.setPointerCapture(e.pointerId)}catch(_){}press(k)});['pointerup','pointercancel','lostpointercapture'].forEach(n=>b.addEventListener(n,()=>rel(k)))});
+const releaseHeldControls=()=>{Object.keys(keys).forEach(k=>keys[k]=0)};
+addEventListener('blur',releaseHeldControls);
+document.addEventListener('visibilitychange',()=>{if(document.hidden)releaseHeldControls()});
 cv.addEventListener('pointerdown',()=>{if(cs)csNext()});
 function solid(nx,ny){for(const k of ['hab','batt']){const s=ST[k];if(nx>s.x-2&&nx<s.x+s.w+2&&ny>s.y+s.h*.4&&ny<s.y+s.h+1)return 1}return 0}
 function loop(t){clrM();const dt=Math.min(.05,(t-last)/1000);last=t;
