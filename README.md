@@ -66,7 +66,8 @@ The current project is a single-page HTML/CSS/JavaScript game and has no build s
 | `README.md` | Project overview and play instructions |
 | `SOURCES.md` | Scientific and NASA/JPL image references |
 | `THIRD_PARTY_NOTICES.md` | Font and NASA/JPL media notices |
-| `LICENSE` | Apache License 2.0 for approved original project contributions |\n| `LICENSING.md` | License scope and third-party rights summary |
+| `LICENSE` | Apache License 2.0 for approved original project contributions |
+| `LICENSING.md` | License scope and third-party rights summary |
 | `REVIEW_NOTES.md` | Review results and final QA checklist |
 
 ## Technology, network use, and saved data
