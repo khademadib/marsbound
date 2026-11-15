@@ -1,14 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Explore Gale Crater, make mission decisions, and keep a Mars outpost running for 10 sols in this student-created survival game.">
-<meta name="theme-color" content="#081525">
-<meta property="og:type" content="website">
-<meta property="og:title" content="MarsBound: Stranded on Mars">
-<meta property="og:description" content="Explore Gale Crater and keep a Mars outpost running for 10 sols in this student-created educational game.">
-<title>MarsBound: Stranded on Mars</title>
-<link rel="icon" type="image/svg+xml" href="/favicon.svg">
-<link rel="preconnect" href="https://fonts.googleapis.com">
+<title>Junior Astronaut: Stranded on Mars</title>
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#081525;--pn:#12283D;--cy:#45D5E8;--tx:#F4F7FA;--ok:#55D68B;--wa:#FFB547;--cr:#F05B64;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
@@ -123,9 +116,9 @@ kbd{background:#081525;color:var(--wa);padding:2px 4px;margin-left:4px;font:inhe
 .sbt{font-size:clamp(7px,.9vw,12px);color:#b8cfe0;margin:1vh 0 .5vh}.sbars{display:grid;grid-template-columns:repeat(3,1fr);gap:.8vw;margin-bottom:1vh}.sbars b{font:clamp(7px,.9vw,12px) "Press Start 2P",monospace;display:block;margin-bottom:.4vh}.sbars .bar{height:clamp(7px,1.1vh,12px);margin:0}
 </style></head><body>
 
-<section id="menu" class="scr on"><canvas id="cv0" width="240" height="135"></canvas><div class="mt"><div><h1>MARSBOUND</h1><div class="sub">SURVIVE 10 SOLS ON MARS</div></div><div><button onclick="startCut()"><kbd>1</kbd> PLAY</button><button class="alt" onclick="show('how')"><kbd>2</kbd> HOW TO PLAY</button><div id="best" class="note"></div><div class="px" style="font-size:clamp(6px,.8vw,10px);color:#b8cfe0;margin-top:1vh">Independent student project · Not an official NASA product or endorsement</div></div></div></section>
+<section id="menu" class="scr on"><canvas id="cv0" width="240" height="135"></canvas><div class="mt"><div><h1>MARSBOUND</h1><div class="sub">SURVIVE 10 SOLS ON MARS</div></div><div><button onclick="startCut()"><kbd>1</kbd> PLAY</button><button class="alt" onclick="show('how')"><kbd>2</kbd> HOW TO PLAY</button><div id="best" class="note"></div></div></div></section>
 
-<section id="how" class="scr"><div class="stage" id="hst"><canvas id="tcv" width="240" height="135" aria-hidden="true"></canvas><canvas id="txo2" class="txo"></canvas><div id="tcap"><h2 id="tct"></h2><p id="tcp"></p></div><div id="tbar"><i style="display:block;height:100%;width:0;background:var(--cy)"></i></div><div id="tctl"><button class="alt" onclick="tSeek(Math.max(0,(Math.floor(TT/TD)-1)*TD))">&#9664; <kbd>&larr;</kbd></button><button id="tpb" onclick="tToggle()">PAUSE</button><button class="alt" onclick="tSeek(Math.min((TS-1)*TD,(Math.floor(TT/TD)+1)*TD))"><kbd>&rarr;</kbd> &#9654;</button><span id="tdots"></span><button onclick="show('menu')">BACK <kbd>ESC</kbd></button></div></div></section>
+<section id="how" class="scr"><div class="stage" id="hst"><canvas id="tcv" width="240" height="135"></canvas><canvas id="txo2" class="txo"></canvas><div id="tcap"><h2 id="tct"></h2><p id="tcp"></p></div><div id="tbar"><i style="display:block;height:100%;width:0;background:var(--cy)"></i></div><div id="tctl"><button class="alt" onclick="tSeek(Math.max(0,(Math.floor(TT/TD)-1)*TD))">&#9664; <kbd>&larr;</kbd></button><button id="tpb" onclick="tToggle()">PAUSE</button><button class="alt" onclick="tSeek(Math.min((TS-1)*TD,(Math.floor(TT/TD)+1)*TD))"><kbd>&rarr;</kbd> &#9654;</button><span id="tdots"></span><button onclick="show('menu')">BACK <kbd>ESC</kbd></button></div></div></section>
 
 <section id="brief" class="scr"><div class="box"><h2>PICK YOUR POWER</h2><p class="px" style="text-align:center;font-size:clamp(10px,1.4vw,18px)">👆 TAP A PICTURE!</p>
 <div class="cards">
@@ -134,10 +127,10 @@ kbd{background:#081525;color:var(--wa);padding:2px 4px;margin-left:4px;font:inhe
 <div class="box pc"><h3>⚡ HYBRID</h3><canvas width="96" height="64" data-p="hyb" data-n="0"></canvas><div class="chips"><button class="chip" data-n="0">☀️<span>DAY</span></button><button class="chip alt" data-n="1">🌙<span>NIGHT</span></button><button class="chip alt" data-n="2">🌪️<span>STORM</span></button></div><div class="stt on">💡 POWER ON!</div><div class="px sbt">YOU START WITH</div><div class="sbars" data-p="hyb"></div><button onclick="start('hyb')"><kbd>3</kbd> PICK</button></div></div>
 <button class="alt" onclick="show('menu')">BACK <kbd>ESC</kbd></button></div></section>
 
-<section id="game" class="scr"><div id="wrap" class="stage"><canvas id="cv" width="240" height="135" aria-label="Interactive Mars game world. Use the arrow keys or WASD to move and Space to interact."></canvas><canvas id="txo" class="txo"></canvas><div id="hint"></div><div id="pop"></div>
+<section id="game" class="scr"><div id="wrap" class="stage"><canvas id="cv" width="240" height="135"></canvas><canvas id="txo" class="txo"></canvas><div id="hint"></div><div id="pop"></div>
 <div id="ui"><div class="hud" id="hud"></div><div id="info"></div><div id="where"></div><div id="tl"></div><div id="ord"></div><div id="side"><div id="inv" class="note"></div></div></div>
 <div id="skipb"><button class="alt" id="skip" onclick="endCut()" style="display:none">SKIP <kbd>S</kbd></button><button class="alt" id="mgx" onclick="M=null;this.style.display='none'" style="display:none">LEAVE <kbd>ESC</kbd></button></div>
-<div id="ui2"><div id="tg"></div><div class="pad"><div><span></span><button data-k="up" aria-label="Move up">&#9650;</button><span></span><button data-k="left" aria-label="Move left">&#9664;</button><button data-k="down" aria-label="Move down">&#9660;</button><button data-k="right" aria-label="Move right">&#9654;</button></div><button class="act" id="actb" data-k="act" aria-label="Act or interact">SPACE</button></div>
+<div id="ui2"><div id="tg"></div><div class="pad"><div><span></span><button data-k="up">&#9650;</button><span></span><button data-k="left">&#9664;</button><button data-k="down">&#9660;</button><button data-k="right">&#9654;</button></div><button class="act" id="actb" data-k="act">SPACE</button></div>
 <div class="box" id="msg"></div>
 <div id="btns"><button onclick="invOpen()"><span class="bi">🎒</span>PACK<kbd>I</kbd></button><button onclick="openTab('build')"><span class="bi">🏗️</span>BUILD<kbd>B</kbd></button><button onclick="goalsOpen()"><span class="bi">⭐</span>GOALS<kbd>G</kbd></button><button onclick="mapOpen()"><span class="bi">🗺️</span>MAP<kbd>M</kbd></button><button class="alt" onclick="pause(1)"><span class="bi">⏸</span>PAUSE<kbd>P</kbd></button></div>
 <div id="kb">ARROWS MOVE · SPACE USE · SHIFT RUN</div></div>
@@ -204,7 +197,7 @@ const BP=[
  {t:'Tired astronaut',d:'You are sleepy after a long sol.',a:['Take a nap','+25 health, orders pause for a while',g=>{g.h+=25;g.next+=10},0,'Sleep matters. Tired astronauts make mistakes.'],b:['Work late','+80 score, -15 health',g=>{g.sc+=80;g.h-=15},1,'Extra work earns points but costs rest.']},
  {t:'Time Guard visits',d:'A Time Guard says your timeline looks wobbly.',a:['Cooperate','+25 stability, orders get 20% more time',g=>{g.st+=25;g.tm*=1.2},0,'Listening to experts keeps missions safe.'],b:['Resist','+100 score, -20 stability',g=>{g.sc+=100;g.st-=20},1,'Bold moves can pay off but risk problems.']},
  {t:'Dust forecast',d:'Earth warns of more dust blowing in.',a:['Tilt panels now','Panels cleaned, -5 power',g=>{g.soil=0;g.p-=5},0,'Tilting panels can help dust slide off.'],b:['Ignore it','+30 score',g=>{g.sc+=30},1,'Ignoring forecasts can cost power later.']},
- {t:'Iron and silicon!',d:'Your scanner finds iron and silicon in the soil.',a:['Dig and study','+80 score, -10 food',g=>{g.sc+=80;g.f-=10},1,'Iron-bearing minerals and silicate materials could be processed for useful products, but both would require equipment, energy, and multiple processing steps.'],b:['Note it for later','+10 stability',g=>{g.st+=10},0,'Mapping first helps you plan the best dig sites.']}];
+ {t:'Iron and silicon!',d:'Your scanner finds iron and silicon in the soil.',a:['Dig and study','+80 score, -10 food',g=>{g.sc+=80;g.f-=10},1,'Iron builds structures. Silicon makes solar cells. Making them on Mars saves launches.'],b:['Note it for later','+10 stability',g=>{g.st+=10},0,'Mapping first helps you plan the best dig sites.']}];
 let G=null,keys={},run=false,paused=false,flash=0,bg,M=null,cs=null,last=0,anim=false;
 function show(i){if(i==='how')tStart();else if(typeof tStop==='function')tStop();if(i==='menu'||i==='brief')musicPlay(i==='menu'?'menu':'intro');document.querySelectorAll('.scr').forEach(e=>e.classList.remove('on'));$(i).classList.add('on');if(i==='menu')bestShow()}
 function bestShow(){let b=0;try{b=+localStorage.getItem('jamt5-best')||0}catch(e){}$('best').textContent=b?'HIGH SCORE: '+b:'FINISH A MISSION FOR A HIGH SCORE!'}
@@ -420,7 +413,7 @@ function endGame(r){run=false;M=null;invClose();mapClose();musicPlay(r==='win'?'
  <p class="edu"><b>Explorer report:</b> NASA facts ${Object.keys(G.facts).length}/${Object.keys(ITEMS).length} · Places ${Object.keys(G.seen).length}/${LMS.length} · Goals ${G.gd} · Built ${G.bd.solar+G.bd.moxie+G.bd.garden}</p>
  <p class="edu"><b>Your power plan (${PL[G.plan].n}):</b> ${tips[G.plan]}</p>
  <p class="edu"><b>MARS TO EARTH:</b> Dust-proof panels and better batteries made for Mars help Earth too!</p>
- <p class="note">A simplified educational game. Resource values and outcomes are not NASA mission specifications. This is an independent student project, not an official NASA product or endorsement.</p>
+ <p class="note">A simplified game. Numbers are not NASA specs.</p>
  <button onclick="show('brief')">REPLAY MISSION</button><button class="alt" onclick="show('menu')">MAIN MENU</button>`;show('end')}
 
 bestShow();
@@ -468,8 +461,8 @@ const LMS=[
 const GALE={id:'gale',n:'GALE CRATER',w:'A giant crater, 154 km wide. Curiosity has explored it since 2012.',m:'Water once pooled here. The rocks hold clues about whether Mars could host life.'};
 const LMR=[...LMS].sort((a,b)=>a.r-b.r),LMN=id=>LMS.find(l=>l.id===id)||GALE,zoneAt=(x,y)=>LMR.find(l=>Math.hypot(l.x-x,l.y-y)<l.r)||GALE;
 const ITEMS={
- iron:{n:'IRON',e:'🔩',u:'FOR BUILDING',f:'Curiosity examined Vera Rubin Ridge for hematite, an iron-oxide mineral. Recovering usable metal from Martian rocks would require processing.'},
- sand:{n:'SAND',e:'🏜️',u:'PILE ON ROOF',f:'Martian soil contains silicate minerals. Recovering usable silicon or other materials would require substantial processing; raw soil is not ready-made solar-cell material. Curiosity scooped soil at Rocknest in 2012.'},
+ iron:{n:'IRON',e:'🔩',u:'FOR BUILDING',f:'Vera Rubin Ridge glows with hematite, an iron mineral. On Mars, iron could become tools and parts.'},
+ sand:{n:'SAND',e:'🏜️',u:'PILE ON ROOF',f:'Mars sand is full of silicon, the stuff in solar cells. Curiosity scooped sand at Rocknest in 2012.'},
  clay:{n:'CLAY',e:'🧱',u:'FOR BUILDING',f:'Curiosity found clay at Yellowknife Bay and Glen Torridon. Clay only forms with water, a clue that Mars was wetter.'},
  ice:{n:'WATER ICE',e:'🧊',u:'MELT FOR GARDEN',f:'NASA’s Phoenix lander dug up water ice just under the surface in 2008. Ice is a future crew’s water.'},
  drill:{n:'DRILL ROCK',e:'🧪',u:'SEND TO EARTH',f:'Curiosity drilled rock at Yellowknife Bay and found signs of an ancient lake. Later samples held organic molecules: carbon-based, but not proof of life.'},
@@ -480,7 +473,7 @@ const USE={ice:()=>{G.f=cl(G.f+12);return'Water for the garden: +12 food.'},sand
  drill:()=>{G.sc+=70;G.st=cl(G.st+5);return'Sample sent to Earth: +70 score, +5 stability.'},o2:()=>{G.o=cl(G.o+20);return'+20 air.'},food:()=>{G.f=cl(G.f+20);return'+20 food.'},batt:()=>{G.p=cl(G.p+20);return'+20 power.'}};
 const BLD={solar:{n:'SOLAR PANEL',e:'☀️',c:{iron:3,sand:2},max:3,d:'MORE POWER'},moxie:{n:'MOXIE',e:'💨',c:{iron:4,sand:2},max:2,d:'MORE AIR'},garden:{n:'GARDEN',e:'🥬',c:{clay:3,ice:2,iron:1},max:2,d:'MORE FOOD'}};
 const SLOT={solar:[[20,104],[75,104],[330,112]],moxie:[[200,110],[262,110]],garden:[[322,166],[322,206]],bank:[[250,120],[272,120]]};
-const SOLF=['A Mars day (a sol) lasts 24 hours 39 minutes, a little longer than an Earth day.','Gravity on Mars is about 38% of Earth’s, so you would feel much lighter.','Mars’s surface air pressure is less than 1% of Earth’s average sea-level pressure, and its atmosphere is about 95% carbon dioxide.','One-way radio signals between Earth and Mars can take several minutes to more than 20 minutes, depending on where the planets are in their orbits.','Mars has two tiny moons, Phobos and Deimos.','Olympus Mons, a Mars volcano, is more than twice as tall as Mount Everest.','At some equatorial locations, Mars temperatures can approach 20°C around midday; nights can fall far below freezing.','A year on Mars lasts about 687 Earth days.','Perseverance uses a plutonium-powered generator, so dust cannot block its power.','Mars is a little over half as wide as Earth.'];
+const SOLF=['A Mars day (a sol) lasts 24 hours 39 minutes, a little longer than an Earth day.','Gravity on Mars is about 38% of Earth’s, so you would feel much lighter.','Mars air is about 95% carbon dioxide, and it is less than 1% as thick as Earth’s.','Radio signals take roughly 5 to 20 minutes to travel between Mars and Earth.','Mars has two tiny moons, Phobos and Deimos.','Olympus Mons, a Mars volcano, is more than twice as tall as Mount Everest.','Mars days can reach about 20°C, but nights drop far below freezing.','A year on Mars lasts about 687 Earth days.','Perseverance uses a plutonium-powered generator, so dust cannot block its power.','Mars is a little over half as wide as Earth.'];
 const NODES=[['o2',100,330],['food',240,320],['batt',395,235],['o2',420,300],['sand',300,375],['sand',355,415],['sand',315,445],['sand',385,380],
  ['clay',535,110],['clay',600,150],['clay',570,175],['drill',568,128],['ice',450,95],['ice',720,230],['ice',520,320],['ice',640,300],
  ['iron',830,225],['iron',905,270],['iron',875,310],['iron',935,215],['iron',850,500],['iron',915,420],['iron',935,500],
@@ -626,10 +619,10 @@ const _mk=mkBg;mkBg=function(){_mk();const g=bg.getContext('2d'),e=(cx,cy,rx,ry,
  e(490,172,34,15,'#8a4528');e(490,174,30,12,'#6f301c');e(491,176,24,9,'#9c4627');e(486,171,8,3,'#b8764a');g.fillStyle='#e0a07a';g.fillRect(472,159,18,1);
  g.fillStyle='#7a3a22';for(let i=0;i<64;i++)g.fillRect(Math.round(228+i*.8+Math.sin(i/4)*6),Math.round(178+Math.cos(i/5)*8+i*.1),1,1);
  for(let j=0;j<3;j++){const x=52+j*14;g.fillStyle='#081525';g.fillRect(x-1,217,13,10);g.fillStyle='#2f5fb3';g.fillRect(x,218,11,8);g.fillStyle='#8fc1ff';g.fillRect(x+5,218,1,8)}};
-SOLF[1]='Mars receives about 43% of the sunlight Earth receives at the top of the atmosphere, because it is farther from the Sun.';SOLF[4]='Dust can reduce the sunlight reaching solar panels. Wind sometimes clears dust from rover panels, but this is not a dependable cleaning system.';SOLF[8]='Dust-resistant designs and energy storage are useful challenges on Earth too. The power systems in this game are simplified examples.';
+SOLF[1]='Mars gets only about 43% of the sunlight Earth gets, because it is farther from the Sun.';SOLF[4]='Dust on solar panels is a Mars problem AND an Earth problem. Both use cleaning tricks!';SOLF[8]='Solar tech made for space, like tough light panels, now helps power homes and schools on Earth.';
 ITEMS.iron.u='FIX THE BASE';ITEMS.clay.u='SEAL THE WALLS';
 USE.iron=()=>{G.h=cl(G.h+10);G.t=cl(G.t+10);return'Fixed walls and tools: +10 health, +10 heat.'};USE.clay=()=>{G.t=cl(G.t+20);return'Clay patched the walls: +20 heat.'};
-BLD.solar.x='Mars sunlight is weak, so Mars panels need dust-tolerant designs and energy storage. These are important engineering challenges, and this game simplifies the trade-offs.';BLD.moxie.x='MOXIE makes air from Mars air, like a robot tree!';BLD.garden.x='Plants make food AND fresh air.';
+BLD.solar.x='Mars sunlight is weak, so Mars panels must be extra tough and smart. That same tech makes Earth solar cheaper and cleaner!';BLD.moxie.x='MOXIE makes air from Mars air, like a robot tree!';BLD.garden.x='Plants make food AND fresh air.';
 BLD.bank={n:'BATTERY BANK',e:'🔋',c:{iron:2,clay:1},max:2,d:'POWER NEVER GETS TOO LOW',x:'Batteries save Sun power for the night. Earth homes with solar use them too!'};
 /* kid-friendly tweaks */
 KM.Enter='act';
@@ -692,7 +685,7 @@ rsz();
 let POP=0,_pt=0,_pcd=0,MMD=0;
 function popShow(h,big){const p=$('pop');p.className=big?'big':'small';p.innerHTML=h+'<div class="pb"><i></i></div><div class="pn">3</div>';p.onclick=()=>{if(POP&&Date.now()-POP>600)popClose()};p.style.display='block';POP=Date.now();paused=true;sfx('switch');clearInterval(_pt);_pt=setInterval(()=>{const t=(Date.now()-POP)/3000;if(t>=1)return popClose();p.querySelector('.pb i').style.width=(100-t*100)+'%';p.querySelector('.pn').textContent=Math.ceil(3-t*3)},60)}
 function popClose(){clearInterval(_pt);$('pop').style.display='none';POP=0;_pcd=Date.now();if(!ovOpen())paused=false}
-const ITI={iron:['Red-orange rocks on ridges, like Vera Rubin Ridge.','Iron makes tools and building parts!'],sand:['Dunes and dusty flats, like Rocknest.','Martian soil contains silicate minerals; recovering useful materials from it would require substantial processing.'],clay:['Old dried-up lake beds, like Yellowknife Bay.','Clay only forms with water. Mars was once wet!'],ice:['Hidden just under the dust, mostly near the poles.','Ice is future water to drink and grow plants.'],drill:['Layered rock you drill into, like at Yellowknife Bay.','Rock holds clues about ancient lakes and life.'],o2:['Mars air is mostly CO₂, so we make oxygen with MOXIE.','Oxygen is what you breathe!'],food:['Packed on Earth and flown to Mars.','Food gives you energy to explore.'],batt:['Brought from Earth with the base.','Batteries save Sun power for the night.']};
+const ITI={iron:['Red-orange rocks on ridges, like Vera Rubin Ridge.','Iron makes tools and building parts!'],sand:['Dunes and dusty flats, like Rocknest.','Sand has silicon, the stuff inside solar panels!'],clay:['Old dried-up lake beds, like Yellowknife Bay.','Clay only forms with water. Mars was once wet!'],ice:['Hidden just under the dust, mostly near the poles.','Ice is future water to drink and grow plants.'],drill:['Layered rock you drill into, like at Yellowknife Bay.','Rock holds clues about ancient lakes and life.'],o2:['Mars air is mostly CO₂, so we make oxygen with MOXIE.','Oxygen is what you breathe!'],food:['Packed on Earth and flown to Mars.','Food gives you energy to explore.'],batt:['Brought from Earth with the base.','Batteries save Sun power for the night.']};
 function popItem(k){const d=ITEMS[k],t=ITI[k]||['On the Mars surface.','Useful for your base.'];popShow(`<div class="pe">${d.e}</div><h2>${d.n}</h2><p><b>WHERE?</b><br>${t[0]}</p><p><b>WHY?</b><br>${t[1]}</p>`,1)}
 function popPlace(z){popShow(`<h2>📍 ${z.n}</h2><p>${z.w}</p><p><b>WHY?</b> ${z.m}</p>`,0)}
 const SD={solar:['☀️','Makes power from sunlight.'],reactor:['☢️','Makes power day and night.'],moxie:['🫧','Turns Mars air into oxygen.'],ext:['💧','Makes water from ice.'],comm:['📡','Radio to Earth and the orbiter.'],garden:['🌱','Grows food and fresh air.'],batt:['🔋','Saves power for the night.'],hab:['🏠','Your home. Warm and safe.'],tools:['🔧','Wrench for fixing things.'],brush:['🧹','Brush for dusty panels.'],filt:['🧰','Spare filters.'],seeds:['🌰','Seeds for the garden.'],ice:['🧊','Ice to melt into water.'],rego:['🪨','Mars soil for the garden.']};
@@ -782,49 +775,27 @@ const NAI={
  iron:{i:['https://assets.science.nasa.gov/dynamicimage/assets/science/psd/mars/resources/detail_files/2/21369_pia22067-16.jpg?w=640&h=400&fit=clip',..._pia('PIA22067')],u:'https://science.nasa.gov/resource/curiosity-checks-under-the-dust-on-a-martian-rock/',c:'NASA/JPL-Caltech/MSSS'},
  sand:{i:_pia('PIA16469'),u:_sci+'scoop-marks-in-the-sand-at-rocknest',c:'NASA/JPL-Caltech/MSSS'},
  clay:{i:_pia('PIA23047'),u:_sci+'curiosity-on-the-clay-unit',c:'NASA/JPL-Caltech/MSSS'},
- ice:{i:_pia('PIA10910'),u:'https://science.nasa.gov/photojournal/ice-on-mars-now-you-see-it/',c:'NASA/JPL-Caltech/University of Arizona/Texas A&M University'},
+ ice:{i:_pia('PIA10910'),u:'https://www.nasa.gov/?p=140785',c:'NASA/JPL-Caltech/UArizona'},
  drill:{i:_pia('PIA17595'),u:'https://www.jpl.nasa.gov/images/pia17595-view-of-yellowknife-bay-formation-with-drilling-sites/',c:'NASA/JPL-Caltech/MSSS'},
  o2:{i:['https://www.nasa.gov/wp-content/uploads/2023/05/pia23154-16.jpg',..._pia('PIA23154')],u:'https://www.nasa.gov/missions/mars-2020-perseverance/perseverance-rover/nasas-oxygen-generating-experiment-moxie-completes-mars-mission/',c:'NASA/JPL-Caltech'},
- food:{i:[],u:'https://www.nasa.gov/exploration-research-and-technology/growing-plants-in-space/',c:'NASA'},
- batt:{i:_pia('PIA22521'),u:'https://science.nasa.gov/photojournal/shades-of-martian-darkness/',c:'NASA/JPL-Caltech/TAMU'}};
+ food:{i:[],u:'https://www.nasa.gov/?search=Veggie%20plant%20growth%20lettuce',c:'NASA'},
+ batt:{i:_pia('PIA22521'),u:'https://science.nasa.gov/solar-system/planets/mars/10-things-massive-dust-storm-on-mars/',c:'NASA/JPL-Caltech/TAMU'}};
 const NAP={
- bra:{i:_pia('PIA16208'),u:'https://science.nasa.gov/photojournal/curiosity-at-bradbury-landing-site-in-3-d/',c:'NASA/JPL-Caltech/University of Arizona'},
+ bra:{i:_pia('PIA16208'),u:_sci+'3-d-view-from-bradbury-landing-site/',c:'NASA/JPL-Caltech'},
  roc:{i:_pia('PIA16570'),u:_sci+'windblown-sand-from-the-rocknest-drift',c:'NASA/JPL-Caltech/MSSS'},
- ykb:{i:_pia('PIA17595'),u:'https://www.jpl.nasa.gov/images/pia17595-view-of-yellowknife-bay-formation-with-drilling-sites/',c:'NASA/JPL-Caltech/MSSS'},
- ms:{i:_pia('PIA17064'),u:_sci+'from-glenelg-to-mount-sharp/',c:'NASA/JPL-Caltech/University of Arizona'},
+ ykb:{i:_pia('PIA17595'),u:'https://science.nasa.gov/mission/msl-curiosity/science-highlights',c:'NASA/JPL-Caltech/MSSS'},
+ ms:{i:_pia('PIA17064'),u:_sci+'from-glenelg-to-mount-sharp/',c:'NASA/JPL-Caltech/UArizona'},
  vrr:{i:NAI.iron.i,u:'https://science.nasa.gov/resource/curiosity-checks-under-the-dust-on-a-martian-rock/',c:'NASA/JPL-Caltech/MSSS'},
  gt:{i:_pia('PIA23139'),u:_sci+'curiosity-surveys-the-clay-bearing-unit/',c:'NASA/JPL-Caltech/MSSS'},
  mb:{i:_pia('PIA20840'),u:_sci+'rovers-panorama-taken-amid-murray-buttes-on-mars/',c:'NASA/JPL-Caltech/MSSS'},
- imp:{i:_pia('PIA17932'),u:'https://science.nasa.gov/photojournal/a-spectacular-new-martian-impact-crater/',c:'NASA/JPL-Caltech/University of Arizona'},
- dd:{i:_pia('PIA04187'),u:'https://science.nasa.gov/photojournal/a-great-place-to-watch-the-weather-vertical/',c:'NASA/JPL-Caltech'},
+ imp:{i:_pia('PIA17932'),u:'https://www.nasa.gov/image-article/spectacular-new-martian-impact-crater',c:'NASA/JPL-Caltech/UArizona'},
+ dd:{i:_pia('PIA04187'),u:_sci+'dust-devils-seen-by-spirit/',c:'NASA/JPL-Caltech/Cornell'},
  sl:{i:_pia('PIA10128'),u:_sci+'dusty-solar-panels-on-spirit/',c:'NASA/JPL-Caltech/Cornell'}};
-/* Descriptive alternatives for NASA/JPL media; visible credits remain below each image. */
-Object.assign(NAI,{
- iron:{...NAI.iron,a:'Curiosity examining a dusty Martian rock near Vera Rubin Ridge'},
- sand:{...NAI.sand,a:'Curiosity scoop marks in windblown sand at Rocknest on Mars'},
- clay:{...NAI.clay,a:'Curiosity exploring clay-bearing terrain on Mars'},
- ice:{...NAI.ice,a:'Water ice exposed in a trench by the Phoenix Mars lander'},
- drill:{...NAI.drill,a:'Curiosity drilling locations in the Yellowknife Bay formation'},
- o2:{...NAI.o2,a:'NASA/JPL team installing the MOXIE oxygen experiment in the Perseverance rover chassis'},
- batt:{...NAI.batt,a:'A simulated view of the Martian sky darkened by a global dust storm'}
-});
-Object.assign(NAP,{
- bra:{...NAP.bra,a:'Bradbury Landing area inside Gale Crater on Mars'},
- roc:{...NAP.roc,a:'Windblown sand drift explored by Curiosity at Rocknest'},
- ykb:{...NAP.ykb,a:'Yellowknife Bay formation and Curiosity rover drill sites'},
- ms:{...NAP.ms,a:'Map showing Curiosity’s route within Gale Crater from Bradbury Landing and Glenelg toward Mount Sharp'},
- vrr:{...NAP.vrr,a:'A Martian rock surface examined near Vera Rubin Ridge'},
- gt:{...NAP.gt,a:'Clay-bearing terrain surveyed by the Curiosity rover'},
- mb:{...NAP.mb,a:'Layered buttes explored by Curiosity in the Murray Buttes area'},
- imp:{...NAP.imp,a:'An impact crater on the surface of Mars'},
- dd:{...NAP.dd,a:'Spirit rover view of three dust devils over the plains of Gusev Crater'},
- sl:{...NAP.sl,a:'Dust accumulation on solar panels of the Spirit Mars rover'}
-});
 /* if a picture will not load, try the next source; if none load, show the emoji instead */
 function nasaErr(im){const c=(im.dataset.c||'').split('|');let n=(+im.dataset.n||0)+1;
  if(n<c.length){im.dataset.n=n;im.src=c[n]}else{im.onerror=null;im.style.display='none';const f=im.nextElementSibling;if(f)f.style.display='flex'}}
 function nasaPic(d,em){const c=d.i||[];
- return `<div class="nimg">${c.length?`<img src="${c[0]}" data-c="${c.join('|')}" data-n="0" alt="${d.a||'NASA/JPL Mars mission image supporting this topic'}" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="nasaErr(this)">`:''}<div class="nimf" style="display:${c.length?'none':'flex'}">${em}</div><span class="ncr">${d.c}</span></div>`}
+ return `<div class="nimg">${c.length?`<img src="${c[0]}" data-c="${c.join('|')}" data-n="0" alt="NASA picture" referrerpolicy="no-referrer" onerror="nasaErr(this)">`:''}<div class="nimf" style="display:${c.length?'none':'flex'}">${em}</div><span class="ncr">${d.c}</span></div>`}
 function nasaLink(d){return `<a class="nlearn" href="${d.u}" target="_blank" rel="noopener noreferrer" onclick="event.stopPropagation();const a=this;setTimeout(()=>a.blur(),0)">CLICK HERE TO LEARN MORE ▸</a>`}
 function nasaCard(d,em){return `<div class="ncard">${nasaPic(d,em)}${nasaLink(d)}</div>`}
 /* popups that have a NASA link wait for you (so you have time to click); SPACE or a click on the popup continues */
@@ -902,7 +873,7 @@ const DM={easy:{n:'EASY',tm:4,dr:.3,warn:20,sl:6,sd:.25,from:5,tip:1,bonus:25,da
 document.head.insertAdjacentHTML('beforeend','<style>#mode{padding:3vh 4vw;background:var(--bg)}.mdc ul{list-style:none;padding:0;margin:1vh 0;text-align:left}.mdc li{font-size:clamp(12px,1.45vw,18px);margin:1vh 0;line-height:1.4}.mdc h2{text-align:center;font-size:clamp(14px,2vw,26px)}.mdc button{display:block;margin:1.5vh auto 0;font-size:clamp(12px,1.6vw,20px)}#clk{position:absolute;left:66cqw;top:1cqh;width:11.5cqw;background:rgba(8,21,37,.8);border:.25cqw solid var(--cy);padding:.3cqw .4cqw;font:max(7px,.7cqw)/1.55 "Press Start 2P",monospace;color:#fff;pointer-events:none}#clk .big{font-size:max(9px,1.15cqw)}#clk .tb{display:flex;height:max(7px,1.2cqh);border:2px solid #2b4660;margin:.5cqh 0;position:relative}#clk .tb i{display:block;height:100%}#clk .tb u{position:absolute;top:-3px;bottom:-3px;width:3px;background:#fff}#clk.hu{border-color:var(--cr);animation:bl .5s infinite steps(2)}.lsn{text-align:left}.lsn p{font-size:clamp(13px,1.5vw,18px);margin:.5vh 0 1.6vh}.lsn b{font:clamp(9px,1.1vw,14px) "Press Start 2P",monospace}#xbox p{font-size:clamp(13px,1.5vw,18px)}</style>');
 document.body.insertAdjacentHTML('beforeend',`<section id="mode" class="scr"><div class="box" style="max-width:1100px;margin:2vh auto"><h2 style="text-align:center;font-size:clamp(14px,2.2vw,28px)">CHOOSE YOUR MODE</h2><p class="px" style="text-align:center;font-size:clamp(8px,1.1vw,14px)">SAME 10 SOLS · SAME GOAL · DIFFERENT CHALLENGE</p><div class="cards">
 <div class="box mdc"><h2 style="color:var(--ok)">🌱 EASY<br>TRAINEE</h2><ul><li>🏠 Base starts <b>clean and working</b></li><li>⏱️ <b>Tons of time</b> for each job</li><li>🛠️ Only <b>1-2 jobs</b> and <b>2 missions</b> a day</li><li>🌪️ Storms: <b>20 sec warning</b>, last about 6 sec</li><li>❤️ Storm damage outside: <b>-0.25 health/sec</b></li><li>☀️ Each day is <b>60 seconds</b></li></ul><button onclick="pickMode('easy')"><kbd>1</kbd> PICK EASY</button></div>
-<div class="box mdc"><h2 style="color:var(--cr)">🚀 HARD<br>COMMANDER</h2><ul><li>🔧 Old base starts with <b>1 broken part</b> to fix</li><li>⏱️ <b>Shorter job timers</b> than Easy mode</li><li>🌪️ Storms: <b>12 sec warning</b>, last about 8 sec</li><li>❤️ Storm damage outside: <b>-0.5 health/sec</b></li><li>☀️ Each day is <b>45 seconds</b></li></ul><button onclick="pickMode('hard')"><kbd>2</kbd> PICK HARD</button></div></div>
+<div class="box mdc"><h2 style="color:var(--cr)">🚀 HARD<br>COMMANDER</h2><ul><li>🔧 Old base starts with <b>1 broken part</b> to fix</li><li>⏱️ <b>Plenty of time</b> for each job</li><li>🌪️ Storms: <b>12 sec warning</b>, last about 8 sec</li><li>❤️ Storm damage outside: <b>-0.5 health/sec</b></li><li>☀️ Each day is <b>45 seconds</b></li></ul><button onclick="pickMode('hard')"><kbd>2</kbd> PICK HARD</button></div></div>
 <p class="note" style="text-align:center">💡 BOTH MODES: tips explain WHY things happen and what to try.</p><button class="alt" onclick="show('menu')">BACK <kbd>ESC</kbd></button></div></section><div class="ov" id="xov"><div class="box" id="xbox" style="text-align:center"></div></div>`);
 $('ui').insertAdjacentHTML('beforeend','<div id="clk"></div>');
 const _s11=show;show=function(i){_s11(i==='brief'&&!MODE_OK?'mode':i)};
@@ -916,9 +887,9 @@ function xClose(){$('xov').classList.remove('on');_pcd=Date.now();if(!ovOpen())p
 addEventListener('keydown',e=>{if(!$('xov').classList.contains('on')||e.repeat)return;const k=e.code;if(k==='Space')e.preventDefault();
  if(X.kind==='dec'){if(k==='Digit1')decide(0);if(k==='Digit2')decide(1)}else if(k==='Space'||k==='Enter'||k==='Escape')xClose()},true);
 const LES={
- storm:['DUST STORM','Your power is dropping and the sky turned dark.','Dust in the sky can greatly reduce sunlight reaching the surface. The game models this as a temporary drop in solar output; real storm effects vary. Cleaning the panels will NOT help, because the dust is in the sky.','Go inside the habitat (SPACE at the door) and let the batteries and reactor carry you until the storm ends.'],
+ storm:['DUST STORM','Your power is dropping and the sky turned dark.','Dust in the sky blocks sunlight. Solar panels need sunlight, so they make about 90% less power. Cleaning the panels will NOT help, because the dust is in the sky.','Go inside the habitat (SPACE at the door) and let the batteries and reactor carry you until the storm ends.'],
  night:['NIGHT TIME','The Sun is gone and solar power stopped.','Mars spins, so half of every sol is dark. Solar panels cannot make power at night, and it gets freezing cold.','Batteries save daytime power for the night. Build a battery bank and do outdoor jobs in the day.'],
- dust:['DUSTY PANELS','Your solar panels look brown and dusty.','A layer of dust can reduce the sunlight reaching the panels. The amount of power lost varies with the dust and conditions; the game uses a simplified effect.','Do the scrub job with the brush when it appears.'],
+ dust:['DUSTY PANELS','Your solar panels look brown and dusty.','Dust covers the panels like a blanket. Less sunlight reaches the cells, so you get up to 70% less power.','Do the scrub job with the brush when it appears.'],
  power:['LOW POWER','Your power bar is almost empty.','Every machine uses power. At zero, MOXIE (air), the garden (food) and the heater all stop, and you start losing health.','Clean the panels, build a solar panel or battery bank, or use a spare battery from your pack.'],
  air:['LOW AIR','Your air bar is dropping.','Mars air is mostly CO₂, which you cannot breathe. MOXIE turns it into oxygen, but it needs power and a clean filter. Leaks and walking far from base use air faster.','Fix MOXIE jobs, seal leaks, grab oxygen cans and stay near base.'],
  food:['LOW FOOD','Your food bar is low.','The garden makes food, but plants need power and water. No water or no power means wilted plants.','Melt ice for the garden, plant seeds, or eat a ration pack.'],
@@ -1010,7 +981,7 @@ const _ns15=nextSol;nextSol=function(){const miss=(G&&G.goals)?G.goals.filter(g=
 /* --- supply runs --- */
 function srPick(){const out=[];
  for(const l of LMS){if(l.id==='bra')continue;const cnt={};
-  for(const n of G.nodes)if(!n.got&&Math.hypot(n.x-l.x,n.y-l.y)<l.r)cnt[n.k]=(cnt[n.k]||0)+1;
+  for(const n of G.nodes)if(!n.got&&Math.hypot(n.x-l.x,n.y-l.y)<l.r+30)cnt[n.k]=(cnt[n.k]||0)+1;
   for(const k of ['iron','sand','clay','ice','drill'])if(cnt[k]>=2){const d=Math.hypot(l.x-G.x,l.y-G.y);out.push({l,k,n:Math.min(3,cnt[k]),w:1+(G.seen[l.id]?0:2)+d/200})}}
  if(!out.length)return null;let r=Math.random()*out.reduce((a,o)=>a+o.w,0);return out.find(o=>(r-=o.w)<=0)||out[0]}
 function srStart(){const pk=srPick();if(!pk){G.srT=15;G.srDue=1;return}
@@ -1020,8 +991,8 @@ function srStart(){const pk=srPick();if(!pk){G.srT=15;G.srDue=1;return}
 function srTarget(){const s=G.sr;if(!s)return null;const l=LMN(s.lm);
  if(!s.vis)return{x:l.x,y:l.y,name:l.n,kind:'lm',lab:'GET '+s.n+' '+ITEMS[s.k].n};
  if((G.inv[s.k]||0)>=s.n)return{x:PAD.x+PAD.w/2,y:PAD.y+4,name:'BASE DROP-OFF',kind:'pad',lab:'DEPOSIT HERE'};
- let b=null,bd=1e9;for(const n of G.nodes)if(!n.got&&n.k===s.k&&Math.hypot(n.x-l.x,n.y-l.y)<l.r){const d=Math.hypot(n.x-G.x,n.y-G.y);if(d<bd){bd=d;b=n}}
- if(!b){for(const n of G.nodes)if(n.k===s.k&&Math.hypot(n.x-l.x,n.y-l.y)<l.r){n.got=0;b=n;break}}return b?{x:b.x,y:b.y,name:ITEMS[s.k].n,kind:'node',lab:'GRAB '+ITEMS[s.k].n}:{x:l.x,y:l.y,name:l.n,kind:'lm',lab:'GET '+s.n+' '+ITEMS[s.k].n}}
+ let b=null,bd=1e9;for(const n of G.nodes)if(!n.got&&n.k===s.k){const d=Math.hypot(n.x-G.x,n.y-G.y);if(d<bd){bd=d;b=n}}
+ return b?{x:b.x,y:b.y,name:ITEMS[s.k].n,kind:'node',lab:'GRAB '+ITEMS[s.k].n}:{x:l.x,y:l.y,name:l.n,kind:'lm',lab:'GET '+s.n+' '+ITEMS[s.k].n}}
 function srTick(dt){
  if(G.sr){const s=G.sr;s.left-=dt;
   if(!G.in&&!s.vis&&zoneAt(G.x,G.y).id===s.lm){s.vis=1;_qb='';sfx('switch');say('📍 You made it!','Grab '+s.n+' '+ITEMS[s.k].n+' here (press SPACE on each one), then carry them back to the DROP-OFF at base.','var(--ok)')}
@@ -1102,7 +1073,4 @@ const _up16=update;update=function(dt){const h0=G&&G.h;_up16(dt);if(!G||!run||G.
  if(G.hFall>0&&(G.hLoss||0)>=.5&&!(G.hTip>0)&&!M&&!ovOpen()){G.hLoss=0;G.hTip=20;sfx('alert');
   say('❤️ You are losing health!',G.storm>0&&!G.in?'Get inside the habitat, then walk to a BED and press SPACE to SLEEP. Sleeping gives health back!':G.in?'Walk to a BED and press SPACE to SLEEP. Sleeping gives health back!':'Go into the habitat (SPACE at the door) and SLEEP in a bed to get health back!','var(--cr)')}};
 const _h16=hud;hud=function(n){_h16(n);if(G&&G.hFall>0&&G.h<98)$('info').innerHTML+=' · <b style="color:var(--cr)">❤ LOW HEALTH: SLEEP IN A BED!</b>'};
-
-/* Respect reduced-motion preferences while keeping mission warnings visible. */
-document.head.insertAdjacentHTML('beforeend','<style>@media (prefers-reduced-motion: reduce){.scr.on,#stw.on,#quest .qr.bad,#btns button.mfl{animation:none!important;transition:none!important}.pc canvas{transition:none!important}}</style>');
 </script></body></html>
