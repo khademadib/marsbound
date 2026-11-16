@@ -223,7 +223,7 @@ kbd{background:#081525;color:var(--wa);padding:2px 4px;margin-left:4px;font:inhe
 <section id="game" class="scr"><div id="wrap" class="stage"><canvas id="cv" width="240" height="135"></canvas><canvas id="txo" class="txo"></canvas><div id="hint"></div><div id="pop"></div>
 <div id="ui"><div class="hud" id="hud"></div><div id="info"></div><div id="where"></div><div id="tl"></div><div id="ord"></div><div id="side"><div id="inv" class="note"></div></div></div>
 <div id="skipb"><button class="alt" id="skip" onclick="endCut()" style="display:none">SKIP <kbd>S</kbd></button><button class="alt" id="mgx" onclick="M=null;this.style.display='none'" style="display:none">LEAVE <kbd>ESC</kbd></button></div>
-<div id="ui2"><div id="tg"></div><div class="pad"><div class="move-pad"><span></span><button type="button" data-k="up" aria-label="Move up">&#9650;</button><span></span><button type="button" data-k="left" aria-label="Move left">&#9664;</button><button type="button" data-k="down" aria-label="Move down">&#9660;</button><button type="button" data-k="right" aria-label="Move right">&#9654;</button></div><div class="touch-actions"><button type="button" class="act" id="actb" data-k="act" aria-label="Use or interact">USE</button><button type="button" class="run" id="runb" data-k="run" aria-label="Hold to run">RUN</button></div></div>
+<div id="ui2"><div id="tg"></div><div class="pad"><div class="move-pad"><span></span><button type="button" data-k="up" aria-label="Move up">&#9650;</button><span></span><button type="button" data-k="left" aria-label="Move left">&#9664;</button><button type="button" data-k="down" aria-label="Move down">&#9660;</button><button type="button" data-k="right" aria-label="Move right">&#9654;</button></div><div class="joystick" id="stick" role="group" aria-label="Virtual joystick. Drag in a direction to move."><div class="stick-ring"><div class="stick-knob" id="stick-knob"></div></div></div><div class="touch-actions"><button type="button" class="act" id="actb" data-k="act" aria-label="Use or interact">USE</button><button type="button" class="run" id="runb" data-k="run" aria-label="Hold to run">RUN</button></div></div>
 <div class="box" id="msg"></div>
 <div id="btns"><button onclick="invOpen()"><span class="bi">🎒</span>PACK<kbd>I</kbd></button><button onclick="openTab('build')"><span class="bi">🏗️</span>BUILD<kbd>B</kbd></button><button onclick="goalsOpen()"><span class="bi">⭐</span>GOALS<kbd>G</kbd></button><button onclick="mapOpen()"><span class="bi">🗺️</span>MAP<kbd>M</kbd></button><button class="alt" onclick="pause(1)"><span class="bi">⏸</span>PAUSE<kbd>P</kbd></button></div>
 <div id="kb">ARROWS MOVE · SPACE USE · SHIFT RUN</div></div>
@@ -450,7 +450,53 @@ function rel(k){if(k==='run'){keys.shift=0;return}keys[k]=0;if(M)mgUp(k)}
 addEventListener('keydown',e=>{if(KM[e.code]){e.preventDefault();if(!e.repeat)press(KM[e.code])}if(e.code==='KeyP'&&run&&!POP)pause(!paused);if(e.code==='Escape'&&M){M=null;$('mgx').style.display='none'}});
 addEventListener('keyup',e=>{if(KM[e.code])rel(KM[e.code])});
 document.querySelectorAll('.pad [data-k]').forEach(b=>{const k=b.dataset.k;b.addEventListener('pointerdown',e=>{e.preventDefault();try{b.setPointerCapture(e.pointerId)}catch(_){}press(k)});['pointerup','pointercancel','lostpointercapture'].forEach(n=>b.addEventListener(n,()=>rel(k)))});
-const releaseHeldControls=()=>{Object.keys(keys).forEach(k=>keys[k]=0)};
+
+// Mobile virtual joystick. It feeds the same directional input as the existing
+// D-pad/keyboard, so movement speed and gameplay rules remain unchanged.
+const stick=$('stick'),stickKnob=$('stick-knob');
+let stickPointer=null,stickDirs=new Set(),stickLastMiniDir=null;
+function stickRelease(){
+  for(const k of stickDirs)keys[k]=0;
+  stickDirs.clear();stickLastMiniDir=null;
+  if(stickKnob)stickKnob.style.transform='translate(-50%,-50%)';
+}
+function stickUpdate(e){
+  const r=stick.getBoundingClientRect(),radius=Math.min(r.width,r.height)*.36;
+  let dx=e.clientX-(r.left+r.width/2),dy=e.clientY-(r.top+r.height/2);
+  const distance=Math.hypot(dx,dy),scale=distance>radius?radius/distance:1;
+  dx*=scale;dy*=scale;
+  stickKnob.style.transform=`translate(calc(-50% + ${dx}px),calc(-50% + ${dy}px))`;
+  const nx=dx/radius,ny=dy/radius,dead=.24;
+  let next=new Set();
+  if(M){
+    // Minigames use one clear cardinal direction per joystick gesture.
+    let d=null;
+    if(Math.max(Math.abs(nx),Math.abs(ny))>dead)
+      d=Math.abs(nx)>=Math.abs(ny)?(nx>0?'right':'left'):(ny>0?'down':'up');
+    if(d&&d!==stickLastMiniDir)mgKey(d);
+    stickLastMiniDir=d;
+    if(d)next.add(d);
+  }else if(Math.hypot(nx,ny)>dead){
+    const angle=Math.atan2(ny,nx)*180/Math.PI;
+    // Eight directions match the existing normalized keyboard movement.
+    if(angle>=-22.5&&angle<22.5)next.add('right');
+    else if(angle>=22.5&&angle<67.5){next.add('right');next.add('down')}
+    else if(angle>=67.5&&angle<112.5)next.add('down');
+    else if(angle>=112.5&&angle<157.5){next.add('left');next.add('down')}
+    else if(angle>=157.5||angle< -157.5)next.add('left');
+    else if(angle>=-157.5&&angle< -112.5){next.add('left');next.add('up')}
+    else if(angle>=-112.5&&angle< -67.5)next.add('up');
+    else {next.add('right');next.add('up')}
+  }
+  for(const k of ['up','down','left','right'])keys[k]=next.has(k);
+  stickDirs=next;
+}
+if(stick){
+  stick.addEventListener('pointerdown',e=>{e.preventDefault();stickPointer=e.pointerId;try{stick.setPointerCapture(e.pointerId)}catch(_){}stickUpdate(e)});
+  stick.addEventListener('pointermove',e=>{if(e.pointerId===stickPointer){e.preventDefault();stickUpdate(e)}});
+  ['pointerup','pointercancel','lostpointercapture'].forEach(n=>stick.addEventListener(n,e=>{if(e.pointerId===stickPointer){stickPointer=null;stickRelease()}}));
+}
+const releaseHeldControls=()=>{Object.keys(keys).forEach(k=>keys[k]=0);stickPointer=null;stickDirs.clear();stickLastMiniDir=null;if(stickKnob)stickKnob.style.transform='translate(-50%,-50%)'};
 addEventListener('blur',releaseHeldControls);
 document.addEventListener('visibilitychange',()=>{if(document.hidden)releaseHeldControls()});
 cv.addEventListener('pointerdown',()=>{if(cs)csNext()});
@@ -1169,6 +1215,98 @@ const _up16=update;update=function(dt){const h0=G&&G.h;_up16(dt);if(!G||!run||G.
  if(G.hFall>0&&(G.hLoss||0)>=.5&&!(G.hTip>0)&&!M&&!ovOpen()){G.hLoss=0;G.hTip=20;sfx('alert');
   say('❤️ You are losing health!',G.storm>0&&!G.in?'Get inside the habitat, then walk to a BED and press SPACE to SLEEP. Sleeping gives health back!':G.in?'Walk to a BED and press SPACE to SLEEP. Sleeping gives health back!':'Go into the habitat (SPACE at the door) and SLEEP in a bed to get health back!','var(--cr)')}};
 const _h16=hud;hud=function(n){_h16(n);if(G&&G.hFall>0&&G.h<98)$('info').innerHTML+=' · <b style="color:var(--cr)">❤ LOW HEALTH: SLEEP IN A BED!</b>'};
+
+const joystickStyle=document.createElement('style');
+joystickStyle.textContent=`
+@media (pointer:coarse) {
+  .move-pad { display:none !important; }
+  .joystick {
+    display:block;
+    position:relative;
+    flex:0 0 auto;
+    width:clamp(92px,16cqw,136px);
+    height:clamp(92px,16cqw,136px);
+    touch-action:none;
+    -webkit-user-select:none;
+    user-select:none;
+  }
+  .stick-ring {
+    position:absolute;
+    inset:0;
+    border:3px solid #45D5E8;
+    border-radius:50%;
+    background:radial-gradient(circle,rgba(69,213,232,.16) 0 38%,rgba(8,21,37,.76) 40% 100%);
+    box-shadow:inset 0 0 0 2px #1d4a66,0 0 0 3px #081525,0 0 15px #45d5e833;
+  }
+  .stick-ring::before,.stick-ring::after {
+    content:"";
+    position:absolute;
+    background:#45d5e844;
+    pointer-events:none;
+  }
+  .stick-ring::before { left:50%;top:12%;bottom:12%;width:1px; }
+  .stick-ring::after { top:50%;left:12%;right:12%;height:1px; }
+  .stick-knob {
+    position:absolute;
+    left:50%;top:50%;
+    width:43%;height:43%;
+    border-radius:50%;
+    border:3px solid #b6f5ff;
+    background:radial-gradient(circle at 35% 30%,#6ee7f5,#16748a 72%,#0b3a52);
+    box-shadow:0 3px 8px #0009,inset 0 0 0 2px #ffffff33;
+    transform:translate(-50%,-50%);
+    pointer-events:none;
+  }
+  #ui2 .pad {
+    left:1cqw;right:1cqw;bottom:1cqh;
+    align-items:flex-end;justify-content:flex-start;
+  }
+  .pad .touch-actions {
+    position:absolute;
+    left:clamp(104px,19cqw,170px);
+    right:auto;bottom:0;
+    display:flex;align-items:flex-end;gap:5px;
+  }
+  .pad .act {
+    width:clamp(56px,8cqw,72px);
+    height:clamp(56px,8cqw,72px);
+    min-width:56px;min-height:56px;
+    border:2px solid #45D5E8;
+    border-radius:50%;
+    background:#12354d;
+    color:#fff;
+    box-shadow:0 3px 8px #0009,inset 0 0 0 2px #ffffff22;
+    font-size:clamp(10px,1.2cqw,15px) !important;
+  }
+  .pad .run {
+    width:clamp(42px,6.5cqw,54px);
+    height:clamp(42px,6.5cqw,54px);
+    min-width:42px;min-height:42px;
+    border:2px solid var(--wa);
+    border-radius:50%;
+    background:#49391d;
+    color:#fff;
+    font-size:clamp(8px,1cqw,12px);
+  }
+  #btns { right:1cqw;bottom:1cqh;gap:3px; }
+  #btns button {
+    width:max(32px,5.2cqw);height:max(36px,7cqh);
+    min-width:32px;min-height:36px;
+    padding:2px;gap:2px;
+    font-size:max(6px,.72cqw);
+  }
+  #btns .bi { font-size:max(14px,1.8cqw); }
+  #msg {
+    left:clamp(104px,19cqw,170px);
+    bottom:19cqh;
+    width:min(50cqw,420px);
+    min-height:0;max-height:13cqh;
+    overflow:auto;padding:.5cqw;
+    font-size:max(8px,.85cqw);
+  }
+}
+`;
+document.head.appendChild(joystickStyle);
 
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
